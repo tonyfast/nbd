@@ -57,3 +57,8 @@ Jupyter notebook are the primary mode of development.  The bash script below
     jupyter nbconvert --to python nbd.ipynb
     python -m nbd --deep --ext ipynb
 ```
+
+
+```python
+
+```
