@@ -31,7 +31,7 @@ script:
 - git merge -X theirs build
 - jupyter nbconvert --to markdown readme.ipynb
 - jupyter nbconvert --to python nbd.ipynb
-- python nbd.py --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd --id nbd
+- python nbd.py --to . --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd --id nbd
 - git add .
 - git commit -m "Convert posts and scripts automatically"
 - git push -q upstream HEAD:gh-pages
