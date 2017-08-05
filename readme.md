@@ -1,5 +1,6 @@
 
 # `nbd`ocumentation
+* [`github`](https://github.com/tonyfast/nbd)
 
 `nbd` creates bare-bones documentation for Jupyter notebooks & _like_ every other kinda file. `nbd` creates a static html views of notebooks documents and code. This minimal documentation _should_ work on most file systems and web servers.  
 
@@ -33,5 +34,5 @@ Bootstrap is resilient and it ships with the default `--to html` __nbconvert__ c
 ```
 
     [NbConvertApp] Converting notebook readme.ipynb to markdown
-    [NbConvertApp] Writing 1214 bytes to readme.md
+    [NbConvertApp] Writing 1495 bytes to readme.md
 
