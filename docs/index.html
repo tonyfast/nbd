@@ -11773,8 +11773,6 @@ div#notebook {
 <div class="row">
 <iframe class="embed-responsive-item" src="readme.ipynb.html" name="docs"></iframe>
 </div><div class="row"><div class="panel panel-default">
-  <div class="panel-heading"><a href="usage/Untitled.ipynb.html" target="docs"><h3 class="list-group-item-heading">usage/Untitled.ipynb</h3></a></div>
-  <ul class='list-group'></ul></div><div class="panel panel-default">
   <div class="panel-heading"><a href="readme.md.html" target="docs"><h3 class="list-group-item-heading">readme.md</h3></a></div>
   <ul class='list-group'><li class="list-group-item">
     <h4><a href="readme.md.html#nbdocumentation" target="docs">nbdocumentation¶</a></h4></li><li class="list-group-item">
@@ -11783,7 +11781,14 @@ div#notebook {
     <h4><a href="readme.md.html#Why-Bootstrap?" target="docs">Why Bootstrap?¶</a></h4></li><li class="list-group-item">
     <h4><a href="readme.md.html#Convert-the-readme-to-markdown-for-viewing-on-github." target="docs">Convert the readme to markdown for viewing on github.¶</a></h4></li></ul></div><div class="panel panel-default">
   <div class="panel-heading"><a href="nbd.ipynb.html" target="docs"><h3 class="list-group-item-heading">nbd.ipynb</h3></a></div>
-  <div class="panel-body"><p>The <strong>main</strong> code for the <code>nbd</code>ocs.</p>
+  <div class="panel-body"><pre><code>from pathlib import Path
+from nbconvert import exporters
+from operator import methodcaller
+from bs4 import BeautifulSoup
+from mistune import markdown
+from nbformat.v4 import new_code_cell, new_markdown_cell, new_raw_cell as raw, new_notebook
+from fnmatch import fnmatch
+</code></pre>
 </div><ul class='list-group'><li class="list-group-item">
     <h4><a href="nbd.ipynb.html#nbconvert-HTML-exporter" target="docs">nbconvert HTML exporter¶</a></h4></li><li class="list-group-item">
     <h4><a href="nbd.ipynb.html#Extension-Readers" target="docs">Extension Readers¶</a></h4></li><li class="list-group-item">
@@ -11796,12 +11801,17 @@ div#notebook {
 <ul>
 <li><a href="https://github.com/tonyfast/nbd"><code>github</code></a></li>
 </ul>
+<p><code>nbd</code> creates bare-bones documentation for Jupyter notebooks &amp; <em>like</em> every other kinda file. <code>nbd</code> creates a static html views of notebooks documents and code. This minimal documentation <em>should</em> work on most file systems and web servers.</p>
 </div><ul class='list-group'><li class="list-group-item">
     <h4><a href="readme.ipynb.html#nbdocumentation" target="docs">nbdocumentation¶</a></h4></li><li class="list-group-item">
+    <h4><a href="readme.ipynb.html#The-First-Markdown-Cell" target="docs">The First Markdown Cell¶</a></h4></li><li class="list-group-item">
     <h4><a href="readme.ipynb.html#How-it-works" target="docs">How it works¶</a></h4></li><li class="list-group-item">
     <h4><a href="readme.ipynb.html#Why" target="docs">Why¶</a></h4></li><li class="list-group-item">
     <h4><a href="readme.ipynb.html#Why-Bootstrap?" target="docs">Why Bootstrap?¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme.ipynb.html#Convert-the-readme-to-markdown-for-viewing-on-github." target="docs">Convert the readme to markdown for viewing on github.¶</a></h4></li></ul></div></div>
+    <h4><a href="readme.ipynb.html#Convert-the-readme-to-markdown-for-viewing-on-github." target="docs">Convert the readme to markdown for viewing on github.¶</a></h4></li></ul></div><div class="panel panel-default">
+  <div class="panel-heading"><a href="usage/Untitled.ipynb.html" target="docs"><h3 class="list-group-item-heading">usage/Untitled.ipynb</h3></a></div>
+  <div class="panel-body"><p>import toolz</p>
+</div><ul class='list-group'></ul></div></div>
 <style>
     body {
         padding: 0 !important;

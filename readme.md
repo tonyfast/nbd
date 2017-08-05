@@ -10,9 +10,16 @@
     import nbd
 ```
 
-    The importable extension is already loaded. To reload it, use:
-      %reload_ext importable
+    docs/usage/Untitled.ipynb.html
+    docs/readme.md.html
+    docs/nbd.ipynb.html
+    docs/readme.ipynb.html
+    docs/index.html
 
+
+## The First Markdown Cell
+
+`nbd` takes the opinion tha
 
 ## How it works
 
@@ -34,5 +41,5 @@ Bootstrap is resilient and it ships with the default `--to html` __nbconvert__ c
 ```
 
     [NbConvertApp] Converting notebook readme.ipynb to markdown
-    [NbConvertApp] Writing 1495 bytes to readme.md
+    [NbConvertApp] Writing 1362 bytes to readme.md
 
