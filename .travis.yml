@@ -1,0 +1,41 @@
+language: python
+python:
+- 3.5
+
+# blocklist
+branches:
+  except:
+  - gh-pages
+
+install:
+- wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+- bash miniconda.sh -b -p $HOME/miniconda
+- export PATH="$HOME/miniconda/bin:$PATH"
+- rm miniconda.sh
+- hash -r
+- conda config --set always_yes yes --set changeps1 no
+- conda config --add channels conda-forge
+- conda update -q conda
+- conda info -a
+- conda create -y -q -n convert python=$TRAVIS_PYTHON_VERSION jupyter nbconvert beautifulsoup4
+- source activate convert
+
+script:
+- set -e
+- git init
+- git config user.name "T-Bone"
+- git config user.email "tony.fast@gmail.com"
+- git remote add upstream "https://$GH_TOKEN@github.com/tonyfast/nbd"
+- git fetch upstream
+- git checkout gh-pages
+- git merge -X theirs build
+- jupyter nbconvert --to markdown readme.ipynb
+- jupyter nbconvert --to python nbd.ipynb
+- python nbd.py --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd --id nbd
+- git add .
+- git commit -m "Convert posts and scripts automatically"
+- git push -q upstream HEAD:gh-pages
+
+env:
+    global:
+    - secure: "gmbLoLZ00wT7l88jEzI8G7EVeOozUXePDmsH3Y0SZ/ehxb94pE78biOksgPwDuJ1br9n8nSdoO7qRgm+q8qqpMdBEfqOTNnL/N0vFKDE5KVpuemx7AZeuSPIFHF34/PuwaId3O+4JkKXeIEQgKImb4y28hfdrHW06Pl60JbpaAzcKm4ZoghmpYUsjUFfTc0AMDH0kiXT6obmcEw3JIO6zY+/jypFs9bo8y+Uf/X1xFBDisW2p+9BLQJhsa1vw80e+bDf7RCE+bpxdNesnQLh+bBzVev70hWqKnlifyTRlsxoDTz4lG74DIQaq2h5VNm1tafqq4YZB2cDQ28F9ewMUvhprl1Wjapm2sVu+6Us8pP55ouaqr/6g2KXhNiCcoP1/qFecRUUU9Uy186AxoSue+CKQ0J8YtFgI7RblHOljmp7juL7f7Tqhyvp1UKbvsSiV6HxI6Dgk0UfjnVcE5rhMwVI2YGZ/cRtnE35Eu6Ajxb7AaoifzEe+/EoKjBNG7SYRY6APYBdpmNkkX3NM5MOqA6hmOYDXt3WnZNP4lNo1gK1x/MHNsJVh2XEXVF+huT6NUSZU1dUnU2XFh4gF982GRENjNlbwAjOnRcWRoIQfK8RIqqDk9QwR5wEAV447kQ4vb48q6+pdZ0mEpUh8DMBvMkGBFpXYGi0ppbTmhpMX+k="

@@ -5,24 +5,26 @@
 `nbd` creates bare-bones documentation for Jupyter notebooks & _like_ every other kinda file. `nbd` creates a static html views of notebooks documents and code. This minimal documentation _should_ work on most file systems and web servers.  
 
 
-```python
-    #     !pip install https://github.com/tonyfast/nbd
-    !python -m nbd --deep
+```bash
+    %%bash
+    pip install https://github.com/tonyfast/nbd
+    python -m nbd --deep
 ```
 
-    docs/setup.py.html
-    docs/usage/basic.ipynb.html
-    docs/nbd.ipynb.html
+    Collecting https://github.com/tonyfast/nbd
+      Downloading https://github.com/tonyfast/nbd
     docs/nbd.py.html
-    docs/readme.ipynb.html
+    docs/nbd.ipynb.html
     docs/readme.md.html
+    docs/usage/basic.ipynb.html
+    docs/readme.ipynb.html
+    docs/setup.py.html
     docs/index.html
 
 
+      Cannot unpack file /private/var/folders/0g/4z343jrx1lbb4mz0sqwlfmr00000gp/T/pip-qwjaqvnp-unpack/nbd (downloaded from /private/var/folders/0g/4z343jrx1lbb4mz0sqwlfmr00000gp/T/pip-kbtpmbi_-build, content-type: text/html; charset=utf-8); cannot detect archive format
+    Cannot determine archive format of /private/var/folders/0g/4z343jrx1lbb4mz0sqwlfmr00000gp/T/pip-kbtpmbi_-build
 
-```python
-    import nbd
-```
 
 ## The First Markdown Cell
 
@@ -57,3 +59,15 @@ Jupyter notebook are the primary mode of development.  The bash script below
     jupyter nbconvert --to python nbd.ipynb
     python -m nbd --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd --id nbd
 ```
+
+    docs/usage/basic.ipynb.html
+    docs/nbd.ipynb.html
+    docs/readme.ipynb.html
+    docs/index.html
+
+
+    [NbConvertApp] Converting notebook readme.ipynb to markdown
+    [NbConvertApp] Writing 1887 bytes to readme.md
+    [NbConvertApp] Converting notebook nbd.ipynb to python
+    [NbConvertApp] Writing 7574 bytes to nbd.py
+

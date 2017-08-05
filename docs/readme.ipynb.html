@@ -11785,11 +11785,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>    <span class="c1">#     !pip install https://github.com/tonyfast/nbd</span>
-    <span class="o">!</span>python -m nbd --deep
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+    pip install https://github.com/tonyfast/nbd
+    python -m nbd --deep
 </pre></div>
 
 </div>
@@ -11806,30 +11807,31 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>docs/setup.py.html
-docs/usage/basic.ipynb.html
-docs/nbd.ipynb.html
+<pre>Collecting https://github.com/tonyfast/nbd
+  Downloading https://github.com/tonyfast/nbd
 docs/nbd.py.html
-docs/readme.ipynb.html
+docs/nbd.ipynb.html
 docs/readme.md.html
+docs/usage/basic.ipynb.html
+docs/readme.ipynb.html
+docs/setup.py.html
 docs/index.html
 </pre>
 </div>
 </div>
 
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>  Cannot unpack file /private/var/folders/0g/4z343jrx1lbb4mz0sqwlfmr00000gp/T/pip-qwjaqvnp-unpack/nbd (downloaded from /private/var/folders/0g/4z343jrx1lbb4mz0sqwlfmr00000gp/T/pip-kbtpmbi_-build, content-type: text/html; charset=utf-8); cannot detect archive format
+Cannot determine archive format of /private/var/folders/0g/4z343jrx1lbb4mz0sqwlfmr00000gp/T/pip-kbtpmbi_-build
+</pre>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>    <span class="kn">import</span> <span class="nn">nbd</span>
-</pre></div>
-
-</div>
 </div>
 </div>
 
