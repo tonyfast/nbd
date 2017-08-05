@@ -11857,7 +11857,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">()</span>
@@ -11867,6 +11867,9 @@ div#notebook {
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--ignore&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;ipynb_checkpoints&#39;</span><span class="p">,))</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--ext&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">readers</span><span class="p">))</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--deep&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--url&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--id&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--name&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="n">defaults</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="nb">tuple</span><span class="p">())</span>
 </pre></div>
 
@@ -11885,18 +11888,21 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
         <span class="n">root</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">to</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">ignore</span><span class="p">,</span>
-        <span class="n">ext</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">ext</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">deep</span>
+        <span class="n">ext</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">ext</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">deep</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">defaults</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;The main nbd function.&quot;&quot;&quot;</span>
         <span class="n">root</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="o">*</span><span class="nb">dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">),</span> <span class="n">Path</span><span class="p">(</span><span class="n">to</span><span class="p">),</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">Path</span><span class="p">,</span> <span class="nb">dir</span><span class="p">)</span>
         <span class="n">nbs</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">files</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ext</span><span class="p">,</span> <span class="n">ignore</span><span class="p">,</span> <span class="nb">dir</span><span class="p">,</span> <span class="n">deep</span><span class="p">))</span>
         <span class="n">docs</span> <span class="o">=</span> <span class="n">write</span><span class="p">(</span><span class="n">nbs</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
-        <span class="n">index</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">nbs</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">to</span><span class="p">)</span>
+        <span class="n">index</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">nbs</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="p">})</span>
 </pre></div>
 
 </div>
@@ -11914,7 +11920,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">def</span> <span class="nf">files</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">exts</span><span class="p">,</span> <span class="n">ignores</span><span class="p">,</span> <span class="nb">dir</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -11936,7 +11942,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">def</span> <span class="nf">parents</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
@@ -11952,7 +11958,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">def</span> <span class="nf">writeFile</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">nb</span><span class="p">):</span>
@@ -11971,7 +11977,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">nbs</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
@@ -11989,7 +11995,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">nbs</span><span class="p">):</span>
@@ -12013,7 +12019,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="n">div</span><span class="p">,</span> <span class="n">_div</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;div class=&quot;</span><span class="si">{}</span><span class="s2">&quot;&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">)),</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;/div&gt;&quot;&quot;&quot;</span><span class="p">)</span>
@@ -12035,7 +12041,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[56]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="n">iframe</span> <span class="o">=</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;div class=&quot;row&quot;&gt;</span>
@@ -12050,7 +12056,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[69]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">def</span> <span class="nf">item</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">nb</span><span class="p">):</span>
@@ -12074,14 +12080,19 @@ div#notebook {
                 <span class="nb">str</span><span class="p">(</span><span class="n">link</span><span class="p">),</span> <span class="n">item</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">item</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
         <span class="k">return</span> <span class="n">output</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;&lt;/ul&gt;&lt;/div&gt;&quot;&quot;&quot;</span> 
 
-    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">nbs</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">to</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">nbs</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">disqus</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create the index of notebook items&quot;&quot;&quot;</span>
         <span class="n">nb</span> <span class="o">=</span> <span class="n">new_notebook</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="p">[</span><span class="n">iframe</span><span class="p">,</span> <span class="n">div</span><span class="p">(</span><span class="s2">&quot;row&quot;</span><span class="p">),</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&quot;&quot;&quot;</span><span class="p">)])</span>
         <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">:</span>
             <span class="n">source</span> <span class="o">=</span> <span class="n">root</span> <span class="o">/</span> <span class="n">doc</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;.html&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
             
             <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">source</span> <span class="o">+=</span> <span class="n">item</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">docs</span><span class="p">[</span><span class="n">doc</span><span class="p">],</span> <span class="n">nbs</span><span class="p">[</span><span class="n">source</span><span class="p">])</span>
+        
+        <span class="n">disqus</span> <span class="ow">and</span> <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">raw</span><span class="p">(</span><span class="n">DISQUS</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">disqus</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="n">disqus</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">),</span> <span class="n">url</span><span class="o">=</span><span class="n">disqus</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">))))</span>
+            
         <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">_div</span><span class="p">,</span> <span class="n">style</span><span class="p">])</span>
+
         <span class="n">docs</span><span class="p">[</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;index.html&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">nb</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="p">(</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">docs</span><span class="p">[</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;index.html&#39;</span><span class="p">])</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span>
@@ -12103,7 +12114,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="n">style</span> <span class="o">=</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
@@ -12163,9 +12174,50 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>    <span class="n">DISQUS</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;div class=&quot;row&quot; id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;</span>
+<span class="s2">    &lt;script&gt;</span>
+<span class="s2">        var disqus_config = function () {</span>
+<span class="s2">            this.page.url = &quot;{{url}}&quot;;  // Replace PAGE_URL with your page&#39;s canonical URL variable</span>
+<span class="s2">            this.page.identifier = &quot;{{id}}&quot;; // Replace PAGE_IDENTIFIER with your page&#39;s unique identifier variable</span>
+<span class="s2">        };</span>
+<span class="s2">        (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW</span>
+<span class="s2">            var d = document, s = d.createElement(&#39;script&#39;);</span>
+
+<span class="s2">            s.src = &#39;https://{{name}}.disqus.com/embed.js&#39;;  // IMPORTANT: Replace EXAMPLE with your forum shortname!</span>
+
+<span class="s2">            s.setAttribute(&#39;data-timestamp&#39;, +new Date());</span>
+<span class="s2">            (d.head || d.body).appendChild(s);</span>
+<span class="s2">        })();</span>
+<span class="s2">    &lt;/script&gt;</span>
+<span class="s2">    &lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot; rel=&quot;nofollow&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;&quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">render</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
             <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-            <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">to</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">ignore</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">ext</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">deep</span><span class="p">)</span>
+            <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">to</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">ignore</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">ext</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">deep</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12182,15 +12234,44 @@ div#notebook {
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-<pre><code>main()</code></pre>
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#     defaults.name=&#39;tonyfast&#39;</span>
+<span class="c1">#     defaults.url=&#39;https://tonyfast.com/nbd&#39;</span>
+<span class="c1">#     defaults.id=&#39;nbd&#39;</span>
+<span class="c1">#     main(args=defaults)</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>docs/nbd.py.html
+docs/setup.py.html
+docs/nbd.ipynb.html
+docs/readme.ipynb.html
+docs/readme.md.html
+docs/index.html
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
     </div>
   </div>

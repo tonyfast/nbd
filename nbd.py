@@ -41,7 +41,7 @@ readers['pyi'] = readers['py']
 
 # ### Argument Parser
 
-# In[4]:
+# In[47]:
 
 
 parser = ArgumentParser()
@@ -51,28 +51,34 @@ parser.add_argument('--dir', nargs='*', default=tuple())
 parser.add_argument('--ignore', nargs='*', default=('ipynb_checkpoints',))
 parser.add_argument('--ext', nargs='*', default=tuple(readers))
 parser.add_argument('--deep', action='store_true')
+parser.add_argument('--url', default='')
+parser.add_argument('--id', default='')
+parser.add_argument('--name', default='')
 defaults = parser.parse_args(tuple())
 
 
 # ## Main Program
 
-# In[5]:
+# In[49]:
 
 
 def main(
     root=defaults.root, to=defaults.to, dir=defaults.dir, ignore=defaults.ignore,
-    ext=defaults.ext, deep=defaults.deep
+    ext=defaults.ext, deep=defaults.deep, args=defaults
 ):
     """The main nbd function."""
     root, to, *dir = Path(root), Path(to), *map(Path, dir)
     nbs = load(files(root, ext, ignore, dir, deep))
     docs = write(nbs, to, root)
-    index(docs, nbs, root, to)
+    index(docs, nbs, root, to, {
+        key: getattr(args, key) for key in ['name', 'id', 'url']
+        if getattr(args, key)
+    })
 
 
 # ## Public Python Functions
 
-# In[6]:
+# In[50]:
 
 
 def files(root, exts, ignores, dir, deep=False):
@@ -87,7 +93,7 @@ def files(root, exts, ignores, dir, deep=False):
     }
 
 
-# In[7]:
+# In[51]:
 
 
 def parents(file):
@@ -96,7 +102,7 @@ def parents(file):
          _1 for _1 in file.parents if not _1.exists()])]
 
 
-# In[8]:
+# In[52]:
 
 
 def writeFile(file, nb):
@@ -108,7 +114,7 @@ def writeFile(file, nb):
     return nb
 
 
-# In[9]:
+# In[53]:
 
 
 def write(nbs, to, root):
@@ -119,7 +125,7 @@ def write(nbs, to, root):
         for key in [to/_.relative_to(root).with_suffix(_.suffix+'.html')]}
 
 
-# In[10]:
+# In[54]:
 
 
 def load(nbs):
@@ -130,7 +136,7 @@ def load(nbs):
 
 # #### Open and Close `<div>`s
 
-# In[11]:
+# In[55]:
 
 
 div, _div = lambda s: raw("""<div class="{}">""".format(s)), raw("""</div>""")
@@ -140,7 +146,7 @@ div, _div = lambda s: raw("""<div class="{}">""".format(s)), raw("""</div>""")
 # 
 # A bootstrap `list-group` to display `html` documents.
 
-# In[12]:
+# In[56]:
 
 
 iframe = raw("""<div class="row">
@@ -148,7 +154,7 @@ iframe = raw("""<div class="row">
 </div>""")
 
 
-# In[40]:
+# In[69]:
 
 
 def item(target, to, html, nb):
@@ -172,14 +178,19 @@ def item(target, to, html, nb):
             str(link), item.attrs['id'], item.text, i=2+int(item.name[-1]))
     return output + """</ul></div>""" 
 
-def index(docs, nbs, root, to):
+def index(docs, nbs, root, to, disqus=None):
     """Create the index of notebook items"""
     nb = new_notebook(cells=[iframe, div("row"), raw("""""")])
     for doc in docs:
         source = root / doc.with_suffix(doc.suffix.rstrip('.html')).relative_to(to)
         
         nb.cells[-1].source += item(doc, to, docs[doc], nbs[source])
+    
+    disqus and nb.cells.append(raw(DISQUS(
+            name=disqus.get('name'), id=disqus.get('id'), url=disqus.get('url'))))
+        
     nb.cells.extend([_div, style])
+
     docs[to/'index.html'] = html.from_notebook_node(nb)[0]
     (to/'index.html').write_text(docs[to/'index.html'])
     print(to/'index.html')
@@ -189,7 +200,7 @@ def index(docs, nbs, root, to):
 # 
 # The changes in style reflect the most basic modifications to create a side-by-side documentation browser.
 
-# In[41]:
+# In[58]:
 
 
 style = raw("""
@@ -242,9 +253,36 @@ style = raw("""
 # In[ ]:
 
 
+
+
+
+# In[66]:
+
+
+DISQUS = html.environment.from_string("""<div class="row" id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = "{{url}}";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "{{id}}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+        var d = document, s = d.createElement('script');
+
+        s.src = 'https://{{name}}.disqus.com/embed.js';  // IMPORTANT: Replace EXAMPLE with your forum shortname!
+
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>""").render
+
+
+# In[ ]:
+
+
 if __name__ == '__main__':
         args = parser.parse_args()
-        main(args.root, args.to, args.dir, args.ignore, args.ext, args.deep)
+        main(args.root, args.to, args.dir, args.ignore, args.ext, args.deep, args)
 
 
 # ### Interactive mode
@@ -252,4 +290,11 @@ if __name__ == '__main__':
 # Enable the code cell to run `nbd` in interactive mode.
 #     
 
-#     main()
+# In[65]:
+
+
+#     defaults.name='tonyfast'
+#     defaults.url='https://tonyfast.com/nbd'
+#     defaults.id='nbd'
+#     main(args=defaults)
+

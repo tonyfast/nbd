@@ -10,11 +10,11 @@
     !python -m nbd --deep
 ```
 
-    docs/nbd.py.html
-    docs/readme.ipynb.html
+    docs/setup.py.html
     docs/usage/basic.ipynb.html
     docs/nbd.ipynb.html
-    docs/setup.py.html
+    docs/nbd.py.html
+    docs/readme.ipynb.html
     docs/readme.md.html
     docs/index.html
 
@@ -55,10 +55,5 @@ Jupyter notebook are the primary mode of development.  The bash script below
     %%bash
     jupyter nbconvert --to markdown readme.ipynb
     jupyter nbconvert --to python nbd.ipynb
-    python -m nbd --deep --ext ipynb
-```
-
-
-```python
-
+    python -m nbd --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd --id nbd
 ```

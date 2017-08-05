@@ -11771,120 +11771,312 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="nbdocumentation"><code>nbd</code>ocumentation<a class="anchor-link" href="#nbdocumentation">&#182;</a></h1><ul>
-<li><a href="https://github.com/tonyfast/nbd"><code>github</code></a></li>
-</ul>
-<p><code>nbd</code> creates bare-bones documentation for Jupyter notebooks &amp; <em>like</em> every other kinda file. <code>nbd</code> creates a static html views of notebooks documents and code. This minimal documentation <em>should</em> work on most file systems and web servers.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>    <span class="c1">#     !pip install https://github.com/tonyfast/nbd</span>
-    <span class="o">!</span>python -m nbd --deep
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>docs/setup.py.html
-docs/usage/basic.ipynb.html
-docs/nbd.ipynb.html
-docs/nbd.py.html
-docs/readme.ipynb.html
-docs/readme.md.html
-docs/index.html
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>    <span class="kn">import</span> <span class="nn">nbd</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-First-Markdown-Cell">The First Markdown Cell<a class="anchor-link" href="#The-First-Markdown-Cell">&#182;</a></h2><p><code>nbd</code> takes the opinion that the 🥇st cell is the abstract or descriptor of a notebook.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-it-works">How it works<a class="anchor-link" href="#How-it-works">&#182;</a></h2><p>Every file, even non-notebooks are transformed into <strong>NotebookNode</strong>s that obey the <strong>nbformat.v4</strong> schemas; <strong>nbconvert</strong> transforms the notebook nodes to static html documents. <code>nbd</code> should not using any special <strong>nbconvert</strong> templates.</p>
-<h2 id="Why">Why<a class="anchor-link" href="#Why">&#182;</a></h2><p>Because I make a lot of notebooks that combine Python, PySpark, HTML, CoffeeScript, and Markdown.  The static view of the document is how must folks experience your work.  Static documents that contain data-driven narratives can accelerate development within multifunctional teams.</p>
-<h2 id="Why-Bootstrap?">Why Bootstrap?<a class="anchor-link" href="#Why-Bootstrap?">&#182;</a></h2><p>Bootstrap is resilient and it ships with the default <code>--to html</code> <strong>nbconvert</strong> converter.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Convert-the-readme-to-markdown-for-viewing-on-github.">Convert the readme to markdown for viewing on github.<a class="anchor-link" href="#Convert-the-readme-to-markdown-for-viewing-on-github.">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Development">Development<a class="anchor-link" href="#Development">&#182;</a></h2><p>Jupyter notebook are the primary mode of development.  The bash script below</p>
-<ol>
-<li>Creates the <code>readme.md</code> document for Github.</li>
-<li>Converts <code>nbd</code> to a Python sript</li>
-<li>Creates documentation for the notebooks in <code>nbd</code>.</li>
-</ol>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>%%bash
-    jupyter nbconvert --to markdown readme.ipynb
-    jupyter nbconvert --to python nbd.ipynb
-    python -m nbd --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd --id nbd
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># coding: utf-8</span>
+
+<span class="c1"># In[1]:</span>
+
+
+<span class="kn">from</span> <span class="nn">nbconvert</span> <span class="k">import</span> <span class="n">exporters</span>
+<span class="kn">from</span> <span class="nn">nbformat.v4</span> <span class="k">import</span> <span class="n">new_code_cell</span><span class="p">,</span> <span class="n">new_markdown_cell</span><span class="p">,</span> <span class="n">new_raw_cell</span> <span class="k">as</span> <span class="n">raw</span><span class="p">,</span> <span class="n">new_notebook</span>
+<span class="kn">from</span> <span class="nn">mistune</span> <span class="k">import</span> <span class="n">markdown</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="k">import</span> <span class="n">ArgumentParser</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">operator</span> <span class="k">import</span> <span class="n">methodcaller</span>
+<span class="kn">from</span> <span class="nn">fnmatch</span> <span class="k">import</span> <span class="n">fnmatch</span>
+
+
+<span class="c1"># ## nbconvert `HTML` exporter</span>
+<span class="c1"># </span>
+<span class="c1"># `readers` load different file extensions and return notebooks.</span>
+
+<span class="c1"># In[2]:</span>
+
+
+<span class="n">html</span> <span class="o">=</span> <span class="n">exporters</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">HTMLExporter</span><span class="p">()</span>
+
+
+<span class="c1"># ## Extension Readers</span>
+
+<span class="c1"># In[3]:</span>
+
+
+<span class="n">readers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;ipynb&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">path</span><span class="p">:</span> <span class="nb">__import__</span><span class="p">(</span><span class="s1">&#39;nbformat&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reads</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(),</span> <span class="mi">4</span><span class="p">),</span>
+    <span class="s1">&#39;py&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">path</span><span class="p">:</span> <span class="n">new_notebook</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="p">[</span><span class="n">new_code_cell</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">())]),</span>
+    <span class="s1">&#39;md&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">path</span><span class="p">:</span> <span class="n">new_notebook</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="p">[</span><span class="n">new_markdown_cell</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">())]),}</span>
+<span class="n">readers</span><span class="p">[</span><span class="s1">&#39;markdown&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">readers</span><span class="p">[</span><span class="s1">&#39;md&#39;</span><span class="p">]</span>
+<span class="n">readers</span><span class="p">[</span><span class="s1">&#39;pyi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">readers</span><span class="p">[</span><span class="s1">&#39;py&#39;</span><span class="p">]</span>
+
+
+<span class="c1"># ## Arguments</span>
+
+<span class="c1"># ### Argument Parser</span>
+
+<span class="c1"># In[47]:</span>
+
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--root&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--to&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;./docs&#39;</span><span class="p">))</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--dir&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">tuple</span><span class="p">())</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--ignore&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;ipynb_checkpoints&#39;</span><span class="p">,))</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--ext&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">readers</span><span class="p">))</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--deep&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--url&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--id&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--name&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">defaults</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">(</span><span class="nb">tuple</span><span class="p">())</span>
+
+
+<span class="c1"># ## Main Program</span>
+
+<span class="c1"># In[49]:</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
+    <span class="n">root</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">to</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">to</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">ignore</span><span class="p">,</span>
+    <span class="n">ext</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">ext</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">deep</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">defaults</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The main nbd function.&quot;&quot;&quot;</span>
+    <span class="n">root</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="o">*</span><span class="nb">dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">root</span><span class="p">),</span> <span class="n">Path</span><span class="p">(</span><span class="n">to</span><span class="p">),</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">Path</span><span class="p">,</span> <span class="nb">dir</span><span class="p">)</span>
+    <span class="n">nbs</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">files</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ext</span><span class="p">,</span> <span class="n">ignore</span><span class="p">,</span> <span class="nb">dir</span><span class="p">,</span> <span class="n">deep</span><span class="p">))</span>
+    <span class="n">docs</span> <span class="o">=</span> <span class="n">write</span><span class="p">(</span><span class="n">nbs</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+    <span class="n">index</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">nbs</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="p">{</span>
+        <span class="n">key</span><span class="p">:</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="p">})</span>
+
+
+<span class="c1"># ## Public Python Functions</span>
+
+<span class="c1"># In[50]:</span>
+
+
+<span class="k">def</span> <span class="nf">files</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">exts</span><span class="p">,</span> <span class="n">ignores</span><span class="p">,</span> <span class="nb">dir</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an object of Paths to &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">path</span> <span class="k">for</span> <span class="nb">dir</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="n">Path</span><span class="p">,</span> <span class="p">[</span><span class="n">root</span><span class="p">,</span> <span class="o">*</span><span class="nb">dir</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="n">exts</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">methodcaller</span><span class="p">(</span>
+            <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">glob&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">deep</span> <span class="ow">and</span> <span class="s1">&#39;r&#39;</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">ext</span><span class="p">))</span>
+        <span class="p">)(</span><span class="nb">dir</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">fnmatch</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">ignore</span><span class="p">)</span> <span class="k">for</span> <span class="n">ignore</span> <span class="ow">in</span> <span class="n">ignores</span><span class="p">)</span>  
+        <span class="ow">and</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">ignore</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">for</span> <span class="n">ignore</span> <span class="ow">in</span> <span class="n">ignores</span><span class="p">)</span>
+    <span class="p">}</span>
+
+
+<span class="c1"># In[51]:</span>
+
+
+<span class="k">def</span> <span class="nf">parents</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create parent directories if they do no exist.&quot;&quot;&quot;</span>
+    <span class="p">[</span><span class="n">_0</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span> <span class="k">for</span> <span class="n">_0</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">([</span>
+         <span class="n">_1</span> <span class="k">for</span> <span class="n">_1</span> <span class="ow">in</span> <span class="n">file</span><span class="o">.</span><span class="n">parents</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">_1</span><span class="o">.</span><span class="n">exists</span><span class="p">()])]</span>
+
+
+<span class="c1"># In[52]:</span>
+
+
+<span class="k">def</span> <span class="nf">writeFile</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">nb</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Export an html file from a new notebook&quot;&quot;&quot;</span>
+    <span class="c1"># If the parent directories do not exists then create them.</span>
+    <span class="n">parents</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="n">nb</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">nb</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">nb</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nb</span>
+
+
+<span class="c1"># In[53]:</span>
+
+
+<span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">nbs</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Orchestrate the writing of the html version of each document.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">key</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">or</span> <span class="n">writeFile</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> 
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">nbs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="n">to</span><span class="o">/</span><span class="n">_</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="n">_</span><span class="o">.</span><span class="n">suffix</span><span class="o">+</span><span class="s1">&#39;.html&#39;</span><span class="p">)]}</span>
+
+
+<span class="c1"># In[54]:</span>
+
+
+<span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">nbs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Read each file in the documentation.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">file</span><span class="p">:</span> <span class="n">readers</span><span class="p">[</span><span class="n">file</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)](</span><span class="n">file</span><span class="p">)</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">nbs</span><span class="p">}</span>
+
+
+<span class="c1"># #### Open and Close `&lt;div&gt;`s</span>
+
+<span class="c1"># In[55]:</span>
+
+
+<span class="n">div</span><span class="p">,</span> <span class="n">_div</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;div class=&quot;</span><span class="si">{}</span><span class="s2">&quot;&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">)),</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;/div&gt;&quot;&quot;&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># ### Documentation Index</span>
+<span class="c1"># </span>
+<span class="c1"># A bootstrap `list-group` to display `html` documents.</span>
+
+<span class="c1"># In[56]:</span>
+
+
+<span class="n">iframe</span> <span class="o">=</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;div class=&quot;row&quot;&gt;</span>
+<span class="s2">&lt;iframe class=&quot;embed-responsive-item&quot; src=&quot;readme.ipynb.html&quot; name=&quot;docs&quot;&gt;&lt;/iframe&gt;</span>
+<span class="s2">&lt;/div&gt;&quot;&quot;&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># In[69]:</span>
+
+
+<span class="k">def</span> <span class="nf">item</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">nb</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An item in the index&quot;&quot;&quot;</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">link</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;.html&#39;</span><span class="p">))</span>
+    
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;div class=&quot;panel panel-default&quot;&gt;</span>
+<span class="s2">  &lt;div class=&quot;panel-heading&quot;&gt;&lt;a href=&quot;</span><span class="si">{}</span><span class="s2">&quot; target=&quot;docs&quot;&gt;&lt;h3 class=&quot;list-group-item-heading&quot;&gt;</span><span class="si">{}</span><span class="s2">&lt;/h3&gt;&lt;/a&gt;&lt;/div&gt;</span>
+<span class="s2">  &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">link</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;.ipynb&#39;</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;div class=&quot;panel-body&quot;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">markdown</span><span class="p">(</span>
+            <span class="n">nb</span><span class="o">.</span><span class="n">cells</span> <span class="ow">and</span> <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">source</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+    
+    <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;ul class=&#39;list-group&#39;&gt;&quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;h1,h2,h3&#39;</span><span class="p">):</span>
+        <span class="n">output</span><span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;li class=&quot;list-group-item&quot;&gt;</span>
+<span class="s2">    &lt;h</span><span class="si">{i}</span><span class="s2">&gt;&lt;a href=&quot;</span><span class="si">{}</span><span class="s2">#</span><span class="si">{}</span><span class="s2">&quot; target=&quot;docs&quot;&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;&lt;/h</span><span class="si">{i}</span><span class="s2">&gt;&lt;/li&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">link</span><span class="p">),</span> <span class="n">item</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">],</span> <span class="n">item</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">output</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;&lt;/ul&gt;&lt;/div&gt;&quot;&quot;&quot;</span> 
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">nbs</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">disqus</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create the index of notebook items&quot;&quot;&quot;</span>
+    <span class="n">nb</span> <span class="o">=</span> <span class="n">new_notebook</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="p">[</span><span class="n">iframe</span><span class="p">,</span> <span class="n">div</span><span class="p">(</span><span class="s2">&quot;row&quot;</span><span class="p">),</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&quot;&quot;&quot;</span><span class="p">)])</span>
+    <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">:</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">root</span> <span class="o">/</span> <span class="n">doc</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;.html&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
+        
+        <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">source</span> <span class="o">+=</span> <span class="n">item</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">docs</span><span class="p">[</span><span class="n">doc</span><span class="p">],</span> <span class="n">nbs</span><span class="p">[</span><span class="n">source</span><span class="p">])</span>
+    
+    <span class="n">disqus</span> <span class="ow">and</span> <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">raw</span><span class="p">(</span><span class="n">DISQUS</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">disqus</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="nb">id</span><span class="o">=</span><span class="n">disqus</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">),</span> <span class="n">url</span><span class="o">=</span><span class="n">disqus</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">))))</span>
+        
+    <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">_div</span><span class="p">,</span> <span class="n">style</span><span class="p">])</span>
+
+    <span class="n">docs</span><span class="p">[</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;index.html&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">nb</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="p">(</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">docs</span><span class="p">[</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;index.html&#39;</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># ### Custom Styling</span>
+<span class="c1"># </span>
+<span class="c1"># The changes in style reflect the most basic modifications to create a side-by-side documentation browser.</span>
+
+<span class="c1"># In[58]:</span>
+
+
+<span class="n">style</span> <span class="o">=</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;style&gt;</span>
+<span class="s2">    body {</span>
+<span class="s2">        padding: 0 !important;</span>
+<span class="s2">    }</span>
+<span class="s2">    body &gt; #notebook {</span>
+<span class="s2">        margin: 0;</span>
+<span class="s2">        padding: 0;</span>
+<span class="s2">    }</span>
+<span class="s2">    #notebook-container {</span>
+<span class="s2">        width: 100%;</span>
+<span class="s2">        padding: 0;</span>
+<span class="s2">        box-shadow: none;</span>
+<span class="s2">        display: flex;</span>
+<span class="s2">        flex-direction: row;</span>
+<span class="s2">        align-items: stretch;</span>
+<span class="s2">        height: 100vh;</span>
+<span class="s2">        overflow: hidden;</span>
+<span class="s2">    }</span>
+<span class="s2">    #notebook-container .row {</span>
+<span class="s2">        flex: 0;</span>
+<span class="s2">        min-width: 33vw;</span>
+<span class="s2">        max-height: 100%;</span>
+<span class="s2">        overflow-y: auto;</span>
+<span class="s2">        padding: 1rem;</span>
+<span class="s2">    }</span>
+<span class="s2">    </span>
+<span class="s2">    #notebook-container .row:first-child {</span>
+<span class="s2">        flex: 1;</span>
+<span class="s2">        display: flex;</span>
+<span class="s2">        flex-direction: row;</span>
+<span class="s2">    }</span>
+<span class="s2">    #notebook-container .panel {</span>
+<span class="s2">        box-shadow: none;</span>
+<span class="s2">    }</span>
+<span class="s2">    #notebook-container .panel-heading {</span>
+<span class="s2">        overflow-wrap: break-word;</span>
+<span class="s2">        background: none;</span>
+<span class="s2">    }</span>
+<span class="s2">    #notebook-container .row iframe[name=&quot;docs&quot;] {</span>
+<span class="s2">        flex: 1;</span>
+<span class="s2">        border: none;</span>
+<span class="s2">    }</span>
+<span class="s2">&lt;/style&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># In[ ]:</span>
+
+
+
+
+
+<span class="c1"># In[66]:</span>
+
+
+<span class="n">DISQUS</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;div class=&quot;row&quot; id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;</span>
+<span class="s2">&lt;script&gt;</span>
+<span class="s2">    var disqus_config = function () {</span>
+<span class="s2">        this.page.url = &quot;{{url}}&quot;;  // Replace PAGE_URL with your page&#39;s canonical URL variable</span>
+<span class="s2">        this.page.identifier = &quot;{{id}}&quot;; // Replace PAGE_IDENTIFIER with your page&#39;s unique identifier variable</span>
+<span class="s2">    };</span>
+<span class="s2">    (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW</span>
+<span class="s2">        var d = document, s = d.createElement(&#39;script&#39;);</span>
+
+<span class="s2">        s.src = &#39;https://{{name}}.disqus.com/embed.js&#39;;  // IMPORTANT: Replace EXAMPLE with your forum shortname!</span>
+
+<span class="s2">        s.setAttribute(&#39;data-timestamp&#39;, +new Date());</span>
+<span class="s2">        (d.head || d.body).appendChild(s);</span>
+<span class="s2">    })();</span>
+<span class="s2">&lt;/script&gt;</span>
+<span class="s2">&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot; rel=&quot;nofollow&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;&quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">render</span>
+
+
+<span class="c1"># In[60]:</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+        <span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">to</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">ignore</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">ext</span><span class="p">,</span> <span class="n">args</span><span class="o">.</span><span class="n">deep</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+
+
+<span class="c1"># ### Interactive mode</span>
+<span class="c1"># </span>
+<span class="c1"># Enable the code cell to run `nbd` in interactive mode.</span>
+<span class="c1">#     </span>
+
+<span class="c1"># In[65]:</span>
+
+
+<span class="n">defaults</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;tonyfast&#39;</span>
+<span class="n">defaults</span><span class="o">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://tonyfast.com/nbd&#39;</span>
+<span class="n">defaults</span><span class="o">.</span><span class="n">id</span><span class="o">=</span><span class="s1">&#39;nbd&#39;</span>
+<span class="n">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">defaults</span><span class="p">)</span>
+
+
+<span class="c1"># In[ ]:</span>
 </pre></div>
 
 </div>
