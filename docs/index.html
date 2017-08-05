@@ -11773,6 +11773,32 @@ div#notebook {
 <div class="row">
 <iframe class="embed-responsive-item" src="readme.ipynb.html" name="docs"></iframe>
 </div><div class="row"><div class="panel panel-default">
+  <div class="panel-heading"><a href="readme.md.html" target="docs"><h3 class="list-group-item-heading">readme.md</h3></a></div>
+  <div class="panel-body"><h1><code>nbd</code>ocumentation</h1>
+<p><code>nbd</code> creates bare-bones documentation for Jupyter notebooks &amp; <em>like</em> every other kinda file. <code>nbd</code> creates a static html views of notebooks documents and code. This minimal documentation <em>should</em> work on most file systems and web servers.</p>
+<pre><code class="lang-python">    %load_ext importable
+    import nbd
+</code></pre>
+<pre><code>The importable extension is already loaded. To reload it, use:
+  %reload_ext importable
+</code></pre>
+<h2>How it works</h2>
+<p>Every file, even non-notebooks are transformed into <strong>NotebookNode</strong>s that obey the <strong>nbformat.v4</strong> schemas; <strong>nbconvert</strong> transforms the notebook nodes to static html documents. <code>nbd</code> should not using any special <strong>nbconvert</strong> templates.</p>
+<h2>Why</h2>
+<p>Because I make a lot of notebooks that combine Python, PySpark, HTML, CoffeeScript, and Markdown.  The static view of the document is how must folks experience your work.  Static documents that contain data-driven narratives can accelerate development within multifunctional teams.</p>
+<h2>Why Bootstrap?</h2>
+<p>Bootstrap is resilient and it ships with the default <code>--to html</code> <strong>nbconvert</strong> converter.</p>
+<h3>Convert the readme to markdown for viewing on github.</h3>
+<pre><code class="lang-python">!jupyter nbconvert --to markdown readme.ipynb
+</code></pre>
+<pre><code class="lang-python">
+</code></pre>
+</div><ul class='list-group'><li class="list-group-item">
+    <h4><a href="readme.md.html#nbdocumentation" target="docs">nbdocumentation¶</a></h4></li><li class="list-group-item">
+    <h4><a href="readme.md.html#How-it-works" target="docs">How it works¶</a></h4></li><li class="list-group-item">
+    <h4><a href="readme.md.html#Why" target="docs">Why¶</a></h4></li><li class="list-group-item">
+    <h4><a href="readme.md.html#Why-Bootstrap?" target="docs">Why Bootstrap?¶</a></h4></li><li class="list-group-item">
+    <h4><a href="readme.md.html#Convert-the-readme-to-markdown-for-viewing-on-github." target="docs">Convert the readme to markdown for viewing on github.¶</a></h4></li></ul></div><div class="panel panel-default">
   <div class="panel-heading"><a href="readme.ipynb.html" target="docs"><h3 class="list-group-item-heading">readme.ipynb</h3></a></div>
   <div class="panel-body"><h1><code>nbd</code>ocumentation</h1>
 <p><code>nbd</code> creates bare-bones documentation for Jupyter notebooks &amp; <em>like</em> every other kinda file. <code>nbd</code> creates a static html views of notebooks documents and code. This minimal documentation <em>should</em> work on most file systems and web servers.</p>
@@ -11780,7 +11806,8 @@ div#notebook {
     <h4><a href="readme.ipynb.html#nbdocumentation" target="docs">nbdocumentation¶</a></h4></li><li class="list-group-item">
     <h4><a href="readme.ipynb.html#How-it-works" target="docs">How it works¶</a></h4></li><li class="list-group-item">
     <h4><a href="readme.ipynb.html#Why" target="docs">Why¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme.ipynb.html#Why-Bootstrap?" target="docs">Why Bootstrap?¶</a></h4></li></ul></div><div class="panel panel-default">
+    <h4><a href="readme.ipynb.html#Why-Bootstrap?" target="docs">Why Bootstrap?¶</a></h4></li><li class="list-group-item">
+    <h4><a href="readme.ipynb.html#Convert-the-readme-to-markdown-for-viewing-on-github." target="docs">Convert the readme to markdown for viewing on github.¶</a></h4></li></ul></div><div class="panel panel-default">
   <div class="panel-heading"><a href="usage/Untitled.ipynb.html" target="docs"><h3 class="list-group-item-heading">usage/Untitled.ipynb</h3></a></div>
   <ul class='list-group'></ul></div><div class="panel panel-default">
   <div class="panel-heading"><a href="nbd.ipynb.html" target="docs"><h3 class="list-group-item-heading">nbd.ipynb</h3></a></div>
