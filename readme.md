@@ -6,20 +6,27 @@
 
 
 ```python
-    %load_ext importable
-    import nbd
+    #     !pip install https://github.com/tonyfast/nbd
+    !python -m nbd --deep
 ```
 
-    docs/usage/Untitled.ipynb.html
-    docs/readme.md.html
-    docs/nbd.ipynb.html
+    docs/nbd.py.html
     docs/readme.ipynb.html
+    docs/usage/basic.ipynb.html
+    docs/nbd.ipynb.html
+    docs/setup.py.html
+    docs/readme.md.html
     docs/index.html
 
 
+
+```python
+    import nbd
+```
+
 ## The First Markdown Cell
 
-`nbd` takes the opinion tha
+`nbd` takes the opinion that the 🥇st cell is the abstract or descriptor of a notebook.
 
 ## How it works
 
@@ -35,11 +42,18 @@ Bootstrap is resilient and it ships with the default `--to html` __nbconvert__ c
 
 ### Convert the readme to markdown for viewing on github.
 
+## Development
 
-```python
-!jupyter nbconvert --to markdown readme.ipynb
+Jupyter notebook are the primary mode of development.  The bash script below
+
+1. Creates the `readme.md` document for Github.
+2. Converts `nbd` to a Python sript
+3. Creates documentation for the notebooks in `nbd`.
+
+
+```bash
+    %%bash
+    jupyter nbconvert --to markdown readme.ipynb
+    jupyter nbconvert --to python nbd.ipynb
+    python -m nbd --deep --ext ipynb
 ```
-
-    [NbConvertApp] Converting notebook readme.ipynb to markdown
-    [NbConvertApp] Writing 1362 bytes to readme.md
-
