@@ -17,7 +17,7 @@ install:
 - conda config --add channels conda-forge
 - conda update -q conda
 - conda info -a
-- conda create -y -q -n convert python=$TRAVIS_PYTHON_VERSION jupyter nbconvert beautifulsoup4
+- conda create -y -q -n convert python=$TRAVIS_PYTHON_VERSION jupyter nbconvert beautifulsoup4 lxml
 - source activate convert
 
 script:
