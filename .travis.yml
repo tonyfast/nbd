@@ -28,7 +28,7 @@ script:
 - git remote add upstream "https://$GH_TOKEN@github.com/tonyfast/nbd"
 - git fetch upstream
 - git checkout gh-pages
-- git merge -X theirs build
+- git merge -X theirs master
 - jupyter nbconvert --to markdown readme.ipynb
 - jupyter nbconvert --to python nbd.ipynb
 - python nbd.py --to . --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd --id nbd
