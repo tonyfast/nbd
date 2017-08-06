@@ -1,32 +1,36 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[100]:
 
 
 from nbconvert import exporters
 from nbformat.v4 import new_code_cell, new_markdown_cell, new_raw_cell as raw, new_notebook
+from nbconvert.preprocessors import Preprocessor
 from mistune import markdown
 from bs4 import BeautifulSoup
 from argparse import ArgumentParser
 from pathlib import Path
 from operator import methodcaller
 from fnmatch import fnmatch
+from traitlets import Bool
 
 
 # ## nbconvert `HTML` exporter
 # 
 # `readers` load different file extensions and return notebooks.
 
-# In[2]:
+# In[85]:
 
 
 html = exporters.html.HTMLExporter()
 
 
 # ## Extension Readers
+# 
+# The extension readers define valid extensions for nbd & how each path should be read.
 
-# In[3]:
+# In[97]:
 
 
 readers = {
@@ -41,7 +45,7 @@ readers['pyi'] = readers['py']
 
 # ### Argument Parser
 
-# In[47]:
+# In[88]:
 
 
 parser = ArgumentParser()
@@ -52,14 +56,16 @@ parser.add_argument('--ignore', nargs='*', default=('ipynb_checkpoints',))
 parser.add_argument('--ext', nargs='*', default=tuple(readers))
 parser.add_argument('--deep', action='store_true')
 parser.add_argument('--url', default='')
-parser.add_argument('--id', default='')
 parser.add_argument('--name', default='')
+parser.add_argument('--theme', default='')
+parser.add_argument('--drop-input', action='store_true')
+parser.add_argument('--drop-output', action='store_true')
 defaults = parser.parse_args(tuple())
 
 
 # ## Main Program
 
-# In[49]:
+# In[83]:
 
 
 def main(
@@ -69,11 +75,11 @@ def main(
     """The main nbd function."""
     root, to, *dir = Path(root), Path(to), *map(Path, dir)
     nbs = load(files(root, ext, ignore, dir, deep))
-    docs = write(nbs, to, root)
+    docs = write(nbs, to, root, args)
     index(docs, nbs, root, to, {
-        key: getattr(args, key) for key in ['name', 'id', 'url']
+        key: getattr(args, key) for key in ['name', 'url']
         if getattr(args, key)
-    })
+    }, args.theme)
 
 
 # ## Public Python Functions
@@ -102,30 +108,32 @@ def parents(file):
          _1 for _1 in file.parents if not _1.exists()])]
 
 
-# In[52]:
+# In[95]:
 
 
-def writeFile(file, nb):
+def writeFile(file, nb, args):
     """Export an html file from a new notebook"""
     # If the parent directories do not exists then create them.
     parents(file)
-    nb = html.from_notebook_node(nb)[0]
+    nb = html.from_notebook_node(
+        Remove(input=args.drop_input, output=args.drop_output).preprocess(nb, {})[0]
+    )[0]
     file.write_text(nb)
     return nb
 
 
-# In[53]:
+# In[93]:
 
 
-def write(nbs, to, root):
+def write(nbs, to, root, args):
     """Orchestrate the writing of the html version of each document."""
     return {
-        key: print(key) or writeFile(key, value) 
+        key: print(key) or writeFile(key, value, args) 
         for _, value in nbs.items()
         for key in [to/_.relative_to(root).with_suffix(_.suffix+'.html')]}
 
 
-# In[54]:
+# In[94]:
 
 
 def load(nbs):
@@ -142,9 +150,7 @@ def load(nbs):
 div, _div = lambda s: raw("""<div class="{}">""".format(s)), raw("""</div>""")
 
 
-# ### Documentation Index
-# 
-# A bootstrap `list-group` to display `html` documents.
+# ### Notebook Viewer in an IFrame
 
 # In[56]:
 
@@ -154,7 +160,11 @@ iframe = raw("""<div class="row">
 </div>""")
 
 
-# In[69]:
+# ### Documentation Index
+# 
+# A bootstrap `list-group` to display `html` documents.
+
+# In[80]:
 
 
 def item(target, to, html, nb):
@@ -178,7 +188,7 @@ def item(target, to, html, nb):
             str(link), item.attrs['id'], item.text, i=2+int(item.name[-1]))
     return output + """</ul></div>""" 
 
-def index(docs, nbs, root, to, disqus=None):
+def index(docs, nbs, root, to, disqus=None, theme=None):
     """Create the index of notebook items"""
     nb = new_notebook(cells=[iframe, div("row"), raw("""""")])
     for doc in docs:
@@ -186,25 +196,56 @@ def index(docs, nbs, root, to, disqus=None):
         
         nb.cells[-1].source += item(doc, to, docs[doc], nbs[source])
     
-    disqus and nb.cells.append(raw(DISQUS(
-            name=disqus.get('name'), id=disqus.get('id'), url=disqus.get('url'))))
+    disqus and nb.cells.append(
+        raw(DISQUS(name=disqus.get('name'), url=disqus.get('url'))))
         
     nb.cells.extend([_div, style])
 
-    docs[to/'index.html'] = html.from_notebook_node(nb)[0]
+    docs[to/'index.html'] = add_theme(html.from_notebook_node(nb)[0], theme)
     (to/'index.html').write_text(docs[to/'index.html'])
-    print(to/'index.html')
 
 
+# ## Toggle Input and Output Preprocessor
+# 
+# An nbconvert preprocessor that removes input or output cells.  Literacy re-renders code in the output.  Software projects make forcibly remove output cells to maintain a clean document.
+
+# In[96]:
+
+
+class Remove(Preprocessor):
+    input = Bool(False)
+    output = Bool(False)
+    
+    def preprocess_cell(self, cell, resources, index):
+        if self.input or self.output:
+            cell = cell.copy()
+        
+        if hasattr(cell, 'outputs'):
+            
+            if self.input:
+                cell.source = """"""
+            
+        
+            if self.output:
+                cell.outputs = []
+                
+        return cell, resources
+
+
+# ## Customization
+# 
 # ### Custom Styling
 # 
 # The changes in style reflect the most basic modifications to create a side-by-side documentation browser.
+# 
+# This should probably go in custom.css.
 
-# In[58]:
+# In[78]:
 
 
 style = raw("""
 <style>
+    @import https://bootswatch.com/cyborg/bootstrap.min.css;
     body {
         padding: 0 !important;
     }
@@ -250,20 +291,18 @@ style = raw("""
 """)
 
 
-# In[ ]:
+# ### Disqus Universal Embed Code
+# 
+# Disqus Universal embed code
 
-
-
-
-
-# In[66]:
+# In[81]:
 
 
 DISQUS = html.environment.from_string("""<div class="row" id="disqus_thread"></div>
 <script>
     var disqus_config = function () {
         this.page.url = "{{url}}";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "{{id}}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "{{url}}"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
         var d = document, s = d.createElement('script');
@@ -277,24 +316,26 @@ DISQUS = html.environment.from_string("""<div class="row" id="disqus_thread"></d
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>""").render
 
 
+# ### Experimental Themes
+# 
+# Attach free bootswatch theme.
+
+# In[82]:
+
+
+def add_theme(html, theme):
+    if theme:
+        head, rest = html.split('</head>', 1)
+        html = head + """
+        <link href="https://bootswatch.com/slate/bootstrap.min.css" rel="stylesheet">
+        </head>""" + rest
+    return html
+
+
 # In[ ]:
 
 
 if __name__ == '__main__':
-        args = parser.parse_args()
-        main(args.root, args.to, args.dir, args.ignore, args.ext, args.deep, args)
-
-
-# ### Interactive mode
-# 
-# Enable the code cell to run `nbd` in interactive mode.
-#     
-
-# In[65]:
-
-
-#     defaults.name='tonyfast'
-#     defaults.url='https://tonyfast.com/nbd'
-#     defaults.id='nbd'
-#     main(args=defaults)
+    args = parser.parse_args()
+    main(args.root, args.to, args.dir, args.ignore, args.ext, args.deep, args)
 

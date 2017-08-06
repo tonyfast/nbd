@@ -7,23 +7,16 @@
 
 ```bash
     %%bash
-    pip install https://github.com/tonyfast/nbd
+#     pip install https://github.com/tonyfast/nbd
     python -m nbd --deep
 ```
 
-    Collecting https://github.com/tonyfast/nbd
-      Downloading https://github.com/tonyfast/nbd
-    docs/nbd.py.html
-    docs/nbd.ipynb.html
+    docs/setup.py.html
     docs/readme.md.html
+    docs/nbd.ipynb.html
+    docs/nbd.py.html
     docs/usage/basic.ipynb.html
     docs/readme.ipynb.html
-    docs/setup.py.html
-    docs/index.html
-
-
-      Cannot unpack file /private/var/folders/0g/4z343jrx1lbb4mz0sqwlfmr00000gp/T/pip-qwjaqvnp-unpack/nbd (downloaded from /private/var/folders/0g/4z343jrx1lbb4mz0sqwlfmr00000gp/T/pip-kbtpmbi_-build, content-type: text/html; charset=utf-8); cannot detect archive format
-    Cannot determine archive format of /private/var/folders/0g/4z343jrx1lbb4mz0sqwlfmr00000gp/T/pip-kbtpmbi_-build
 
 
 ## The First Markdown Cell
@@ -57,17 +50,16 @@ Jupyter notebook are the primary mode of development.  The bash script below
     %%bash
     jupyter nbconvert --to markdown readme.ipynb
     jupyter nbconvert --to python nbd.ipynb
-    python -m nbd --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd --id nbd
+    python -m nbd --deep --ext ipynb --theme paper --drop-output  --name tonyfast --url https://tonyfast/nbd
 ```
 
-    docs/usage/basic.ipynb.html
-    docs/nbd.ipynb.html
     docs/readme.ipynb.html
-    docs/index.html
+    docs/nbd.ipynb.html
+    docs/usage/basic.ipynb.html
 
 
     [NbConvertApp] Converting notebook readme.ipynb to markdown
-    [NbConvertApp] Writing 1887 bytes to readme.md
+    [NbConvertApp] Writing 2364 bytes to readme.md
     [NbConvertApp] Converting notebook nbd.ipynb to python
-    [NbConvertApp] Writing 7574 bytes to nbd.py
+    [NbConvertApp] Writing 8964 bytes to nbd.py
 

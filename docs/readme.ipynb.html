@@ -11785,53 +11785,15 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>%%bash
-    pip install https://github.com/tonyfast/nbd
+<span class="c1">#     pip install https://github.com/tonyfast/nbd</span>
     python -m nbd --deep
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Collecting https://github.com/tonyfast/nbd
-  Downloading https://github.com/tonyfast/nbd
-docs/nbd.py.html
-docs/nbd.ipynb.html
-docs/readme.md.html
-docs/usage/basic.ipynb.html
-docs/readme.ipynb.html
-docs/setup.py.html
-docs/index.html
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>  Cannot unpack file /private/var/folders/0g/4z343jrx1lbb4mz0sqwlfmr00000gp/T/pip-qwjaqvnp-unpack/nbd (downloaded from /private/var/folders/0g/4z343jrx1lbb4mz0sqwlfmr00000gp/T/pip-kbtpmbi_-build, content-type: text/html; charset=utf-8); cannot detect archive format
-Cannot determine archive format of /private/var/folders/0g/4z343jrx1lbb4mz0sqwlfmr00000gp/T/pip-kbtpmbi_-build
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -11880,13 +11842,13 @@ Cannot determine archive format of /private/var/folders/0g/4z343jrx1lbb4mz0sqwlf
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>%%bash
     jupyter nbconvert --to markdown readme.ipynb
     jupyter nbconvert --to python nbd.ipynb
-    python -m nbd --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd --id nbd
+    python -m nbd --deep --ext ipynb --theme paper --drop-output  --name tonyfast --url https://tonyfast/nbd
 </pre></div>
 
 </div>

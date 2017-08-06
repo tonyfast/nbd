@@ -11766,39 +11766,15 @@ div#notebook {
         }
     });
     </script>
-    <!-- End of mathjax configuration --></head>
+    <!-- End of mathjax configuration -->
+        <link href="https://bootswatch.com/slate/bootstrap.min.css" rel="stylesheet">
+        </head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 <div class="row">
 <iframe class="embed-responsive-item" src="readme.ipynb.html" name="docs"></iframe>
 </div><div class="row"><div class="panel panel-default">
-  <div class="panel-heading"><a href="usage/basic.ipynb.html" target="docs"><h3 class="list-group-item-heading">usage/basic.ipynb</h3></a></div>
-  <div class="panel-body"><h1>Basic <code>nbd</code> usage</h1>
-</div><ul class='list-group'><li class="list-group-item">
-    <h3><a href="usage/basic.ipynb.html#Basic-nbd-usage" target="docs">Basic nbd usage¶</a></h3></li><li class="list-group-item">
-    <h4><a href="usage/basic.ipynb.html#Command-line" target="docs">Command line¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/basic.ipynb.html#Adding-Extensions." target="docs">Adding Extensions.¶</a></h4></li></ul></div><div class="panel panel-default">
-  <div class="panel-heading"><a href="nbd.ipynb.html" target="docs"><h3 class="list-group-item-heading">nbd.ipynb</h3></a></div>
-  <div class="panel-body"><pre><code>from nbconvert import exporters
-from nbformat.v4 import new_code_cell, new_markdown_cell, new_raw_cell as raw, new_notebook
-from mistune import markdown
-from bs4 import BeautifulSoup
-from argparse import ArgumentParser
-from pathlib import Path
-from operator import methodcaller
-from fnmatch import fnmatch
-</code></pre>
-</div><ul class='list-group'><li class="list-group-item">
-    <h4><a href="nbd.ipynb.html#nbconvert-HTML-exporter" target="docs">nbconvert HTML exporter¶</a></h4></li><li class="list-group-item">
-    <h4><a href="nbd.ipynb.html#Extension-Readers" target="docs">Extension Readers¶</a></h4></li><li class="list-group-item">
-    <h4><a href="nbd.ipynb.html#Arguments" target="docs">Arguments¶</a></h4></li><li class="list-group-item">
-    <h4><a href="nbd.ipynb.html#Main-Program" target="docs">Main Program¶</a></h4></li><li class="list-group-item">
-    <h4><a href="nbd.ipynb.html#Public-Python-Functions" target="docs">Public Python Functions¶</a></h4></li><li class="list-group-item">
-    <h5><a href="nbd.ipynb.html#Argument-Parser" target="docs">Argument Parser¶</a></h5></li><li class="list-group-item">
-    <h5><a href="nbd.ipynb.html#Documentation-Index" target="docs">Documentation Index¶</a></h5></li><li class="list-group-item">
-    <h5><a href="nbd.ipynb.html#Custom-Styling" target="docs">Custom Styling¶</a></h5></li><li class="list-group-item">
-    <h5><a href="nbd.ipynb.html#Interactive-mode" target="docs">Interactive mode¶</a></h5></li></ul></div><div class="panel panel-default">
   <div class="panel-heading"><a href="readme.ipynb.html" target="docs"><h3 class="list-group-item-heading">readme.ipynb</h3></a></div>
   <div class="panel-body"><h1><code>nbd</code>ocumentation</h1>
 <ul>
@@ -11812,11 +11788,43 @@ from fnmatch import fnmatch
     <h4><a href="readme.ipynb.html#Why" target="docs">Why¶</a></h4></li><li class="list-group-item">
     <h4><a href="readme.ipynb.html#Why-Bootstrap?" target="docs">Why Bootstrap?¶</a></h4></li><li class="list-group-item">
     <h4><a href="readme.ipynb.html#Development" target="docs">Development¶</a></h4></li><li class="list-group-item">
-    <h5><a href="readme.ipynb.html#Convert-the-readme-to-markdown-for-viewing-on-github." target="docs">Convert the readme to markdown for viewing on github.¶</a></h5></li></ul></div><div class="row" id="disqus_thread"></div>
+    <h5><a href="readme.ipynb.html#Convert-the-readme-to-markdown-for-viewing-on-github." target="docs">Convert the readme to markdown for viewing on github.¶</a></h5></li></ul></div><div class="panel panel-default">
+  <div class="panel-heading"><a href="usage/basic.ipynb.html" target="docs"><h3 class="list-group-item-heading">usage/basic.ipynb</h3></a></div>
+  <div class="panel-body"><h1>Basic <code>nbd</code> usage</h1>
+</div><ul class='list-group'><li class="list-group-item">
+    <h3><a href="usage/basic.ipynb.html#Basic-nbd-usage" target="docs">Basic nbd usage¶</a></h3></li><li class="list-group-item">
+    <h4><a href="usage/basic.ipynb.html#Command-line" target="docs">Command line¶</a></h4></li><li class="list-group-item">
+    <h4><a href="usage/basic.ipynb.html#Adding-Extensions." target="docs">Adding Extensions.¶</a></h4></li></ul></div><div class="panel panel-default">
+  <div class="panel-heading"><a href="nbd.ipynb.html" target="docs"><h3 class="list-group-item-heading">nbd.ipynb</h3></a></div>
+  <div class="panel-body"><pre><code>from nbconvert import exporters
+from nbformat.v4 import new_code_cell, new_markdown_cell, new_raw_cell as raw, new_notebook
+from nbconvert.preprocessors import Preprocessor
+from mistune import markdown
+from bs4 import BeautifulSoup
+from argparse import ArgumentParser
+from pathlib import Path
+from operator import methodcaller
+from fnmatch import fnmatch
+from traitlets import Bool
+</code></pre>
+</div><ul class='list-group'><li class="list-group-item">
+    <h4><a href="nbd.ipynb.html#nbconvert-HTML-exporter" target="docs">nbconvert HTML exporter¶</a></h4></li><li class="list-group-item">
+    <h4><a href="nbd.ipynb.html#Extension-Readers" target="docs">Extension Readers¶</a></h4></li><li class="list-group-item">
+    <h4><a href="nbd.ipynb.html#Arguments" target="docs">Arguments¶</a></h4></li><li class="list-group-item">
+    <h4><a href="nbd.ipynb.html#Main-Program" target="docs">Main Program¶</a></h4></li><li class="list-group-item">
+    <h4><a href="nbd.ipynb.html#Public-Python-Functions" target="docs">Public Python Functions¶</a></h4></li><li class="list-group-item">
+    <h4><a href="nbd.ipynb.html#Toggle-Input-and-Output-Preprocessor" target="docs">Toggle Input and Output Preprocessor¶</a></h4></li><li class="list-group-item">
+    <h4><a href="nbd.ipynb.html#Customization" target="docs">Customization¶</a></h4></li><li class="list-group-item">
+    <h5><a href="nbd.ipynb.html#Argument-Parser" target="docs">Argument Parser¶</a></h5></li><li class="list-group-item">
+    <h5><a href="nbd.ipynb.html#Notebook-Viewer-in-an-IFrame" target="docs">Notebook Viewer in an IFrame¶</a></h5></li><li class="list-group-item">
+    <h5><a href="nbd.ipynb.html#Documentation-Index" target="docs">Documentation Index¶</a></h5></li><li class="list-group-item">
+    <h5><a href="nbd.ipynb.html#Custom-Styling" target="docs">Custom Styling¶</a></h5></li><li class="list-group-item">
+    <h5><a href="nbd.ipynb.html#Disqus-Universal-Embed-Code" target="docs">Disqus Universal Embed Code¶</a></h5></li><li class="list-group-item">
+    <h5><a href="nbd.ipynb.html#Experimental-Themes" target="docs">Experimental Themes¶</a></h5></li></ul></div><div class="row" id="disqus_thread"></div>
 <script>
     var disqus_config = function () {
-        this.page.url = "https://tonyfast.com/nbd";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "nbd"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = "https://tonyfast/nbd";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "https://tonyfast/nbd"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
         var d = document, s = d.createElement('script');
@@ -11829,6 +11837,7 @@ from fnmatch import fnmatch
 </script>
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript></div>
 <style>
+    @import https://bootswatch.com/cyborg/bootstrap.min.css;
     body {
         padding: 0 !important;
     }
