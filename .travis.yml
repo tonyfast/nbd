@@ -18,21 +18,16 @@ install:
   lxml
 - source activate convert
 script:
-- set -e
-- git init
-- git config user.name "T-Bone"
-- git config user.email "tony.fast@gmail.com"
-- git remote add upstream "https://$GH_TOKEN@github.com/tonyfast/nbd.git"
-- git fetch upstream
-- git checkout gh-pages
-- git merge -X theirs master
 - jupyter nbconvert --to markdown readme.ipynb
 - jupyter nbconvert --to python nbd.ipynb
 - python nbd.py --to . --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd
   --id nbd
-- git add .
-- git commit -m "Update docs nbd docs."
-- git push -q upstream HEAD:gh-pages
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master
 env:
   global:
     secure: 2qxEQeS4EZhCNsCQy/bbYhK65tRkePpyUD2n3ZHxd/i5U/lAWAgTzhHVoba5TF6ZHy7HfWUlQVrI6Qoni3vheM3HbipW0uZhTb7IRQSmcKjtynrqWfvGQHeImKUlaCI+q2Phsrzjfxu9mnm5cB9VmYmxgTItJxigO1KvmZC0u2F5fEn+YdlY4EatDHSXPQJEYL+5LBIeOmITiOJxK8YvxGlWugn9HWSxBtnEI2yfy/KRfpX7BV25NzhBl8h/q6/xRtRr67WtR2xrcyvv4uk/BgdZ5Fi4cwxnE8o9DqlSNKSvae7Lly5X4h7QrTOAQDHrricOeWSyYKPOIE5MIF/u7UctoUmyBLvoJ9N3hpl43IoKHQaWdwn6oiHSov+itd9JonmBHDLOWYlVBuuRHNkpxy2vNQm6sg3jXE5TPPdm3qpKaUy2WL+8mocLMvunP7+4tFutFgLO7wmLobrqM0ffCBZgP62FG98bDc3ZIg2zcp4u+UVEHYEMHg4C/dauqU2AQuBtVEqSKme97ReY83k073E+nPkKTFAQhKbYsxhb1vwGF75cyOcYrviks+YYm71oxulsNhS8IuqTDJfkCkHjJV9aYB4VwcIaTBM0I1qy3+UxjiypSNQeMivBWy+mnufx4l0FNV4xCssNtd/SgfFwP8UJlxLQ0PG7F0XlyuaqaRw=
