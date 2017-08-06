@@ -1,12 +1,9 @@
 language: python
 python:
 - 3.5
-
-# blocklist
 branches:
   except:
   - gh-pages
-
 install:
 - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
 - bash miniconda.sh -b -p $HOME/miniconda
@@ -17,25 +14,25 @@ install:
 - conda config --add channels conda-forge
 - conda update -q conda
 - conda info -a
-- conda create -y -q -n convert python=$TRAVIS_PYTHON_VERSION jupyter nbconvert beautifulsoup4 lxml
+- conda create -y -q -n convert python=$TRAVIS_PYTHON_VERSION jupyter nbconvert beautifulsoup4
+  lxml
 - source activate convert
-
 script:
 - set -e
 - git init
 - git config user.name "T-Bone"
 - git config user.email "tony.fast@gmail.com"
-- git remote add upstream "https://$GH_TOKEN@github.com/tonyfast/nbd"
+- git remote add upstream "https://$GH_TOKEN@github.com/tonyfast/nbd.git"
 - git fetch upstream
 - git checkout gh-pages
 - git merge -X theirs master
 - jupyter nbconvert --to markdown readme.ipynb
 - jupyter nbconvert --to python nbd.ipynb
-- python nbd.py --to . --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd --id nbd
+- python nbd.py --to . --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd
+  --id nbd
 - git add .
-- git commit -m "Convert posts and scripts automatically"
+- git commit -m "Update docs nbd docs."
 - git push -q upstream HEAD:gh-pages
-
 env:
-    global:
-    - secure: "gmbLoLZ00wT7l88jEzI8G7EVeOozUXePDmsH3Y0SZ/ehxb94pE78biOksgPwDuJ1br9n8nSdoO7qRgm+q8qqpMdBEfqOTNnL/N0vFKDE5KVpuemx7AZeuSPIFHF34/PuwaId3O+4JkKXeIEQgKImb4y28hfdrHW06Pl60JbpaAzcKm4ZoghmpYUsjUFfTc0AMDH0kiXT6obmcEw3JIO6zY+/jypFs9bo8y+Uf/X1xFBDisW2p+9BLQJhsa1vw80e+bDf7RCE+bpxdNesnQLh+bBzVev70hWqKnlifyTRlsxoDTz4lG74DIQaq2h5VNm1tafqq4YZB2cDQ28F9ewMUvhprl1Wjapm2sVu+6Us8pP55ouaqr/6g2KXhNiCcoP1/qFecRUUU9Uy186AxoSue+CKQ0J8YtFgI7RblHOljmp7juL7f7Tqhyvp1UKbvsSiV6HxI6Dgk0UfjnVcE5rhMwVI2YGZ/cRtnE35Eu6Ajxb7AaoifzEe+/EoKjBNG7SYRY6APYBdpmNkkX3NM5MOqA6hmOYDXt3WnZNP4lNo1gK1x/MHNsJVh2XEXVF+huT6NUSZU1dUnU2XFh4gF982GRENjNlbwAjOnRcWRoIQfK8RIqqDk9QwR5wEAV447kQ4vb48q6+pdZ0mEpUh8DMBvMkGBFpXYGi0ppbTmhpMX+k="
+  global:
+    secure: 2qxEQeS4EZhCNsCQy/bbYhK65tRkePpyUD2n3ZHxd/i5U/lAWAgTzhHVoba5TF6ZHy7HfWUlQVrI6Qoni3vheM3HbipW0uZhTb7IRQSmcKjtynrqWfvGQHeImKUlaCI+q2Phsrzjfxu9mnm5cB9VmYmxgTItJxigO1KvmZC0u2F5fEn+YdlY4EatDHSXPQJEYL+5LBIeOmITiOJxK8YvxGlWugn9HWSxBtnEI2yfy/KRfpX7BV25NzhBl8h/q6/xRtRr67WtR2xrcyvv4uk/BgdZ5Fi4cwxnE8o9DqlSNKSvae7Lly5X4h7QrTOAQDHrricOeWSyYKPOIE5MIF/u7UctoUmyBLvoJ9N3hpl43IoKHQaWdwn6oiHSov+itd9JonmBHDLOWYlVBuuRHNkpxy2vNQm6sg3jXE5TPPdm3qpKaUy2WL+8mocLMvunP7+4tFutFgLO7wmLobrqM0ffCBZgP62FG98bDc3ZIg2zcp4u+UVEHYEMHg4C/dauqU2AQuBtVEqSKme97ReY83k073E+nPkKTFAQhKbYsxhb1vwGF75cyOcYrviks+YYm71oxulsNhS8IuqTDJfkCkHjJV9aYB4VwcIaTBM0I1qy3+UxjiypSNQeMivBWy+mnufx4l0FNV4xCssNtd/SgfFwP8UJlxLQ0PG7F0XlyuaqaRw=
