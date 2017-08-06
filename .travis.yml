@@ -21,7 +21,6 @@ script:
 - jupyter nbconvert --to markdown readme.ipynb
 - jupyter nbconvert --to python nbd.ipynb
 - python nbd.py --to . --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd
-  --id nbd
 deploy:
   provider: pages
   skip_cleanup: true
