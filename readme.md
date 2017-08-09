@@ -53,13 +53,18 @@ Jupyter notebook are the primary mode of development.  The bash script below
     python -m nbd --deep --ext ipynb --theme paper --drop-output  --name tonyfast --url https://tonyfast/nbd
 ```
 
-    docs/readme.ipynb.html
     docs/nbd.ipynb.html
     docs/usage/basic.ipynb.html
+    docs/readme.ipynb.html
 
 
     [NbConvertApp] Converting notebook readme.ipynb to markdown
-    [NbConvertApp] Writing 2364 bytes to readme.md
+    [NbConvertApp] Writing 2181 bytes to readme.md
     [NbConvertApp] Converting notebook nbd.ipynb to python
-    [NbConvertApp] Writing 8964 bytes to nbd.py
+    [NbConvertApp] Writing 9131 bytes to nbd.py
 
+
+
+```python
+
+```

@@ -164,7 +164,7 @@ iframe = raw("""<div class="row">
 # 
 # A bootstrap `list-group` to display `html` documents.
 
-# In[80]:
+# In[118]:
 
 
 def item(target, to, html, nb):
@@ -190,7 +190,9 @@ def item(target, to, html, nb):
 
 def index(docs, nbs, root, to, disqus=None, theme=None):
     """Create the index of notebook items"""
-    nb = new_notebook(cells=[iframe, div("row"), raw("""""")])
+    nb = new_notebook(cells=[iframe, 
+                             div("row"), ])
+    nb.cells.append(raw(""""""))
     for doc in docs:
         source = root / doc.with_suffix(doc.suffix.rstrip('.html')).relative_to(to)
         
@@ -199,17 +201,21 @@ def index(docs, nbs, root, to, disqus=None, theme=None):
     disqus and nb.cells.append(
         raw(DISQUS(name=disqus.get('name'), url=disqus.get('url'))))
         
-    nb.cells.extend([_div, style])
-
-    docs[to/'index.html'] = add_theme(html.from_notebook_node(nb)[0], theme)
-    (to/'index.html').write_text(docs[to/'index.html'])
+    nb.cells.extend([_div])
+    docs[to/'index.html'] = html.from_notebook_node(nb, {})[0].replace(
+        """<div class="container" id="notebook-container">""",
+        """<div class="container flexxed" id="notebook-container">"""
+    )
+    
+    docs[to/'custom.css'] = (add_theme(theme) if theme else theme) + style
+    for key in ('index.html', 'custom.css'): (to / key).write_text(docs[to/key])
 
 
 # ## Toggle Input and Output Preprocessor
 # 
 # An nbconvert preprocessor that removes input or output cells.  Literacy re-renders code in the output.  Software projects make forcibly remove output cells to maintain a clean document.
 
-# In[96]:
+# In[109]:
 
 
 class Remove(Preprocessor):
@@ -240,62 +246,66 @@ class Remove(Preprocessor):
 # 
 # This should probably go in custom.css.
 
-# In[78]:
+# In[120]:
 
 
-style = raw("""
-<style>
-    @import https://bootswatch.com/cyborg/bootstrap.min.css;
-    body {
-        padding: 0 !important;
-    }
-    body > #notebook {
-        margin: 0;
-        padding: 0;
-    }
-    #notebook-container {
-        width: 100%;
-        padding: 0;
-        box-shadow: none;
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        height: 100vh;
-        overflow: hidden;
-    }
-    #notebook-container .row {
-        flex: 0;
-        min-width: 33vw;
-        max-height: 100%;
-        overflow-y: auto;
-        padding: 1rem;
-    }
-    
-    #notebook-container .row:first-child {
-        flex: 1;
-        display: flex;
-        flex-direction: row;
-    }
-    #notebook-container .panel {
-        box-shadow: none;
-    }
-    #notebook-container .panel-heading {
-        overflow-wrap: break-word;
-        background: none;
-    }
-    #notebook-container .row iframe[name="docs"] {
-        flex: 1;
-        border: none;
-    }
-</style>
-""")
+style = """
+body {
+    padding: 0 !important;
+}
+body > #notebook {
+    margin: 0;
+    padding: 0;
+}
+#notebook-container {
+    width: 100%;
+    padding: 0;
+    box-shadow: none;
+}
+
+div.flexxed#notebook-container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    height: 100vh;
+    overflow: hidden;
+}
+
+div.flexxed#notebook-container .row {
+    flex: 0;
+    min-width: 33vw;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+div.flexxed#notebook-container .row:first-child {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+}
+
+#notebook-container .panel {
+    box-shadow: none;
+}
+
+#notebook-container .panel-heading {
+    overflow-wrap: break-word;
+    background: none;
+}
+
+div.flexxed#notebook-container .row iframe[name="docs"] {
+    flex: 1;
+    border: none;
+}
+"""
 
 
 # ### Disqus Universal Embed Code
 # 
 # Disqus Universal embed code
 
-# In[81]:
+# In[111]:
 
 
 DISQUS = html.environment.from_string("""<div class="row" id="disqus_thread"></div>
@@ -320,16 +330,12 @@ DISQUS = html.environment.from_string("""<div class="row" id="disqus_thread"></d
 # 
 # Attach free bootswatch theme.
 
-# In[82]:
+# In[105]:
 
 
-def add_theme(html, theme):
-    if theme:
-        head, rest = html.split('</head>', 1)
-        html = head + """
-        <link href="https://bootswatch.com/slate/bootstrap.min.css" rel="stylesheet">
-        </head>""" + rest
-    return html
+add_theme = """
+@import url(https://bootswatch.com/{}/bootstrap.min.css);
+""".format
 
 
 # In[ ]:

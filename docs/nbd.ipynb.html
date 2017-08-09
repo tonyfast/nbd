@@ -12071,7 +12071,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="prompt input_prompt">In&nbsp;[118]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">def</span> <span class="nf">item</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">nb</span><span class="p">):</span>
@@ -12097,7 +12097,9 @@ div#notebook {
 
     <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">docs</span><span class="p">,</span> <span class="n">nbs</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">to</span><span class="p">,</span> <span class="n">disqus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">theme</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Create the index of notebook items&quot;&quot;&quot;</span>
-        <span class="n">nb</span> <span class="o">=</span> <span class="n">new_notebook</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="p">[</span><span class="n">iframe</span><span class="p">,</span> <span class="n">div</span><span class="p">(</span><span class="s2">&quot;row&quot;</span><span class="p">),</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&quot;&quot;&quot;</span><span class="p">)])</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="n">new_notebook</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="p">[</span><span class="n">iframe</span><span class="p">,</span> 
+                                 <span class="n">div</span><span class="p">(</span><span class="s2">&quot;row&quot;</span><span class="p">),</span> <span class="p">])</span>
+        <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&quot;&quot;&quot;</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">:</span>
             <span class="n">source</span> <span class="o">=</span> <span class="n">root</span> <span class="o">/</span> <span class="n">doc</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;.html&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
             
@@ -12106,10 +12108,14 @@ div#notebook {
         <span class="n">disqus</span> <span class="ow">and</span> <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">raw</span><span class="p">(</span><span class="n">DISQUS</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">disqus</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="n">url</span><span class="o">=</span><span class="n">disqus</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">))))</span>
             
-        <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">_div</span><span class="p">,</span> <span class="n">style</span><span class="p">])</span>
-
-        <span class="n">docs</span><span class="p">[</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;index.html&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_theme</span><span class="p">(</span><span class="n">html</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">nb</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">theme</span><span class="p">)</span>
-        <span class="p">(</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;index.html&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">docs</span><span class="p">[</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;index.html&#39;</span><span class="p">])</span>
+        <span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">_div</span><span class="p">])</span>
+        <span class="n">docs</span><span class="p">[</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;index.html&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="p">{})[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+            <span class="sd">&quot;&quot;&quot;&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;&quot;&quot;&quot;</span><span class="p">,</span>
+            <span class="sd">&quot;&quot;&quot;&lt;div class=&quot;container flexxed&quot; id=&quot;notebook-container&quot;&gt;&quot;&quot;&quot;</span>
+        <span class="p">)</span>
+        
+        <span class="n">docs</span><span class="p">[</span><span class="n">to</span><span class="o">/</span><span class="s1">&#39;custom.css&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">add_theme</span><span class="p">(</span><span class="n">theme</span><span class="p">)</span> <span class="k">if</span> <span class="n">theme</span> <span class="k">else</span> <span class="n">theme</span><span class="p">)</span> <span class="o">+</span> <span class="n">style</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="s1">&#39;custom.css&#39;</span><span class="p">):</span> <span class="p">(</span><span class="n">to</span> <span class="o">/</span> <span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">docs</span><span class="p">[</span><span class="n">to</span><span class="o">/</span><span class="n">key</span><span class="p">])</span>
 </pre></div>
 
 </div>
@@ -12128,7 +12134,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="prompt input_prompt">In&nbsp;[109]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">class</span> <span class="nc">Remove</span><span class="p">(</span><span class="n">Preprocessor</span><span class="p">):</span>
@@ -12168,55 +12174,59 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In&nbsp;[120]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>    <span class="n">style</span> <span class="o">=</span> <span class="n">raw</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">    &lt;style&gt;</span>
-<span class="s2">        @import https://bootswatch.com/cyborg/bootstrap.min.css;</span>
-<span class="s2">        body {</span>
-<span class="s2">            padding: 0 !important;</span>
-<span class="s2">        }</span>
-<span class="s2">        body &gt; #notebook {</span>
-<span class="s2">            margin: 0;</span>
-<span class="s2">            padding: 0;</span>
-<span class="s2">        }</span>
-<span class="s2">        #notebook-container {</span>
-<span class="s2">            width: 100%;</span>
-<span class="s2">            padding: 0;</span>
-<span class="s2">            box-shadow: none;</span>
-<span class="s2">            display: flex;</span>
-<span class="s2">            flex-direction: row;</span>
-<span class="s2">            align-items: stretch;</span>
-<span class="s2">            height: 100vh;</span>
-<span class="s2">            overflow: hidden;</span>
-<span class="s2">        }</span>
-<span class="s2">        #notebook-container .row {</span>
-<span class="s2">            flex: 0;</span>
-<span class="s2">            min-width: 33vw;</span>
-<span class="s2">            max-height: 100%;</span>
-<span class="s2">            overflow-y: auto;</span>
-<span class="s2">            padding: 1rem;</span>
-<span class="s2">        }</span>
-<span class="s2">        </span>
-<span class="s2">        #notebook-container .row:first-child {</span>
-<span class="s2">            flex: 1;</span>
-<span class="s2">            display: flex;</span>
-<span class="s2">            flex-direction: row;</span>
-<span class="s2">        }</span>
-<span class="s2">        #notebook-container .panel {</span>
-<span class="s2">            box-shadow: none;</span>
-<span class="s2">        }</span>
-<span class="s2">        #notebook-container .panel-heading {</span>
-<span class="s2">            overflow-wrap: break-word;</span>
-<span class="s2">            background: none;</span>
-<span class="s2">        }</span>
-<span class="s2">        #notebook-container .row iframe[name=&quot;docs&quot;] {</span>
-<span class="s2">            flex: 1;</span>
-<span class="s2">            border: none;</span>
-<span class="s2">        }</span>
-<span class="s2">    &lt;/style&gt;</span>
-<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span>    <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    body {</span>
+<span class="s2">        padding: 0 !important;</span>
+<span class="s2">    }</span>
+<span class="s2">    body &gt; #notebook {</span>
+<span class="s2">        margin: 0;</span>
+<span class="s2">        padding: 0;</span>
+<span class="s2">    }</span>
+<span class="s2">    #notebook-container {</span>
+<span class="s2">        width: 100%;</span>
+<span class="s2">        padding: 0;</span>
+<span class="s2">        box-shadow: none;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    div.flexxed#notebook-container {</span>
+<span class="s2">        display: flex;</span>
+<span class="s2">        flex-direction: row;</span>
+<span class="s2">        align-items: stretch;</span>
+<span class="s2">        height: 100vh;</span>
+<span class="s2">        overflow: hidden;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    div.flexxed#notebook-container .row {</span>
+<span class="s2">        flex: 0;</span>
+<span class="s2">        min-width: 33vw;</span>
+<span class="s2">        max-height: 100%;</span>
+<span class="s2">        overflow-y: auto;</span>
+<span class="s2">        padding: 1rem;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    div.flexxed#notebook-container .row:first-child {</span>
+<span class="s2">        flex: 1;</span>
+<span class="s2">        display: flex;</span>
+<span class="s2">        flex-direction: row;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    #notebook-container .panel {</span>
+<span class="s2">        box-shadow: none;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    #notebook-container .panel-heading {</span>
+<span class="s2">        overflow-wrap: break-word;</span>
+<span class="s2">        background: none;</span>
+<span class="s2">    }</span>
+
+<span class="s2">    div.flexxed#notebook-container .row iframe[name=&quot;docs&quot;] {</span>
+<span class="s2">        flex: 1;</span>
+<span class="s2">        border: none;</span>
+<span class="s2">    }</span>
+<span class="s2">    &quot;&quot;&quot;</span>
 </pre></div>
 
 </div>
@@ -12235,7 +12245,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[81]:</div>
+<div class="prompt input_prompt">In&nbsp;[111]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>    <span class="n">DISQUS</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">environment</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;div class=&quot;row&quot; id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;</span>
@@ -12272,16 +12282,12 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">def</span> <span class="nf">add_theme</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">theme</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">theme</span><span class="p">:</span>
-            <span class="n">head</span><span class="p">,</span> <span class="n">rest</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&lt;/head&gt;&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-            <span class="n">html</span> <span class="o">=</span> <span class="n">head</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">            &lt;link href=&quot;https://bootswatch.com/slate/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;</span>
-<span class="s2">            &lt;/head&gt;&quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">rest</span>
-        <span class="k">return</span> <span class="n">html</span>
+<div class=" highlight hl-ipython3"><pre><span></span>    <span class="n">add_theme</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    @import url(https://bootswatch.com/</span><span class="si">{}</span><span class="s2">/bootstrap.min.css);</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span>
 </pre></div>
 
 </div>
