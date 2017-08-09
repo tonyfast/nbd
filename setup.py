@@ -26,5 +26,5 @@ setuptools.setup(
         "Topic :: Software Development :: Testing",
     ],
     install_requires=[
-        'nbconvert', 'entrypoints', 
+        'nbconvert', 'entrypoints', 'beautifulsoup4',
     ], tests_require=[])
