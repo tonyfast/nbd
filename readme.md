@@ -31,11 +31,6 @@ Add `--deep` to find notebooks in deep nested directories.
     jupyter nbconvert --to notebook --execute --NbConvertApp.use_output_suffix=False usage/development.ipynb
 ```
 
-    [NbConvertApp] Converting notebook usage/development.ipynb to notebook
-    [NbConvertApp] Executing notebook with kernel: python3
-    [NbConvertApp] Writing 1920 bytes to usage/development.ipynb
-
-
 ### HTML Views
 
 * [Raw Git](https://rawgit.com/tonyfast/nbd/master/docs/index.html)
