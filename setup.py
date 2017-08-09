@@ -1,7 +1,6 @@
 # coding: utf-8
 import setuptools
 
-
 setuptools.setup(
     name="nbd",
     version="0.0.1",
@@ -23,7 +22,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: BSD License",
-        "Topic :: Software Development :: Testing",
+        "Topic :: Software Development :: Documentation",
     ],
     install_requires=[
         'nbconvert', 'entrypoints', 'beautifulsoup4', 'lxml'

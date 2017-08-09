@@ -11771,42 +11771,46 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Basic-nbd-usage">Basic <code>nbd</code> usage<a class="anchor-link" href="#Basic-nbd-usage">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Command-line">Command line<a class="anchor-link" href="#Command-line">&#182;</a></h2>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>python -m nbd --root .. --to docs
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># coding: utf-8</span>
+<span class="kn">import</span> <span class="nn">setuptools</span>
+
+<span class="n">setuptools</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;nbd&quot;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
+    <span class="n">author</span><span class="o">=</span><span class="s2">&quot;Tony Fast&quot;</span><span class="p">,</span>
+    <span class="n">author_email</span><span class="o">=</span><span class="s2">&quot;tony.fast@gmail.com&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Documentation for notebooks.&quot;</span><span class="p">,</span>
+    <span class="n">license</span><span class="o">=</span><span class="s2">&quot;BSD-3-Clause&quot;</span><span class="p">,</span>
+    <span class="n">keywords</span><span class="o">=</span><span class="s2">&quot;IPython Jupyter&quot;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://github.com/tonyfast/nbd&quot;</span><span class="p">,</span>
+    <span class="n">py_modules</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbd&#39;</span><span class="p">],</span>
+    <span class="c1">#     long_description=read(&quot;readme.rst&quot;),</span>
+    <span class="n">classifiers</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;Topic :: Utilities&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Framework :: IPython&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Natural Language :: English&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Programming Language :: Python&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Intended Audience :: Developers&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Development Status :: 3 - Alpha&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Operating System :: OS Independent&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Programming Language :: Python :: 3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;License :: OSI Approved :: BSD License&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Topic :: Software Development :: Documentation&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
+        <span class="s1">&#39;nbconvert&#39;</span><span class="p">,</span> <span class="s1">&#39;entrypoints&#39;</span><span class="p">,</span> <span class="s1">&#39;beautifulsoup4&#39;</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span>
+    <span class="p">],</span> <span class="n">tests_require</span><span class="o">=</span><span class="p">[])</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Adding-Extensions.">Adding Extensions.<a class="anchor-link" href="#Adding-Extensions.">&#182;</a></h2>
-</div>
-</div>
 </div>
     </div>
   </div>
