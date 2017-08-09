@@ -11775,20 +11775,104 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Basic-nbd-usage">Basic <code>nbd</code> usage<a class="anchor-link" href="#Basic-nbd-usage">&#182;</a></h1><p>The most basic use of <code>nbd</code> is note big deal.  Simply navigate to a directory of interest then somehow execute the Python module</p>
+<h1 id="nbdcumentatin"><code>nbd</code><a href="https://github.com/tonyfast/nbd"><i class="fa fa-github-square " /></a>cumentati<a href="https://github.com/tonyfast/nbd"><i class="fa fa-github-square " /></a>n<a class="anchor-link" href="#nbdcumentatin">&#182;</a></h1><p><code>nbd</code> creates static documentation for Jupyter noteb👀ks.</p>
+<blockquote><p>This minimal documentation <em>should</em> work on most file systems and web servers; it is just a directory of html files.</p>
+</blockquote>
 
-<pre><code>python -m nbd </code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Install-nbd-from-">Install <code>nbd</code> from <a href="https://github.com/tonyfast/nbd"><i class="fa fa-github-square " /></a><a class="anchor-link" href="#Install-nbd-from-">&#182;</a></h2>
+<pre><code>pip install https://github.com/tonyfast/nbd</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Usage">Usage<a class="anchor-link" href="#Usage">&#182;</a></h2><p>For any directory containing notebooks, run</p>
+
+<pre><code>python -m nbd
+
+</code></pre>
+<p>to convert all notebooks, python scripts, and markdown files to a single page documentation viewer.</p>
+<p>Add <code>--deep</code> to find notebooks in deep nested directories.</p>
+
+<pre><code>python -m nbd --deep</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-First-Markdown-Cell">The First Markdown Cell<a class="anchor-link" href="#The-First-Markdown-Cell">&#182;</a></h2><p><code>nbd</code> takes the opinion that the 🥇st cell is the abstract or descriptor of a notebook.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="How-it-works">How it works<a class="anchor-link" href="#How-it-works">&#182;</a></h2><p>Every file, even non-notebooks are transformed into <strong>NotebookNode</strong>s that obey the <strong>nbformat.v4</strong> schemas; <strong>nbconvert</strong> transforms the notebook nodes to static html documents. <code>nbd</code> should not using any special <strong>nbconvert</strong> templates.</p>
+<h2 id="Why">Why<a class="anchor-link" href="#Why">&#182;</a></h2><p>Because I make a lot of notebooks that combine Python, PySpark, HTML, CoffeeScript, and Markdown.  The static view of the document is how must folks experience your work.  Static documents that contain data-driven narratives can accelerate development within multifunctional teams.</p>
+<h2 id="Why-Bootstrap?">Why Bootstrap?<a class="anchor-link" href="#Why-Bootstrap?">&#182;</a></h2><p>Bootstrap is resilient and it ships with the default <code>--to html</code> <strong>nbconvert</strong> converter.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Convert-the-readme-to-markdown-for-viewing-on-github.">Convert the readme to markdown for viewing on github.<a class="anchor-link" href="#Convert-the-readme-to-markdown-for-viewing-on-github.">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Development">Development<a class="anchor-link" href="#Development">&#182;</a></h2><p>Jupyter notebook are the primary mode of development.  The bash script below</p>
+<ol>
+<li>Creates the <code>readme.md</code> document for Github.</li>
+<li>Converts <code>nbd</code> to a Python sript</li>
+<li>Creates documentation for the notebooks in <code>nbd</code>.</li>
+</ol>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[81]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>%%bash
-    python -m nbd
+    jupyter nbconvert --to markdown readme.ipynb
+    jupyter nbconvert --to python nbd.ipynb
+    python -m nbd --deep --ext ipynb --theme paper --drop-output  --name tonyfast --url https://tonyfast/nbd
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
 </div>
