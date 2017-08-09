@@ -11769,121 +11769,97 @@ div#notebook {
     <!-- End of mathjax configuration --></head>
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container flexxed" id="notebook-container">
-<div class="row">
-<iframe class="embed-responsive-item" src="readme.ipynb.html" name="docs"></iframe>
-</div><div class="row"><div class="panel panel-default">
-  <div class="panel-heading"><a href="usage/arguments.ipynb.html" target="docs"><h3 class="list-group-item-heading">usage/arguments.ipynb</h3></a></div>
-  <div class="panel-body"><h2>The First Markdown Cell</h2>
-<p><code>nbd</code> takes the opinion that the 🥇st cell is the abstract or descriptor of a notebook.</p>
-</div><ul class='list-group'><li class="list-group-item">
-    <h4><a href="usage/arguments.ipynb.html#The-First-Markdown-Cell" target="docs">The First Markdown Cell¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/arguments.ipynb.html#How-it-works" target="docs">How it works¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/arguments.ipynb.html#Why" target="docs">Why¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/arguments.ipynb.html#Why-Bootstrap?" target="docs">Why Bootstrap?¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/arguments.ipynb.html#Development" target="docs">Development¶</a></h4></li><li class="list-group-item">
-    <h5><a href="usage/arguments.ipynb.html#Convert-the-readme-to-markdown-for-viewing-on-github." target="docs">Convert the readme to markdown for viewing on github.¶</a></h5></li></ul></div><div class="panel panel-default">
-  <div class="panel-heading"><a href="nbd.ipynb.html" target="docs"><h3 class="list-group-item-heading">nbd.ipynb</h3></a></div>
-  <div class="panel-body"><pre><code>from nbconvert import exporters
-from nbformat.v4 import new_code_cell, new_markdown_cell, new_raw_cell as raw, new_notebook
-from nbconvert.preprocessors import Preprocessor
-from mistune import markdown
-from bs4 import BeautifulSoup
-from argparse import ArgumentParser
-from pathlib import Path
-from operator import methodcaller
-from fnmatch import fnmatch
-from traitlets import Bool
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="nbdcumentatin"><code>nbd</code><a href="https://github.com/tonyfast/nbd"><i class="fa fa-github-square " /></a>cumentati<a href="https://github.com/tonyfast/nbd"><i class="fa fa-github-square " /></a>n<a class="anchor-link" href="#nbdcumentatin">&#182;</a></h1><p><code>nbd</code> creates static documentation for Jupyter noteb👀ks.</p>
+<blockquote><p>This minimal documentation <em>should</em> work on most file systems and web servers; it is just a directory of html files.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Install-nbd-from-">Install <code>nbd</code> from <a href="https://github.com/tonyfast/nbd"><i class="fa fa-github-square " /></a><a class="anchor-link" href="#Install-nbd-from-">&#182;</a></h2>
+<pre><code>pip install https://github.com/tonyfast/nbd</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Usage">Usage<a class="anchor-link" href="#Usage">&#182;</a></h2><p>For any directory containing notebooks, run</p>
+
+<pre><code>python -m nbd
+
 </code></pre>
-</div><ul class='list-group'><li class="list-group-item">
-    <h4><a href="nbd.ipynb.html#nbconvert-HTML-exporter" target="docs">nbconvert HTML exporter¶</a></h4></li><li class="list-group-item">
-    <h4><a href="nbd.ipynb.html#Extension-Readers" target="docs">Extension Readers¶</a></h4></li><li class="list-group-item">
-    <h4><a href="nbd.ipynb.html#Arguments" target="docs">Arguments¶</a></h4></li><li class="list-group-item">
-    <h4><a href="nbd.ipynb.html#Main-Program" target="docs">Main Program¶</a></h4></li><li class="list-group-item">
-    <h4><a href="nbd.ipynb.html#Public-Python-Functions" target="docs">Public Python Functions¶</a></h4></li><li class="list-group-item">
-    <h4><a href="nbd.ipynb.html#Toggle-Input-and-Output-Preprocessor" target="docs">Toggle Input and Output Preprocessor¶</a></h4></li><li class="list-group-item">
-    <h4><a href="nbd.ipynb.html#Customization" target="docs">Customization¶</a></h4></li><li class="list-group-item">
-    <h5><a href="nbd.ipynb.html#Argument-Parser" target="docs">Argument Parser¶</a></h5></li><li class="list-group-item">
-    <h5><a href="nbd.ipynb.html#Notebook-Viewer-in-an-IFrame" target="docs">Notebook Viewer in an IFrame¶</a></h5></li><li class="list-group-item">
-    <h5><a href="nbd.ipynb.html#Documentation-Index" target="docs">Documentation Index¶</a></h5></li><li class="list-group-item">
-    <h5><a href="nbd.ipynb.html#Custom-Styling" target="docs">Custom Styling¶</a></h5></li><li class="list-group-item">
-    <h5><a href="nbd.ipynb.html#Disqus-Universal-Embed-Code" target="docs">Disqus Universal Embed Code¶</a></h5></li><li class="list-group-item">
-    <h5><a href="nbd.ipynb.html#Experimental-Themes" target="docs">Experimental Themes¶</a></h5></li></ul></div><div class="panel panel-default">
-  <div class="panel-heading"><a href="nbd.py.html" target="docs"><h3 class="list-group-item-heading">nbd.py</h3></a></div>
-  <ul class='list-group'></ul></div><div class="panel panel-default">
-  <div class="panel-heading"><a href="usage/development.ipynb.html" target="docs"><h3 class="list-group-item-heading">usage/development.ipynb</h3></a></div>
-  <div class="panel-body"><h2>The First Markdown Cell</h2>
-<p><code>nbd</code> takes the opinion that the 🥇st cell is the abstract or descriptor of a notebook.</p>
-</div><ul class='list-group'><li class="list-group-item">
-    <h4><a href="usage/development.ipynb.html#The-First-Markdown-Cell" target="docs">The First Markdown Cell¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/development.ipynb.html#How-it-works" target="docs">How it works¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/development.ipynb.html#Why" target="docs">Why¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/development.ipynb.html#Why-Bootstrap?" target="docs">Why Bootstrap?¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/development.ipynb.html#Development" target="docs">Development¶</a></h4></li><li class="list-group-item">
-    <h5><a href="usage/development.ipynb.html#Convert-the-readme-to-markdown-for-viewing-on-github." target="docs">Convert the readme to markdown for viewing on github.¶</a></h5></li></ul></div><div class="panel panel-default">
-  <div class="panel-heading"><a href="readme.md.html" target="docs"><h3 class="list-group-item-heading">readme.md</h3></a></div>
-  <ul class='list-group'><li class="list-group-item">
-    <h3><a href="readme.md.html#nbdocumentation" target="docs">nbdocumentation¶</a></h3></li><li class="list-group-item">
-    <h4><a href="readme.md.html#The-First-Markdown-Cell" target="docs">The First Markdown Cell¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme.md.html#How-it-works" target="docs">How it works¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme.md.html#Why" target="docs">Why¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme.md.html#Why-Bootstrap?" target="docs">Why Bootstrap?¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme.md.html#Development" target="docs">Development¶</a></h4></li><li class="list-group-item">
-    <h5><a href="readme.md.html#Convert-the-readme-to-markdown-for-viewing-on-github." target="docs">Convert the readme to markdown for viewing on github.¶</a></h5></li></ul></div><div class="panel panel-default">
-  <div class="panel-heading"><a href="setup.py.html" target="docs"><h3 class="list-group-item-heading">setup.py</h3></a></div>
-  <ul class='list-group'></ul></div><div class="panel panel-default">
-  <div class="panel-heading"><a href="usage/basic.ipynb.html" target="docs"><h3 class="list-group-item-heading">usage/basic.ipynb</h3></a></div>
-  <div class="panel-body"><h1>Basic <code>nbd</code> usage</h1>
-</div><ul class='list-group'><li class="list-group-item">
-    <h3><a href="usage/basic.ipynb.html#Basic-nbd-usage" target="docs">Basic nbd usage¶</a></h3></li><li class="list-group-item">
-    <h4><a href="usage/basic.ipynb.html#Command-line" target="docs">Command line¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/basic.ipynb.html#Adding-Extensions." target="docs">Adding Extensions.¶</a></h4></li></ul></div><div class="panel panel-default">
-  <div class="panel-heading"><a href="readme.ipynb.html" target="docs"><h3 class="list-group-item-heading">readme.ipynb</h3></a></div>
-  <div class="panel-body"><h1><code>nbd</code>&lt;a href="https://github.com/tonyfast/nbd"&gt;&lt;i class="fa fa-github-square "&gt;&lt;/i&gt;&lt;/a&gt;cumentati&lt;a href="https://github.com/tonyfast/nbd"&gt;&lt;i class="fa fa-github-square "&gt;&lt;/i&gt;&lt;/a&gt;n</h1>
-<p><code>nbd</code> creates static documentation for Jupyter noteb👀ks.</p>
-<blockquote><p>This minimal documentation <em>should</em> work on most file systems and web servers; it is just a directory of html files.</p>
-</blockquote>
-</div><ul class='list-group'><li class="list-group-item">
-    <h3><a href="readme.ipynb.html#nbdcumentatin" target="docs">nbdcumentatin¶</a></h3></li><li class="list-group-item">
-    <h4><a href="readme.ipynb.html#Install-nbd-from-" target="docs">Install nbd from ¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme.ipynb.html#Usage" target="docs">Usage¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme.ipynb.html#Example-documentation" target="docs">Example documentation¶</a></h4></li></ul></div><div class="panel panel-default">
-  <div class="panel-heading"><a href="usage/styleguide.ipynb.html" target="docs"><h3 class="list-group-item-heading">usage/styleguide.ipynb</h3></a></div>
-  <div class="panel-body"><h1><code>nbd</code> styleguide</h1>
-<p>Opinions in software are unavoidable.  <code>nbd</code> has a few rules influenced by other documentation and reporting technologies.  This document explains opinions and their origins.  Hopefully, they are no big deal.</p>
-</div><ul class='list-group'><li class="list-group-item">
-    <h3><a href="usage/styleguide.ipynb.html#nbd-styleguide" target="docs">nbd styleguide¶</a></h3></li><li class="list-group-item">
-    <h4><a href="usage/styleguide.ipynb.html#The-First-Cell" target="docs">The First Cell¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/styleguide.ipynb.html#Headers" target="docs">Headers¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/styleguide.ipynb.html#custom.css-Styling" target="docs">custom.css Styling¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/styleguide.ipynb.html#Theming" target="docs">Theming¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/styleguide.ipynb.html#References" target="docs">References¶</a></h4></li><li class="list-group-item">
-    <h5><a href="usage/styleguide.ipynb.html#A-Markdown-Cell-First" target="docs">A Markdown Cell First¶</a></h5></li><li class="list-group-item">
-    <h5><a href="usage/styleguide.ipynb.html#A-Code-Cell-First" target="docs">A Code Cell First¶</a></h5></li></ul></div><div class="panel panel-default">
-  <div class="panel-heading"><a href="usage/about.ipynb.html" target="docs"><h3 class="list-group-item-heading">usage/about.ipynb</h3></a></div>
-  <div class="panel-body"><h1><code>nbd</code>&lt;a href="https://github.com/tonyfast/nbd"&gt;&lt;i class="fa fa-github-square "&gt;&lt;/i&gt;&lt;/a&gt;cumentati&lt;a href="https://github.com/tonyfast/nbd"&gt;&lt;i class="fa fa-github-square "&gt;&lt;/i&gt;&lt;/a&gt;n</h1>
-<p><code>nbd</code> creates static documentation for Jupyter noteb👀ks.</p>
-<blockquote><p>This minimal documentation <em>should</em> work on most file systems and web servers; it is just a directory of html files.</p>
-</blockquote>
-</div><ul class='list-group'><li class="list-group-item">
-    <h3><a href="usage/about.ipynb.html#nbdcumentatin" target="docs">nbdcumentatin¶</a></h3></li><li class="list-group-item">
-    <h4><a href="usage/about.ipynb.html#Install-nbd-from-" target="docs">Install nbd from ¶</a></h4></li><li class="list-group-item">
-    <h4><a href="usage/about.ipynb.html#Usage" target="docs">Usage¶</a></h4></li></ul></div><div class="panel panel-default">
-  <div class="panel-heading"><a href="readme-Copy1.ipynb.html" target="docs"><h3 class="list-group-item-heading">readme-Copy1.ipynb</h3></a></div>
-  <div class="panel-body"><h1><code>nbd</code>&lt;a href="https://github.com/tonyfast/nbd"&gt;&lt;i class="fa fa-github-square "&gt;&lt;/i&gt;&lt;/a&gt;cumentati&lt;a href="https://github.com/tonyfast/nbd"&gt;&lt;i class="fa fa-github-square "&gt;&lt;/i&gt;&lt;/a&gt;n</h1>
-<p><code>nbd</code> creates static documentation for Jupyter noteb👀ks.</p>
-<blockquote><p>This minimal documentation <em>should</em> work on most file systems and web servers; it is just a directory of html files.</p>
-</blockquote>
-</div><ul class='list-group'><li class="list-group-item">
-    <h3><a href="readme-Copy1.ipynb.html#nbdcumentatin" target="docs">nbdcumentatin¶</a></h3></li><li class="list-group-item">
-    <h4><a href="readme-Copy1.ipynb.html#Install-nbd-from-" target="docs">Install nbd from ¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme-Copy1.ipynb.html#Usage" target="docs">Usage¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme-Copy1.ipynb.html#The-First-Markdown-Cell" target="docs">The First Markdown Cell¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme-Copy1.ipynb.html#How-it-works" target="docs">How it works¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme-Copy1.ipynb.html#Why" target="docs">Why¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme-Copy1.ipynb.html#Why-Bootstrap?" target="docs">Why Bootstrap?¶</a></h4></li><li class="list-group-item">
-    <h4><a href="readme-Copy1.ipynb.html#Development" target="docs">Development¶</a></h4></li><li class="list-group-item">
-    <h5><a href="readme-Copy1.ipynb.html#Convert-the-readme-to-markdown-for-viewing-on-github." target="docs">Convert the readme to markdown for viewing on github.¶</a></h5></li></ul></div></div>
+<p>to convert all notebooks, python scripts, and markdown files to a single page documentation viewer.</p>
+<p>Add <code>--deep</code> to find notebooks in deep nested directories.</p>
+
+<pre><code>python -m nbd --deep</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Example-documentation">Example documentation<a class="anchor-link" href="#Example-documentation">&#182;</a></h2><p><a href="https://tonyfast.github.io/nbd"><code>nbd</code> uses <code>nbd</code> to generate its documentation; the github pages view</a> is served by the static files generated by <code>nbd</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+    python -m nbd --to docs --dir usage
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>_site/nbd.ipynb.html
+_site/readme.ipynb.html
+_site/readme.md.html
+_site/readme-Copy1.ipynb.html
+_site/usage/styleguide.ipynb.html
+_site/usage/arguments.ipynb.html
+_site/usage/about.ipynb.html
+_site/usage/basic.ipynb.html
+_site/setup.py.html
+_site/usage/development.ipynb.html
+_site/nbd.py.html
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
     </div>
   </div>
 </body>
