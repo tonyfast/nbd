@@ -11771,29 +11771,138 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># coding: utf-8</span>
+
+<span class="c1"># Looking for opinions on:</span>
+<span class="c1"># </span>
+<span class="c1"># * load which dynamically chooses an loader that turns a file into the notebook format</span>
+<span class="c1"># * the `from_export` method on the ExportBase which ingests data produced by from notebook node.</span>
+
+<span class="c1"># In[1]:</span>
+
+
+<span class="kn">from</span> <span class="nn">traitlets.utils.importstring</span> <span class="k">import</span> <span class="n">import_item</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">nbconvert.nbconvertapp</span>
+<span class="kn">import</span> <span class="nn">traitlets</span><span class="o">,</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">nbformat</span>
+<span class="kn">from</span> <span class="nn">mimetypes</span> <span class="k">import</span> <span class="n">MimeTypes</span>
+<span class="kn">from</span> <span class="nn">nbformat.v4</span> <span class="k">import</span> <span class="n">new_code_cell</span><span class="p">,</span> <span class="n">new_markdown_cell</span><span class="p">,</span> <span class="n">new_raw_cell</span> <span class="k">as</span> <span class="n">raw</span><span class="p">,</span> <span class="n">new_notebook</span><span class="p">,</span> <span class="n">new_output</span>
+<span class="kn">from</span> <span class="nn">nbformat</span> <span class="k">import</span> <span class="n">NotebookNode</span>
+
+
+<span class="c1"># In[2]:</span>
+
+
+<span class="n">mimetypes</span> <span class="o">=</span> <span class="n">MimeTypes</span><span class="p">([</span><span class="s1">&#39;documentation.types&#39;</span><span class="p">])</span>
+
+
+<span class="c1">#         %%file documentation.types</span>
+<span class="c1">#         application/vnd.jupyter ipynb</span>
+<span class="c1">#         text/markdown md markdown</span>
+<span class="c1">#         text/x-python pyi</span>
+
+<span class="c1"># In[3]:</span>
+
+
+<span class="k">class</span> <span class="nc">Loader</span><span class="p">(</span><span class="n">traitlets</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="n">mimetype</span> <span class="o">=</span> <span class="n">traitlets</span><span class="o">.</span><span class="n">Enum</span><span class="p">([</span><span class="nb">str</span> <span class="k">for</span> <span class="nb">object</span> <span class="ow">in</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">types_map</span> <span class="k">for</span> <span class="nb">str</span> <span class="ow">in</span> <span class="nb">object</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">loader</span> <span class="o">=</span> <span class="n">traitlets</span><span class="o">.</span><span class="n">Any</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stream</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">loader</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+
+
+<span class="c1"># In[4]:</span>
+
+
+<span class="k">class</span> <span class="nc">ReduceExport</span><span class="p">(</span><span class="n">traitlets</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">Configurable</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">traitlets</span><span class="o">.</span><span class="n">Unicode</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">enabled</span> <span class="o">=</span> <span class="n">traitlets</span><span class="o">.</span><span class="n">Bool</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">nb</span> <span class="o">=</span> <span class="n">traitlets</span><span class="o">.</span><span class="n">Instance</span><span class="p">(</span><span class="s1">&#39;nbformat.NotebookNode&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># notebooknode</span>
+    
+    <span class="nd">@traitlets</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="s1">&#39;nb&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_default_nb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">v4</span><span class="o">.</span><span class="n">new_notebook</span><span class="p">()</span>
+    
+    <span class="nd">@traitlets</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="s1">&#39;exporter&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_default_exporter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">nbconvert</span><span class="o">.</span><span class="n">exporters</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">HTMLExporter</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">from_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span> <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">resources</span>
+
+
+<span class="c1"># In[5]:</span>
+
+
+<span class="k">def</span> <span class="nf">load_notebook</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span> <span class="k">return</span> <span class="n">nbformat</span><span class="o">.</span><span class="n">reads</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">load_markdown</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span> <span class="k">return</span> <span class="n">new_notebook</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="p">[</span><span class="n">new_markdown_cell</span><span class="p">(</span><span class="nb">str</span><span class="p">)])</span>
+<span class="k">def</span> <span class="nf">load_code</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span> <span class="k">return</span> <span class="n">new_notebook</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="p">[</span><span class="n">new_code_cell</span><span class="p">(</span><span class="nb">str</span><span class="p">)])</span>
+
+
+<span class="c1"># In[6]:</span>
+
+
+<span class="k">class</span> <span class="nc">StaticExporter</span><span class="p">(</span><span class="n">nbconvert</span><span class="o">.</span><span class="n">exporters</span><span class="o">.</span><span class="n">html</span><span class="o">.</span><span class="n">HTMLExporter</span><span class="p">):</span>
+    <span class="n">_current_mimetype</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">loaders</span> <span class="o">=</span> <span class="n">traitlets</span><span class="o">.</span><span class="n">List</span><span class="p">([</span>
+        <span class="n">Loader</span><span class="p">(</span><span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;application/vnd.jupyter&#39;</span><span class="p">,</span> <span class="n">loader</span><span class="o">=</span><span class="n">load_notebook</span><span class="p">),</span>
+        <span class="n">Loader</span><span class="p">(</span><span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;text/x-python&#39;</span><span class="p">,</span> <span class="n">loader</span><span class="o">=</span><span class="n">load_code</span><span class="p">),</span>
+        <span class="n">Loader</span><span class="p">(</span><span class="n">mimetype</span><span class="o">=</span><span class="s1">&#39;text/markdown&#39;</span><span class="p">,</span> <span class="n">loader</span><span class="o">=</span><span class="n">load_markdown</span><span class="p">),])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+ 
+    <span class="n">post_render</span> <span class="o">=</span> <span class="n">traitlets</span><span class="o">.</span><span class="n">List</span><span class="p">([])</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">from_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notebook_filename</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="nb">type</span> <span class="o">=</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">notebook_filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">loader</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">loaders</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">loader</span><span class="o">.</span><span class="n">mimetype</span> <span class="o">==</span> <span class="nb">type</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span>
+                    <span class="n">loader</span><span class="p">(</span>
+                        <span class="n">Path</span><span class="p">(</span><span class="n">notebook_filename</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+                    <span class="p">),</span><span class="n">resources</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+                        
+    <span class="k">def</span> <span class="nf">from_notebook_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nb</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="n">output</span><span class="p">,</span> <span class="n">resources</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">post_render</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">post_render</span><span class="p">:</span> 
+            <span class="n">post_render</span><span class="o">.</span><span class="n">enabled</span> <span class="ow">and</span> <span class="n">post_render</span><span class="o">.</span><span class="n">from_render</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">resources</span>
+    
+    <span class="k">def</span> <span class="nf">init_notebooks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">init_notebooks</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">post_render</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">import_item</span><span class="p">(</span><span class="n">post_render</span><span class="p">)</span>
+
+
+<span class="c1"># In[ ]:</span>
+
+
+<span class="k">class</span> <span class="nc">NbdApp</span><span class="p">(</span><span class="n">nbconvert</span><span class="o">.</span><span class="n">nbconvertapp</span><span class="o">.</span><span class="n">NbConvertApp</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convert_notebooks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">render</span> <span class="ow">in</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">convert_notebooks</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">exporter</span><span class="o">.</span><span class="n">post_render</span><span class="p">:</span>
+            <span class="n">render</span><span class="o">.</span><span class="n">enabled</span> <span class="ow">and</span> <span class="n">nbconvert</span><span class="o">.</span><span class="n">nbconvertapp</span><span class="o">.</span><span class="n">NbConvertApp</span><span class="o">.</span><span class="n">convert_single_notebook</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span> <span class="n">render</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">nbformat</span><span class="o">.</span><span class="n">writes</span><span class="p">(</span><span class="n">render</span><span class="o">.</span><span class="n">nb</span><span class="p">)))</span>
+            
+    <span class="k">def</span> <span class="nf">init_single_notebook_resources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notebook_filename</span><span class="p">):</span>
+        <span class="n">resources</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">init_single_notebook_resources</span><span class="p">(</span><span class="n">notebook_filename</span><span class="p">)</span>
+        <span class="n">resources</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resources</span><span class="p">[</span><span class="s1">&#39;unique_key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">notebook_filename</span>
+        <span class="k">return</span> <span class="n">resources</span>
+            
+<span class="n">NbdApp</span><span class="o">.</span><span class="n">export_format</span><span class="o">.</span><span class="n">default_value</span> <span class="o">=</span> <span class="s1">&#39;nbd.StaticExporter&#39;</span>
+
+
+<span class="c1"># In[7]:</span>
+
+
+<span class="n">main</span> <span class="o">=</span> <span class="n">launch_new_instance</span> <span class="o">=</span> <span class="n">NbdApp</span><span class="o">.</span><span class="n">launch_instance</span>
+</pre></div>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="nbdocumentation&#182;"><a href="readme.ipynb.html#nbdocumentation">nbdocumentation&#182;</a><a class="anchor-link" href="#nbdocumentation&#182;">&#182;</a></h4><h6 id="HTML-Views&#182;"><a href="readme.ipynb.html#HTML-Views">HTML Views&#182;</a><a class="anchor-link" href="#HTML-Views&#182;">&#182;</a></h6><h6 id="Notebook-Views&#182;"><a href="readme.ipynb.html#Notebook-Views">Notebook Views&#182;</a><a class="anchor-link" href="#Notebook-Views&#182;">&#182;</a></h6>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 
-</div>
-</div>
 </div>
     </div>
   </div>

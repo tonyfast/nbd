@@ -14,7 +14,7 @@ from nbd import ReduceExport
 from nbconvert.exporters.html import HTMLExporter 
 from nbformat.v4 import new_markdown_cell
 
-c.NbConvertApp.notebooks = ['readme.md', 'readme.ipynb']
+c.NbConvertApp.notebooks = ['nbd.ipynb', 'readme.ipynb', 'nbd.py']
 c.TemplateExporter.template_path = ['templates']
 c.FilesWriter.build_directory = 'docs'
 
@@ -56,6 +56,24 @@ jupyter nbd --config nbd_config.py
 cp custom.css docs/
 ls docs/
 ```
+
+    custom.css
+    index.html
+    readme.ipynb.html
+    readme.md.html
+
+
+    [NbConvertApp] Converting notebook nbd.ipynb to python
+    [NbConvertApp] Writing 3882 bytes to nbd.py
+    [NbConvertApp] Converting notebook readme.ipynb to markdown
+    [NbConvertApp] Writing 1991 bytes to readme.md
+    [NbdApp] Converting notebook readme.md to nbd.StaticExporter
+    [NbdApp] Writing 256143 bytes to docs/readme.md.html
+    [NbdApp] Converting notebook readme.ipynb to nbd.StaticExporter
+    [NbdApp] Writing 252760 bytes to docs/readme.ipynb.html
+    [NbdApp] Converting notebook into nbd.StaticExporter
+    [NbdApp] Writing 250184 bytes to docs/index.html
+
 
 ### HTML Views
 

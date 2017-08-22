@@ -2,7 +2,7 @@ from nbd import ReduceExport
 from nbconvert.exporters.html import HTMLExporter 
 from nbformat.v4 import new_markdown_cell
 
-c.NbConvertApp.notebooks = ['readme.md', 'readme.ipynb']
+c.NbConvertApp.notebooks = ['nbd.ipynb', 'readme.ipynb', 'nbd.py']
 c.TemplateExporter.template_path = ['templates']
 c.FilesWriter.build_directory = 'docs'
 
