@@ -26,4 +26,10 @@ setuptools.setup(
     ],
     install_requires=[
         'nbconvert', 'entrypoints', 'beautifulsoup4', 'lxml'
-    ], tests_require=[])
+    ], 
+    tests_require=[],
+    entry_points={
+        'console_scripts': [
+            'jupyter-nbd = nbd:main',
+        ]}
+   )

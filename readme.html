@@ -11771,46 +11771,389 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="nbdocumentation"><code>nbd</code>ocumentation<a class="anchor-link" href="#nbdocumentation">&#182;</a></h1><p><a href="https://github.com/tonyfast/nbd"><big>NBD</big></a> creates static documentation for Jupyter noteb👀ks.</p>
+<blockquote><p>This minimal documentation <em>should</em> work on most file systems and web servers; it is just a directory of html files.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># coding: utf-8</span>
-<span class="kn">import</span> <span class="nn">setuptools</span>
-
-<span class="n">setuptools</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;nbd&quot;</span><span class="p">,</span>
-    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.0.1&quot;</span><span class="p">,</span>
-    <span class="n">author</span><span class="o">=</span><span class="s2">&quot;Tony Fast&quot;</span><span class="p">,</span>
-    <span class="n">author_email</span><span class="o">=</span><span class="s2">&quot;tony.fast@gmail.com&quot;</span><span class="p">,</span>
-    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Documentation for notebooks.&quot;</span><span class="p">,</span>
-    <span class="n">license</span><span class="o">=</span><span class="s2">&quot;BSD-3-Clause&quot;</span><span class="p">,</span>
-    <span class="n">keywords</span><span class="o">=</span><span class="s2">&quot;IPython Jupyter&quot;</span><span class="p">,</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://github.com/tonyfast/nbd&quot;</span><span class="p">,</span>
-    <span class="n">py_modules</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nbd&#39;</span><span class="p">],</span>
-    <span class="c1">#     long_description=read(&quot;readme.rst&quot;),</span>
-    <span class="n">classifiers</span><span class="o">=</span><span class="p">[</span>
-        <span class="s2">&quot;Topic :: Utilities&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Framework :: IPython&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Natural Language :: English&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Programming Language :: Python&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Intended Audience :: Developers&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Development Status :: 3 - Alpha&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Operating System :: OS Independent&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Programming Language :: Python :: 3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;License :: OSI Approved :: BSD License&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Topic :: Software Development :: Documentation&quot;</span><span class="p">,</span>
-    <span class="p">],</span>
-    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
-        <span class="s1">&#39;nbconvert&#39;</span><span class="p">,</span> <span class="s1">&#39;entrypoints&#39;</span><span class="p">,</span> <span class="s1">&#39;beautifulsoup4&#39;</span><span class="p">,</span> <span class="s1">&#39;lxml&#39;</span>
-    <span class="p">],</span> <span class="n">tests_require</span><span class="o">=</span><span class="p">[])</span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
 </div>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter nbconvert --to python --output nbd.py nbd2.ipynb 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[NbConvertApp] Converting notebook nbd2.ipynb to python
+[NbConvertApp] Writing 3866 bytes to nbd.py
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">reload_ext</span> importable 
+<span class="kn">from</span> <span class="nn">nbd2</span> <span class="k">import</span> <span class="n">ReduceExport</span><span class="p">,</span> <span class="n">NbdApp</span><span class="p">,</span> <span class="n">ExtensionExporter</span>
+<span class="kn">import</span> <span class="nn">traitlets</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Soupy</span><span class="p">(</span><span class="n">ReduceExport</span><span class="p">):</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">traitlets</span><span class="o">.</span><span class="n">Unicode</span><span class="p">(</span><span class="s1">&#39;other.html&#39;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">add_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">resources</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;&quot;</span><span class="si">{header}</span><span class="s2"> [</span><span class="si">{title}</span><span class="s2">](</span><span class="si">{href}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">header</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="o">*</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">3</span><span class="p">),</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">item</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+            <span class="n">href</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">resources</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;#&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
+    
+    <span class="k">def</span> <span class="nf">from_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span>
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">nb</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">new_markdown_cell</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_entry</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">resources</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;h1,h2,h3&#39;</span><span class="p">)])))</span>
+        
+        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">resources</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">exporter</span><span class="o">.</span><span class="n">post_render</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">AttributeError</span>                            Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-23-f77578c420ad&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>app<span class="ansi-blue-fg">.</span>exporter<span class="ansi-blue-fg">.</span>post_render
+
+<span class="ansi-red-fg">AttributeError</span>: &#39;NbdApp&#39; object has no attribute &#39;exporter&#39;</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">NbdApp</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">traitlets</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">Config</span><span class="p">({</span>
+    <span class="s1">&#39;writer&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;output_dir&#39;</span><span class="p">:</span> <span class="s1">&#39;somewhere&#39;</span>
+    <span class="p">}</span>
+<span class="p">}))</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">readme.md readme.ipynb nbd.py</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">app</span><span class="o">.</span><span class="n">convert_notebooks</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[NbdApp] Converting notebook readme.md to nbd.ExtensionExporter
+[NbdApp] Converting notebook readme.ipynb to nbd.ExtensionExporter
+[NbdApp] Converting notebook nbd.py to nbd.ExtensionExporter
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ls</span> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre><span class="ansi-blue-fg">__pycache__</span>/         nbd.ipynb            readme.md
+<span class="ansi-blue-fg">diffs</span>/               nbd.py               setup.py
+<span class="ansi-blue-fg">docs</span>/                nbd2.ipynb           style.css
+documentation.types  readme-Copy1.ipynb   <span class="ansi-blue-fg">templates</span>/
+<span class="ansi-blue-fg">nbd.egg-info</span>/        readme.html          <span class="ansi-blue-fg">usage</span>/
+nbd.html             readme.ipynb
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">somewhere</span><span class="o">/</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">init_</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-28-6d5f12aeae70&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>app<span class="ansi-blue-fg">.</span>init_notebooks<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;&#39;</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">TypeError</span>: init_notebooks() takes 1 positional argument but 2 were given</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">somewhere</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mkdir</span> <span class="n">somewhere</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">convert_notebooks</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>[NbdApp] Converting notebook readme.md to nbd.ExtensionExporter
+[NbdApp] Converting notebook readme.ipynb to nbd.ExtensionExporter
+[NbdApp] Converting notebook nbd.py to nbd.ExtensionExporter
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ls</span> <span class="n">somewhere</span><span class="o">/</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>nbd.html     readme.html
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="HTML-Views">HTML Views<a class="anchor-link" href="#HTML-Views">&#182;</a></h3><ul>
+<li><a href="https://rawgit.com/tonyfast/nbd/master/docs/index.html">Raw Git</a></li>
+<li><a href="https://tonyfast.github.io/nbd">Github Pages</a></li>
+</ul>
+<h3 id="Notebook-Views">Notebook Views<a class="anchor-link" href="#Notebook-Views">&#182;</a></h3><ul>
+<li><a href="http://nbviewer.jupyter.org/github/tonyfast/nbd/blob/master/readme.ipynb">nbviewer</a></li>
+<li><a href="https://github.com/tonyfast/nbd/blob/master/usage/readme.ipynb">github</a></li>
+</ul>
+
+</div>
+</div>
 </div>
     </div>
   </div>

@@ -11775,26 +11775,126 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Basic-nbd-usage">Basic <code>nbd</code> usage<a class="anchor-link" href="#Basic-nbd-usage">&#182;</a></h1><p>The most basic use of <code>nbd</code> is note big deal.  Simply navigate to a directory of interest then somehow execute the Python module</p>
+<h1 id="nbdocumentation"><code>nbd</code>ocumentation<a class="anchor-link" href="#nbdocumentation">&#182;</a></h1><p><a href="https://github.com/tonyfast/nbd"><big>NBD</big></a> creates static documentation for Jupyter noteb👀ks.</p>
+<blockquote><p>Create documentation from a full featured python script using the nbconvert configuration system.</p>
+</blockquote>
 
-<pre><code>python -m nbd </code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below is a sample configuration file to create an index file.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span>%%bash
-    python -m nbd
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">file</span> nbd_config.py
+from nbd import ReduceExport
+from nbconvert.exporters.html import HTMLExporter 
+from nbformat.v4 import new_markdown_cell
+
+c.NbConvertApp.notebooks = [&#39;readme.md&#39;, &#39;readme.ipynb&#39;]
+c.TemplateExporter.template_path = [&#39;templates&#39;]
+c.FilesWriter.build_directory = &#39;somewhere&#39;
+
+# shit = HTMLExporter(config=c).environment.get_template(&#39;shit&#39;)
+
+class SoupyIndex(ReduceExport):
+    def add_entry(self, item, resources):
+        return &quot;&quot;&quot;{header} [{title}]({href})\n&quot;&quot;&quot;.format(
+            header=&#39;#&#39;*(int(item.name[-1]) + 3),
+            title=item.text,
+            href=&#39;/&#39;.join([
+                resources.get(&#39;name&#39;)+resources.get(&#39;output_extension&#39;)
+            ])+&#39;#&#39;+str(item.attrs[&#39;id&#39;]))
+    
+    def from_render(self, output, resources, **kw):
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup(output, &#39;html.parser&#39;)
+        
+        self.nb.cells.append(
+            new_markdown_cell(&#39;\n&#39;.join([
+                self.add_entry(item, resources)
+                for item in soup.select(&#39;h1,h2,h3&#39;)])))
+        
+        return output, resources
+c.StaticExporter.post_render = [SoupyIndex(filename=&#39;index&#39;)]
 </pre></div>
 
 </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Overwriting nbd_config.py
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Create the documentation and code.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>%%bash
+rm -rf docs
+mkdir docs
+jupyter nbconvert --to python nbd.ipynb
+jupyter nbd --config nbd_config.py
+cp custom.css docs/
+ls docs/
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="HTML-Views">HTML Views<a class="anchor-link" href="#HTML-Views">&#182;</a></h3><ul>
+<li><a href="https://rawgit.com/tonyfast/nbd/master/docs/index.html">Raw Git</a></li>
+<li><a href="https://tonyfast.github.io/nbd">Github Pages</a></li>
+</ul>
+<h3 id="Notebook-Views">Notebook Views<a class="anchor-link" href="#Notebook-Views">&#182;</a></h3><ul>
+<li><a href="http://nbviewer.jupyter.org/github/tonyfast/nbd/blob/master/readme.ipynb">nbviewer</a></li>
+<li><a href="https://github.com/tonyfast/nbd/blob/master/usage/readme.ipynb">github</a></li>
+</ul>
+
+</div>
+</div>
 </div>
     </div>
   </div>
