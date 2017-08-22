@@ -4,7 +4,7 @@ from nbformat.v4 import new_markdown_cell
 
 c.NbConvertApp.notebooks = ['readme.md', 'readme.ipynb']
 c.TemplateExporter.template_path = ['templates']
-c.FilesWriter.build_directory = 'somewhere'
+c.FilesWriter.build_directory = 'docs'
 
 # shit = HTMLExporter(config=c).environment.get_template('shit')
 
