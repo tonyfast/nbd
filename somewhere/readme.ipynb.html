@@ -11870,6 +11870,7 @@ c.StaticExporter.post_render = [SoupyIndex(filename=&#39;index&#39;)]
 rm -rf docs
 mkdir docs
 jupyter nbconvert --to python nbd.ipynb
+jupyter nbconvert --to markdown readme.ipynb
 jupyter nbd --config nbd_config.py
 cp custom.css docs/
 ls docs/
