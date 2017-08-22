@@ -32,6 +32,13 @@ class SoupyIndex(ReduceExport):
     def from_render(self, output, resources, **kw):
         from bs4 import BeautifulSoup
         soup = BeautifulSoup(output, 'html.parser')
+        self.nb.cells.append(new_markdown_cell(
+"""---
+
+> {}
+
+""".format(resources['name'])
+        ))
         
         self.nb.cells.append(
             new_markdown_cell('\n'.join([
@@ -59,20 +66,23 @@ ls docs/
 
     custom.css
     index.html
+    nbd.ipynb.html
+    nbd.py.html
     readme.ipynb.html
-    readme.md.html
 
 
     [NbConvertApp] Converting notebook nbd.ipynb to python
     [NbConvertApp] Writing 3882 bytes to nbd.py
     [NbConvertApp] Converting notebook readme.ipynb to markdown
-    [NbConvertApp] Writing 1991 bytes to readme.md
-    [NbdApp] Converting notebook readme.md to nbd.StaticExporter
-    [NbdApp] Writing 256143 bytes to docs/readme.md.html
+    [NbConvertApp] Writing 2658 bytes to readme.md
+    [NbdApp] Converting notebook nbd.ipynb to nbd.StaticExporter
+    [NbdApp] Writing 268928 bytes to docs/nbd.ipynb.html
     [NbdApp] Converting notebook readme.ipynb to nbd.StaticExporter
-    [NbdApp] Writing 252760 bytes to docs/readme.ipynb.html
+    [NbdApp] Writing 253742 bytes to docs/readme.ipynb.html
+    [NbdApp] Converting notebook nbd.py to nbd.StaticExporter
+    [NbdApp] Writing 267057 bytes to docs/nbd.py.html
     [NbdApp] Converting notebook into nbd.StaticExporter
-    [NbdApp] Writing 250184 bytes to docs/index.html
+    [NbdApp] Writing 249919 bytes to docs/index.html
 
 
 ### HTML Views

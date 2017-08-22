@@ -20,6 +20,13 @@ class SoupyIndex(ReduceExport):
     def from_render(self, output, resources, **kw):
         from bs4 import BeautifulSoup
         soup = BeautifulSoup(output, 'html.parser')
+        self.nb.cells.append(new_markdown_cell(
+"""---
+
+> {}
+
+""".format(resources['name'])
+        ))
         
         self.nb.cells.append(
             new_markdown_cell('\n'.join([

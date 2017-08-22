@@ -11793,7 +11793,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">file</span> nbd_config.py
@@ -11819,6 +11819,13 @@ class SoupyIndex(ReduceExport):
     def from_render(self, output, resources, **kw):
         from bs4 import BeautifulSoup
         soup = BeautifulSoup(output, &#39;html.parser&#39;)
+        self.nb.cells.append(new_markdown_cell(
+&quot;&quot;&quot;---
+
+&gt; {}
+
+&quot;&quot;&quot;.format(resources[&#39;name&#39;])
+        ))
         
         self.nb.cells.append(
             new_markdown_cell(&#39;\n&#39;.join([
@@ -11854,7 +11861,7 @@ c.StaticExporter.post_render = [SoupyIndex(filename=&#39;index&#39;)]
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span>%%bash
@@ -11883,8 +11890,9 @@ ls docs/
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>custom.css
 index.html
+nbd.ipynb.html
+nbd.py.html
 readme.ipynb.html
-readme.md.html
 </pre>
 </div>
 </div>
@@ -11898,13 +11906,15 @@ readme.md.html
 <pre>[NbConvertApp] Converting notebook nbd.ipynb to python
 [NbConvertApp] Writing 3882 bytes to nbd.py
 [NbConvertApp] Converting notebook readme.ipynb to markdown
-[NbConvertApp] Writing 1991 bytes to readme.md
-[NbdApp] Converting notebook readme.md to nbd.StaticExporter
-[NbdApp] Writing 256143 bytes to docs/readme.md.html
+[NbConvertApp] Writing 2658 bytes to readme.md
+[NbdApp] Converting notebook nbd.ipynb to nbd.StaticExporter
+[NbdApp] Writing 268928 bytes to docs/nbd.ipynb.html
 [NbdApp] Converting notebook readme.ipynb to nbd.StaticExporter
-[NbdApp] Writing 252760 bytes to docs/readme.ipynb.html
+[NbdApp] Writing 253742 bytes to docs/readme.ipynb.html
+[NbdApp] Converting notebook nbd.py to nbd.StaticExporter
+[NbdApp] Writing 267057 bytes to docs/nbd.py.html
 [NbdApp] Converting notebook into nbd.StaticExporter
-[NbdApp] Writing 250184 bytes to docs/index.html
+[NbdApp] Writing 249919 bytes to docs/index.html
 </pre>
 </div>
 </div>
