@@ -1,89 +1,94 @@
 
-# `nbd`ocumentation 
+# It's `no big deal`, it just works.
 
-[<big>NBD</big>](https://github.com/tonyfast/nbd) creates static documentation for Jupyter noteb👀ks. 
+Documentation ∀ files; based on the [`nbformat`](nbformat.readthedocs.io).
 
-> Create documentation from a full featured python script using the nbconvert configuration system.
+### Install with version control
 
-Below is a sample configuration file to create an index file.
+`pip install git+`<code><a href="https://github.com/tonyfast/nbd/">https://github.com/tonyfast/nbd/</a></code>
+
+
+## Why
+
+* `nbconvert` doesn't accept all file formats.  `nbd` adds the concept of loaders
+that transform arbitrary files to the nbformat.
 
 
 ```python
-%%file nbd_config.py
-from nbd import ReduceExport
-from nbconvert.exporters.html import HTMLExporter 
-from nbformat.v4 import new_markdown_cell
+%%file demo.py
+from nbd import *
 
-c.NbConvertApp.notebooks = ['nbd.ipynb', 'readme.ipynb', 'nbd.py']
-c.TemplateExporter.template_path = ['templates']
-c.FilesWriter.build_directory = 'docs'
+data = notebook()
+data.cells.append(markdown('# My Demo Page\n\n'))
 
-# shit = HTMLExporter(config=c).environment.get_template('shit')
-
-class SoupyIndex(ReduceExport):
-    def add_entry(self, item, resources):
-        return """{header} [{title}]({href})\n""".format(
-            header='#'*(int(item.name[-1]) + 3),
-            title=item.text,
-            href='/'.join([
-                resources.get('name')+resources.get('output_extension')
-            ])+'#'+str(item.attrs['id']))
+def index(html, resources, name):
+    data.cells[-1].source += '* [{}]({})\n'.format(name, name+resources['output_extension'])
     
-    def from_render(self, output, resources, **kw):
-        from bs4 import BeautifulSoup
-        soup = BeautifulSoup(output, 'html.parser')
-        self.nb.cells.append(new_markdown_cell(
-"""---
-
-> {}
-
-""".format(resources['name'])
-        ))
-        
-        self.nb.cells.append(
-            new_markdown_cell('\n'.join([
-                self.add_entry(item, resources)
-                for item in soup.select('h1,h2,h3')])))
-        
-        return output, resources
-c.StaticExporter.post_render = [SoupyIndex(filename='index')]
+def report():
+    yield 'index', data
+    
+c.Docs.notebooks = ['nbd.ipynb', 'readme.md', 'config.py']
+c.Docs.post, c.Docs.report = index, report
 ```
 
-    Overwriting nbd_config.py
+    Overwriting demo.py
 
 
 
-```bash
-%%bash
-rm -rf docs
-mkdir docs
-jupyter nbconvert --to python nbd.ipynb
-jupyter nbconvert --to markdown readme.ipynb
-jupyter nbd --config nbd_config.py
-cp custom.css docs/
-ls docs/
+```python
+!jupyter nbd --output-dir docs/demo --config demo.py
 ```
 
-    custom.css
-    index.html
-    nbd.ipynb.html
-    nbd.py.html
-    readme.ipynb.html
+    [Docs] Converting notebook nbd.ipynb to html
+    [Docs] Writing 274196 bytes to docs/demo/nbd.ipynb.html
+    [Docs] Converting notebook readme.md to html
+    [Docs] Writing 254809 bytes to docs/demo/readme.md.html
+    [Docs] Converting notebook config.py to html
+    [Docs] Writing 254290 bytes to docs/demo/config.py.html
+    [Docs] Converting notebook into html
+    [Docs] Writing 249275 bytes to docs/demo/index.html
 
 
+## Developer
+
+
+```python
+!jupyter nbconvert --to python config.ipynb nbd.ipynb --output-dir .
+!flake8 nbd.py --output-file=flake8.txt
+!pyreverse -o png -p nbd nbd.py
+!jupyter nbconvert --to markdown readme.ipynb
+!jupyter nbd --config config.py
+```
+
+    [NbConvertApp] Converting notebook config.ipynb to python
+    [NbConvertApp] Writing 1345 bytes to ./config.py
     [NbConvertApp] Converting notebook nbd.ipynb to python
-    [NbConvertApp] Writing 3882 bytes to nbd.py
+    [NbConvertApp] Writing 4741 bytes to ./nbd.py
+    parsing nbd.py...
     [NbConvertApp] Converting notebook readme.ipynb to markdown
-    [NbConvertApp] Writing 2658 bytes to readme.md
-    [NbdApp] Converting notebook nbd.ipynb to nbd.StaticExporter
-    [NbdApp] Writing 268928 bytes to docs/nbd.ipynb.html
-    [NbdApp] Converting notebook readme.ipynb to nbd.StaticExporter
-    [NbdApp] Writing 253742 bytes to docs/readme.ipynb.html
-    [NbdApp] Converting notebook nbd.py to nbd.StaticExporter
-    [NbdApp] Writing 267057 bytes to docs/nbd.py.html
-    [NbdApp] Converting notebook into nbd.StaticExporter
-    [NbdApp] Writing 249919 bytes to docs/index.html
+    [NbConvertApp] Writing 1970 bytes to readme.md
+    [Docs] Converting notebook nbd.ipynb to html
+    [Docs] Writing 274196 bytes to docs/nbd.ipynb.html
+    [Docs] Converting notebook config.ipynb to html
+    [Docs] Writing 256830 bytes to docs/config.ipynb.html
+    [Docs] Converting notebook config.py to html
+    [Docs] Writing 254290 bytes to docs/config.py.html
+    [Docs] Converting notebook template.ipynb to html
+    [Docs] Writing 249736 bytes to docs/template.ipynb.html
+    [Docs] Converting notebook readme.md to html
+    [Docs] Writing 256148 bytes to docs/readme.md.html
+    [Docs] Converting notebook flake8.txt to html
+    [Docs] Writing 381045 bytes to docs/flake8.txt.html
+    [Docs] Converting notebook into html
+    [Docs] Writing 250043 bytes to docs/index.html
+    [Docs] Converting notebook into html
+    [Docs] Writing 249084 bytes to docs/schema.html
 
+
+## Motivation
+
+* An Ipython backed make configuration system
+* It works for every file
 
 ### HTML Views
 
@@ -94,3 +99,8 @@ ls docs/
 
 * [nbviewer](http://nbviewer.jupyter.org/github/tonyfast/nbd/blob/master/readme.ipynb)
 * [github](https://github.com/tonyfast/nbd/blob/master/usage/readme.ipynb)
+
+
+```python
+
+```
