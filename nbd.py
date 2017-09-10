@@ -7,18 +7,18 @@
 # * Callable postprocessor
 # * Nested file writer
 
-# In[110]:
+# In[4]:
 
 
-from nbformat.v4 import new_code_cell, new_markdown_cell, new_notebook, new_raw_cell
-import nbformat
+from nbformat.v4 import new_code_cell as code, new_markdown_cell as markdown, new_notebook as notebook, new_raw_cell as raw, new_output as output
+from nbformat import reads, io, writes
 from traitlets import Any
 from nbconvert.nbconvertapp import NbConvertApp
 from nbconvert.exporters import html
 from nbconvert import writers, postprocessors
 from pathlib2 import Path
 
-__all__ = 'main', 'launch_new_instance'
+__all__ = 'markdown', 'notebook', 'code', 'raw', 'output', 'reads'
 
 
 # In[108]:
@@ -50,9 +50,9 @@ FilesWriter.build_directory.default_value = 'docs'
 # In[102]:
 
 
-def notebook(path, resources=None, **kw):
+def identity(path, resources=None, **kw):
     """callable to export ipynb files"""
-    return nbformat.reads(path.read_text(), 4), resources
+    return reads(path.read_text(), 4), resources
 
 
 # __`FuncExporter`__ is a flexible `nbconvert` exporter. It calls a function that returns
@@ -63,7 +63,7 @@ def notebook(path, resources=None, **kw):
 
 
 class FuncExporter(html.HTMLExporter):
-    callable = Any(notebook)
+    callable = Any(identity)
     def from_filename(self, file_name, resources=None, **kw):
         html, resources = self.from_notebook_node(
             *self.callable(Path(file_name), resources, **kw), **kw)
@@ -73,12 +73,12 @@ class FuncExporter(html.HTMLExporter):
 # In[103]:
 
 
-def minimal_style(new):
+def minimal_style(callable):
     """A minimal style wrapper other file types"""
     def _return_nb(path, resources=None, **kw):
-        return new_notebook(cells=[
-            nbformat.v4.new_markdown_cell("""# [{0}]({0})""".format(str(path))),
-            new(path.read_text())]), resources
+        return notebook(cells=[
+            markdown("""# [{0}]({0})""".format(str(path))),
+            callable(path.read_text())]), resources
     return _return_nb
 
 
@@ -86,10 +86,10 @@ def minimal_style(new):
 
 
 rules = {
-    ('ipynb',): notebook,
-    ('py', 'pyi'): minimal_style(new_code_cell),
-    ('md', 'markdown'): minimal_style(new_markdown_cell),
-    ('txt',): minimal_style(new_code_cell)}
+    ('ipynb',): identity,
+    ('py', 'pyi'): minimal_style(code),
+    ('md', 'markdown'): minimal_style(markdown),
+    ('txt',): minimal_style(code)}
 
 
 # In[105]:
@@ -115,7 +115,7 @@ class Docs(NbConvertApp):
     def convert_notebooks(self):
         super().convert_notebooks() or self.report and [
             name and NbConvertApp.convert_single_notebook(
-                    self, name, nbformat.io.StringIO(nbformat.writes(nb))) for name, nb in self.report()]
+                    self, name, io.StringIO(writes(nb))) for name, nb in self.report()]
    
     def init_single_notebook_resources(self, notebook_filename):
         resources = super().init_single_notebook_resources(notebook_filename)
@@ -135,14 +135,14 @@ main = launch_new_instance = Docs.launch_instance
 # In[2]:
 
 
-def basic_index(data):
+def index(data):
     def _index(html, resources, notebook_name):
         """"""
         from bs4 import BeautifulSoup
         html = BeautifulSoup(html, 'html.parser')    
         location = notebook_name+resources['output_extension']
-        data.cells.append(new_markdown_cell("""[<small>{}</small>]({})""".format(resources['name'], location)))
-        data.cells.append(new_markdown_cell(
+        data.cells.append(markdown("""[<small>{}</small>]({})""".format(resources['name'], location)))
+        data.cells.append(markdown(
             "\n".join(
                 """{} [{}]({}#{})\n""".format('#'*int(h.name[-1]),h.text, location, h.attrs['id']) 
                 for h in html.select('h1,h2'))))

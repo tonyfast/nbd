@@ -8,7 +8,6 @@ nbd.py:47:1: E305 expected 2 blank lines after class or function definition, fou
 nbd.py:58:80: E501 line too long (89 > 79 characters)
 nbd.py:59:80: E501 line too long (91 > 79 characters)
 nbd.py:67:5: E301 expected 1 blank line, found 0
-nbd.py:80:80: E501 line too long (80 > 79 characters)
 nbd.py:98:26: W291 trailing whitespace
 nbd.py:104:77: W291 trailing whitespace
 nbd.py:110:80: E501 line too long (87 > 79 characters)
@@ -24,10 +23,222 @@ nbd.py:129:21: E701 multiple statements on one line (colon)
 nbd.py:130:13: E701 multiple statements on one line (colon)
 nbd.py:131:1: W293 blank line contains whitespace
 nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:133:1: W391 blank line at end of file
+nbd.py:142:50: W291 trailing whitespace
+nbd.py:144:80: E501 line too long (111 > 79 characters)
+nbd.py:147:66: E231 missing whitespace after ','
+nbd.py:147:80: E501 line too long (98 > 79 characters)
+nbd.py:147:99: W291 trailing whitespace
+nbd.py:149:33: E225 missing whitespace around operator
+nbd.py:151:1: W391 blank line at end of file
 nbd.py:6:22: W291 trailing whitespace
-nbd.py:13:1: F401 'nbformat.v4.new_raw_cell' imported but unused
-nbd.py:13:80: E501 line too long (84 > 79 characters)
+nbd.py:13:1: F401 'nbformat.v4.new_raw_cell as raw' imported but unused
+nbd.py:13:80: E501 line too long (123 > 79 characters)
+nbd.py:28:38: W291 trailing whitespace
+nbd.py:29:5: E301 expected 1 blank line, found 0
+nbd.py:46:1: W293 blank line contains whitespace
+nbd.py:47:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:53:1: F811 redefinition of unused 'notebook' from line 13
+nbd.py:58:80: E501 line too long (89 > 79 characters)
+nbd.py:59:80: E501 line too long (91 > 79 characters)
+nbd.py:67:5: E301 expected 1 blank line, found 0
+nbd.py:91:39: F821 undefined name 'md'
+nbd.py:98:26: W291 trailing whitespace
+nbd.py:104:77: W291 trailing whitespace
+nbd.py:110:80: E501 line too long (87 > 79 characters)
+nbd.py:113:80: E501 line too long (116 > 79 characters)
+nbd.py:114:1: W293 blank line contains whitespace
+nbd.py:118:80: E501 line too long (105 > 79 characters)
+nbd.py:119:1: W293 blank line contains whitespace
+nbd.py:123:25: W291 trailing whitespace
+nbd.py:124:1: W293 blank line contains whitespace
+nbd.py:125:27: W291 trailing whitespace
+nbd.py:127:1: W293 blank line contains whitespace
+nbd.py:129:21: E701 multiple statements on one line (colon)
+nbd.py:130:13: E701 multiple statements on one line (colon)
+nbd.py:131:1: W293 blank line contains whitespace
+nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:142:50: W291 trailing whitespace
+nbd.py:144:80: E501 line too long (102 > 79 characters)
+nbd.py:147:66: E231 missing whitespace after ','
+nbd.py:147:80: E501 line too long (98 > 79 characters)
+nbd.py:147:99: W291 trailing whitespace
+nbd.py:149:33: E225 missing whitespace around operator
+nbd.py:151:1: W391 blank line at end of file
+nbd.py:6:22: W291 trailing whitespace
+nbd.py:13:80: E501 line too long (145 > 79 characters)
+nbd.py:28:38: W291 trailing whitespace
+nbd.py:29:5: E301 expected 1 blank line, found 0
+nbd.py:46:1: W293 blank line contains whitespace
+nbd.py:47:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:53:1: F811 redefinition of unused 'notebook' from line 13
+nbd.py:58:80: E501 line too long (89 > 79 characters)
+nbd.py:59:80: E501 line too long (91 > 79 characters)
+nbd.py:67:5: E301 expected 1 blank line, found 0
+nbd.py:98:26: W291 trailing whitespace
+nbd.py:104:77: W291 trailing whitespace
+nbd.py:110:80: E501 line too long (87 > 79 characters)
+nbd.py:113:80: E501 line too long (116 > 79 characters)
+nbd.py:114:1: W293 blank line contains whitespace
+nbd.py:118:80: E501 line too long (105 > 79 characters)
+nbd.py:119:1: W293 blank line contains whitespace
+nbd.py:123:25: W291 trailing whitespace
+nbd.py:124:1: W293 blank line contains whitespace
+nbd.py:125:27: W291 trailing whitespace
+nbd.py:127:1: W293 blank line contains whitespace
+nbd.py:129:21: E701 multiple statements on one line (colon)
+nbd.py:130:13: E701 multiple statements on one line (colon)
+nbd.py:131:1: W293 blank line contains whitespace
+nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:142:50: W291 trailing whitespace
+nbd.py:144:80: E501 line too long (102 > 79 characters)
+nbd.py:147:66: E231 missing whitespace after ','
+nbd.py:147:80: E501 line too long (98 > 79 characters)
+nbd.py:147:99: W291 trailing whitespace
+nbd.py:149:33: E225 missing whitespace around operator
+nbd.py:151:1: W391 blank line at end of file
+nbd.py:6:22: W291 trailing whitespace
+nbd.py:13:80: E501 line too long (145 > 79 characters)
+nbd.py:14:1: F401 'nbformat.io' imported but unused
+nbd.py:28:38: W291 trailing whitespace
+nbd.py:29:5: E301 expected 1 blank line, found 0
+nbd.py:46:1: W293 blank line contains whitespace
+nbd.py:47:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:53:1: F811 redefinition of unused 'notebook' from line 13
+nbd.py:58:80: E501 line too long (89 > 79 characters)
+nbd.py:59:80: E501 line too long (91 > 79 characters)
+nbd.py:67:5: E301 expected 1 blank line, found 0
+nbd.py:98:26: W291 trailing whitespace
+nbd.py:104:77: W291 trailing whitespace
+nbd.py:110:80: E501 line too long (87 > 79 characters)
+nbd.py:113:80: E501 line too long (116 > 79 characters)
+nbd.py:114:1: W293 blank line contains whitespace
+nbd.py:118:33: F821 undefined name 'nbformat'
+nbd.py:118:54: F821 undefined name 'nbformat'
+nbd.py:118:80: E501 line too long (105 > 79 characters)
+nbd.py:119:1: W293 blank line contains whitespace
+nbd.py:123:25: W291 trailing whitespace
+nbd.py:124:1: W293 blank line contains whitespace
+nbd.py:125:27: W291 trailing whitespace
+nbd.py:127:1: W293 blank line contains whitespace
+nbd.py:129:21: E701 multiple statements on one line (colon)
+nbd.py:130:13: E701 multiple statements on one line (colon)
+nbd.py:131:1: W293 blank line contains whitespace
+nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:142:50: W291 trailing whitespace
+nbd.py:144:80: E501 line too long (102 > 79 characters)
+nbd.py:147:66: E231 missing whitespace after ','
+nbd.py:147:80: E501 line too long (98 > 79 characters)
+nbd.py:147:99: W291 trailing whitespace
+nbd.py:149:33: E225 missing whitespace around operator
+nbd.py:151:1: W391 blank line at end of file
+nbd.py:6:22: W291 trailing whitespace
+nbd.py:13:80: E501 line too long (145 > 79 characters)
+nbd.py:14:1: F401 'nbformat.io' imported but unused
+nbd.py:28:38: W291 trailing whitespace
+nbd.py:29:5: E301 expected 1 blank line, found 0
+nbd.py:46:1: W293 blank line contains whitespace
+nbd.py:47:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:53:1: F811 redefinition of unused 'notebook' from line 13
+nbd.py:58:80: E501 line too long (89 > 79 characters)
+nbd.py:59:80: E501 line too long (91 > 79 characters)
+nbd.py:67:5: E301 expected 1 blank line, found 0
+nbd.py:98:26: W291 trailing whitespace
+nbd.py:104:77: W291 trailing whitespace
+nbd.py:110:80: E501 line too long (87 > 79 characters)
+nbd.py:113:80: E501 line too long (116 > 79 characters)
+nbd.py:114:1: W293 blank line contains whitespace
+nbd.py:118:33: F821 undefined name 'nbformat'
+nbd.py:118:54: F821 undefined name 'nbformat'
+nbd.py:118:80: E501 line too long (105 > 79 characters)
+nbd.py:119:1: W293 blank line contains whitespace
+nbd.py:123:25: W291 trailing whitespace
+nbd.py:124:1: W293 blank line contains whitespace
+nbd.py:125:27: W291 trailing whitespace
+nbd.py:127:1: W293 blank line contains whitespace
+nbd.py:129:21: E701 multiple statements on one line (colon)
+nbd.py:130:13: E701 multiple statements on one line (colon)
+nbd.py:131:1: W293 blank line contains whitespace
+nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:142:50: W291 trailing whitespace
+nbd.py:144:80: E501 line too long (102 > 79 characters)
+nbd.py:147:66: E231 missing whitespace after ','
+nbd.py:147:80: E501 line too long (98 > 79 characters)
+nbd.py:147:99: W291 trailing whitespace
+nbd.py:149:33: E225 missing whitespace around operator
+nbd.py:151:1: W391 blank line at end of file
+nbd.py:6:22: W291 trailing whitespace
+nbd.py:13:80: E501 line too long (145 > 79 characters)
+nbd.py:14:1: F401 'nbformat.io' imported but unused
+nbd.py:28:38: W291 trailing whitespace
+nbd.py:29:5: E301 expected 1 blank line, found 0
+nbd.py:46:1: W293 blank line contains whitespace
+nbd.py:47:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:53:1: F811 redefinition of unused 'notebook' from line 13
+nbd.py:58:80: E501 line too long (89 > 79 characters)
+nbd.py:59:80: E501 line too long (91 > 79 characters)
+nbd.py:67:5: E301 expected 1 blank line, found 0
+nbd.py:98:26: W291 trailing whitespace
+nbd.py:104:77: W291 trailing whitespace
+nbd.py:110:80: E501 line too long (87 > 79 characters)
+nbd.py:113:80: E501 line too long (116 > 79 characters)
+nbd.py:114:1: W293 blank line contains whitespace
+nbd.py:118:33: F821 undefined name 'nbformat'
+nbd.py:118:54: F821 undefined name 'nbformat'
+nbd.py:118:80: E501 line too long (105 > 79 characters)
+nbd.py:119:1: W293 blank line contains whitespace
+nbd.py:123:25: W291 trailing whitespace
+nbd.py:124:1: W293 blank line contains whitespace
+nbd.py:125:27: W291 trailing whitespace
+nbd.py:127:1: W293 blank line contains whitespace
+nbd.py:129:21: E701 multiple statements on one line (colon)
+nbd.py:130:13: E701 multiple statements on one line (colon)
+nbd.py:131:1: W293 blank line contains whitespace
+nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:142:50: W291 trailing whitespace
+nbd.py:144:80: E501 line too long (102 > 79 characters)
+nbd.py:147:66: E231 missing whitespace after ','
+nbd.py:147:80: E501 line too long (98 > 79 characters)
+nbd.py:147:99: W291 trailing whitespace
+nbd.py:149:33: E225 missing whitespace around operator
+nbd.py:151:1: W391 blank line at end of file
+nbd.py:6:22: W291 trailing whitespace
+nbd.py:13:80: E501 line too long (145 > 79 characters)
+nbd.py:14:1: F401 'nbformat.io' imported but unused
+nbd.py:28:38: W291 trailing whitespace
+nbd.py:29:5: E301 expected 1 blank line, found 0
+nbd.py:46:1: W293 blank line contains whitespace
+nbd.py:47:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:53:1: F811 redefinition of unused 'notebook' from line 13
+nbd.py:58:80: E501 line too long (89 > 79 characters)
+nbd.py:59:80: E501 line too long (91 > 79 characters)
+nbd.py:67:5: E301 expected 1 blank line, found 0
+nbd.py:98:26: W291 trailing whitespace
+nbd.py:104:77: W291 trailing whitespace
+nbd.py:110:80: E501 line too long (87 > 79 characters)
+nbd.py:113:80: E501 line too long (116 > 79 characters)
+nbd.py:114:1: W293 blank line contains whitespace
+nbd.py:118:33: F821 undefined name 'nbformat'
+nbd.py:118:54: F821 undefined name 'nbformat'
+nbd.py:118:80: E501 line too long (105 > 79 characters)
+nbd.py:119:1: W293 blank line contains whitespace
+nbd.py:123:25: W291 trailing whitespace
+nbd.py:124:1: W293 blank line contains whitespace
+nbd.py:125:27: W291 trailing whitespace
+nbd.py:127:1: W293 blank line contains whitespace
+nbd.py:129:21: E701 multiple statements on one line (colon)
+nbd.py:130:13: E701 multiple statements on one line (colon)
+nbd.py:131:1: W293 blank line contains whitespace
+nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:142:50: W291 trailing whitespace
+nbd.py:144:80: E501 line too long (102 > 79 characters)
+nbd.py:147:66: E231 missing whitespace after ','
+nbd.py:147:80: E501 line too long (98 > 79 characters)
+nbd.py:147:99: W291 trailing whitespace
+nbd.py:149:33: E225 missing whitespace around operator
+nbd.py:151:1: W391 blank line at end of file
+nbd.py:6:22: W291 trailing whitespace
+nbd.py:13:80: E501 line too long (145 > 79 characters)
+nbd.py:14:1: F401 'nbformat.io' imported but unused
 nbd.py:28:38: W291 trailing whitespace
 nbd.py:29:5: E301 expected 1 blank line, found 0
 nbd.py:46:1: W293 blank line contains whitespace
@@ -35,12 +246,13 @@ nbd.py:47:1: E305 expected 2 blank lines after class or function definition, fou
 nbd.py:58:80: E501 line too long (89 > 79 characters)
 nbd.py:59:80: E501 line too long (91 > 79 characters)
 nbd.py:67:5: E301 expected 1 blank line, found 0
-nbd.py:80:80: E501 line too long (80 > 79 characters)
 nbd.py:98:26: W291 trailing whitespace
 nbd.py:104:77: W291 trailing whitespace
 nbd.py:110:80: E501 line too long (87 > 79 characters)
 nbd.py:113:80: E501 line too long (116 > 79 characters)
 nbd.py:114:1: W293 blank line contains whitespace
+nbd.py:118:33: F821 undefined name 'nbformat'
+nbd.py:118:54: F821 undefined name 'nbformat'
 nbd.py:118:80: E501 line too long (105 > 79 characters)
 nbd.py:119:1: W293 blank line contains whitespace
 nbd.py:123:25: W291 trailing whitespace
@@ -51,10 +263,15 @@ nbd.py:129:21: E701 multiple statements on one line (colon)
 nbd.py:130:13: E701 multiple statements on one line (colon)
 nbd.py:131:1: W293 blank line contains whitespace
 nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:133:1: W391 blank line at end of file
+nbd.py:142:50: W291 trailing whitespace
+nbd.py:144:80: E501 line too long (102 > 79 characters)
+nbd.py:147:66: E231 missing whitespace after ','
+nbd.py:147:80: E501 line too long (98 > 79 characters)
+nbd.py:147:99: W291 trailing whitespace
+nbd.py:149:33: E225 missing whitespace around operator
+nbd.py:151:1: W391 blank line at end of file
 nbd.py:6:22: W291 trailing whitespace
-nbd.py:13:1: F401 'nbformat.v4.new_raw_cell' imported but unused
-nbd.py:13:80: E501 line too long (84 > 79 characters)
+nbd.py:13:80: E501 line too long (145 > 79 characters)
 nbd.py:28:38: W291 trailing whitespace
 nbd.py:29:5: E301 expected 1 blank line, found 0
 nbd.py:46:1: W293 blank line contains whitespace
@@ -62,13 +279,12 @@ nbd.py:47:1: E305 expected 2 blank lines after class or function definition, fou
 nbd.py:58:80: E501 line too long (89 > 79 characters)
 nbd.py:59:80: E501 line too long (91 > 79 characters)
 nbd.py:67:5: E301 expected 1 blank line, found 0
-nbd.py:80:80: E501 line too long (80 > 79 characters)
 nbd.py:98:26: W291 trailing whitespace
 nbd.py:104:77: W291 trailing whitespace
 nbd.py:110:80: E501 line too long (87 > 79 characters)
 nbd.py:113:80: E501 line too long (116 > 79 characters)
 nbd.py:114:1: W293 blank line contains whitespace
-nbd.py:118:80: E501 line too long (105 > 79 characters)
+nbd.py:118:80: E501 line too long (87 > 79 characters)
 nbd.py:119:1: W293 blank line contains whitespace
 nbd.py:123:25: W291 trailing whitespace
 nbd.py:124:1: W293 blank line contains whitespace
@@ -78,10 +294,15 @@ nbd.py:129:21: E701 multiple statements on one line (colon)
 nbd.py:130:13: E701 multiple statements on one line (colon)
 nbd.py:131:1: W293 blank line contains whitespace
 nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:133:1: W391 blank line at end of file
+nbd.py:142:50: W291 trailing whitespace
+nbd.py:144:80: E501 line too long (102 > 79 characters)
+nbd.py:147:66: E231 missing whitespace after ','
+nbd.py:147:80: E501 line too long (98 > 79 characters)
+nbd.py:147:99: W291 trailing whitespace
+nbd.py:149:33: E225 missing whitespace around operator
+nbd.py:151:1: W391 blank line at end of file
 nbd.py:6:22: W291 trailing whitespace
-nbd.py:13:1: F401 'nbformat.v4.new_raw_cell' imported but unused
-nbd.py:13:80: E501 line too long (84 > 79 characters)
+nbd.py:13:80: E501 line too long (145 > 79 characters)
 nbd.py:28:38: W291 trailing whitespace
 nbd.py:29:5: E301 expected 1 blank line, found 0
 nbd.py:46:1: W293 blank line contains whitespace
@@ -89,13 +310,12 @@ nbd.py:47:1: E305 expected 2 blank lines after class or function definition, fou
 nbd.py:58:80: E501 line too long (89 > 79 characters)
 nbd.py:59:80: E501 line too long (91 > 79 characters)
 nbd.py:67:5: E301 expected 1 blank line, found 0
-nbd.py:80:80: E501 line too long (80 > 79 characters)
 nbd.py:98:26: W291 trailing whitespace
 nbd.py:104:77: W291 trailing whitespace
 nbd.py:110:80: E501 line too long (87 > 79 characters)
 nbd.py:113:80: E501 line too long (116 > 79 characters)
 nbd.py:114:1: W293 blank line contains whitespace
-nbd.py:118:80: E501 line too long (105 > 79 characters)
+nbd.py:118:80: E501 line too long (87 > 79 characters)
 nbd.py:119:1: W293 blank line contains whitespace
 nbd.py:123:25: W291 trailing whitespace
 nbd.py:124:1: W293 blank line contains whitespace
@@ -105,10 +325,15 @@ nbd.py:129:21: E701 multiple statements on one line (colon)
 nbd.py:130:13: E701 multiple statements on one line (colon)
 nbd.py:131:1: W293 blank line contains whitespace
 nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:133:1: W391 blank line at end of file
+nbd.py:142:50: W291 trailing whitespace
+nbd.py:144:80: E501 line too long (102 > 79 characters)
+nbd.py:147:66: E231 missing whitespace after ','
+nbd.py:147:80: E501 line too long (98 > 79 characters)
+nbd.py:147:99: W291 trailing whitespace
+nbd.py:149:33: E225 missing whitespace around operator
+nbd.py:151:1: W391 blank line at end of file
 nbd.py:6:22: W291 trailing whitespace
-nbd.py:13:1: F401 'nbformat.v4.new_raw_cell' imported but unused
-nbd.py:13:80: E501 line too long (84 > 79 characters)
+nbd.py:13:80: E501 line too long (145 > 79 characters)
 nbd.py:28:38: W291 trailing whitespace
 nbd.py:29:5: E301 expected 1 blank line, found 0
 nbd.py:46:1: W293 blank line contains whitespace
@@ -116,13 +341,12 @@ nbd.py:47:1: E305 expected 2 blank lines after class or function definition, fou
 nbd.py:58:80: E501 line too long (89 > 79 characters)
 nbd.py:59:80: E501 line too long (91 > 79 characters)
 nbd.py:67:5: E301 expected 1 blank line, found 0
-nbd.py:80:80: E501 line too long (80 > 79 characters)
 nbd.py:98:26: W291 trailing whitespace
 nbd.py:104:77: W291 trailing whitespace
 nbd.py:110:80: E501 line too long (87 > 79 characters)
 nbd.py:113:80: E501 line too long (116 > 79 characters)
 nbd.py:114:1: W293 blank line contains whitespace
-nbd.py:118:80: E501 line too long (105 > 79 characters)
+nbd.py:118:80: E501 line too long (87 > 79 characters)
 nbd.py:119:1: W293 blank line contains whitespace
 nbd.py:123:25: W291 trailing whitespace
 nbd.py:124:1: W293 blank line contains whitespace
@@ -132,166 +356,10 @@ nbd.py:129:21: E701 multiple statements on one line (colon)
 nbd.py:130:13: E701 multiple statements on one line (colon)
 nbd.py:131:1: W293 blank line contains whitespace
 nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:133:1: W391 blank line at end of file
-nbd.py:6:22: W291 trailing whitespace
-nbd.py:13:1: F401 'nbformat.v4.new_raw_cell' imported but unused
-nbd.py:13:80: E501 line too long (84 > 79 characters)
-nbd.py:28:38: W291 trailing whitespace
-nbd.py:29:5: E301 expected 1 blank line, found 0
-nbd.py:46:1: W293 blank line contains whitespace
-nbd.py:47:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:58:80: E501 line too long (89 > 79 characters)
-nbd.py:59:80: E501 line too long (91 > 79 characters)
-nbd.py:67:5: E301 expected 1 blank line, found 0
-nbd.py:80:80: E501 line too long (80 > 79 characters)
-nbd.py:98:26: W291 trailing whitespace
-nbd.py:104:77: W291 trailing whitespace
-nbd.py:110:80: E501 line too long (87 > 79 characters)
-nbd.py:113:80: E501 line too long (116 > 79 characters)
-nbd.py:114:1: W293 blank line contains whitespace
-nbd.py:118:80: E501 line too long (105 > 79 characters)
-nbd.py:119:1: W293 blank line contains whitespace
-nbd.py:123:25: W291 trailing whitespace
-nbd.py:124:1: W293 blank line contains whitespace
-nbd.py:125:27: W291 trailing whitespace
-nbd.py:127:1: W293 blank line contains whitespace
-nbd.py:129:21: E701 multiple statements on one line (colon)
-nbd.py:130:13: E701 multiple statements on one line (colon)
-nbd.py:131:1: W293 blank line contains whitespace
-nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:133:1: W391 blank line at end of file
-nbd.py:6:22: W291 trailing whitespace
-nbd.py:13:1: F401 'nbformat.v4.new_raw_cell' imported but unused
-nbd.py:13:80: E501 line too long (84 > 79 characters)
-nbd.py:28:38: W291 trailing whitespace
-nbd.py:29:5: E301 expected 1 blank line, found 0
-nbd.py:46:1: W293 blank line contains whitespace
-nbd.py:47:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:58:80: E501 line too long (89 > 79 characters)
-nbd.py:59:80: E501 line too long (91 > 79 characters)
-nbd.py:67:5: E301 expected 1 blank line, found 0
-nbd.py:80:80: E501 line too long (80 > 79 characters)
-nbd.py:98:26: W291 trailing whitespace
-nbd.py:104:77: W291 trailing whitespace
-nbd.py:110:80: E501 line too long (87 > 79 characters)
-nbd.py:113:80: E501 line too long (116 > 79 characters)
-nbd.py:114:1: W293 blank line contains whitespace
-nbd.py:118:80: E501 line too long (105 > 79 characters)
-nbd.py:119:1: W293 blank line contains whitespace
-nbd.py:123:25: W291 trailing whitespace
-nbd.py:124:1: W293 blank line contains whitespace
-nbd.py:125:27: W291 trailing whitespace
-nbd.py:127:1: W293 blank line contains whitespace
-nbd.py:129:21: E701 multiple statements on one line (colon)
-nbd.py:130:13: E701 multiple statements on one line (colon)
-nbd.py:131:1: W293 blank line contains whitespace
-nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:133:1: W391 blank line at end of file
-nbd.py:6:22: W291 trailing whitespace
-nbd.py:13:1: F401 'nbformat.v4.new_raw_cell' imported but unused
-nbd.py:13:80: E501 line too long (84 > 79 characters)
-nbd.py:28:38: W291 trailing whitespace
-nbd.py:29:5: E301 expected 1 blank line, found 0
-nbd.py:46:1: W293 blank line contains whitespace
-nbd.py:47:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:58:80: E501 line too long (89 > 79 characters)
-nbd.py:59:80: E501 line too long (91 > 79 characters)
-nbd.py:67:5: E301 expected 1 blank line, found 0
-nbd.py:80:80: E501 line too long (80 > 79 characters)
-nbd.py:98:26: W291 trailing whitespace
-nbd.py:104:77: W291 trailing whitespace
-nbd.py:110:80: E501 line too long (87 > 79 characters)
-nbd.py:113:80: E501 line too long (116 > 79 characters)
-nbd.py:114:1: W293 blank line contains whitespace
-nbd.py:118:80: E501 line too long (105 > 79 characters)
-nbd.py:119:1: W293 blank line contains whitespace
-nbd.py:123:25: W291 trailing whitespace
-nbd.py:124:1: W293 blank line contains whitespace
-nbd.py:125:27: W291 trailing whitespace
-nbd.py:127:1: W293 blank line contains whitespace
-nbd.py:129:21: E701 multiple statements on one line (colon)
-nbd.py:130:13: E701 multiple statements on one line (colon)
-nbd.py:131:1: W293 blank line contains whitespace
-nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:133:1: W391 blank line at end of file
-nbd.py:6:22: W291 trailing whitespace
-nbd.py:13:1: F401 'nbformat.v4.new_raw_cell' imported but unused
-nbd.py:13:80: E501 line too long (84 > 79 characters)
-nbd.py:28:38: W291 trailing whitespace
-nbd.py:29:5: E301 expected 1 blank line, found 0
-nbd.py:46:1: W293 blank line contains whitespace
-nbd.py:47:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:58:80: E501 line too long (89 > 79 characters)
-nbd.py:59:80: E501 line too long (91 > 79 characters)
-nbd.py:67:5: E301 expected 1 blank line, found 0
-nbd.py:80:80: E501 line too long (80 > 79 characters)
-nbd.py:98:26: W291 trailing whitespace
-nbd.py:104:77: W291 trailing whitespace
-nbd.py:110:80: E501 line too long (87 > 79 characters)
-nbd.py:113:80: E501 line too long (116 > 79 characters)
-nbd.py:114:1: W293 blank line contains whitespace
-nbd.py:118:80: E501 line too long (105 > 79 characters)
-nbd.py:119:1: W293 blank line contains whitespace
-nbd.py:123:25: W291 trailing whitespace
-nbd.py:124:1: W293 blank line contains whitespace
-nbd.py:125:27: W291 trailing whitespace
-nbd.py:127:1: W293 blank line contains whitespace
-nbd.py:129:21: E701 multiple statements on one line (colon)
-nbd.py:130:13: E701 multiple statements on one line (colon)
-nbd.py:131:1: W293 blank line contains whitespace
-nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:133:1: W391 blank line at end of file
-nbd.py:6:22: W291 trailing whitespace
-nbd.py:13:1: F401 'nbformat.v4.new_raw_cell' imported but unused
-nbd.py:13:80: E501 line too long (84 > 79 characters)
-nbd.py:28:38: W291 trailing whitespace
-nbd.py:29:5: E301 expected 1 blank line, found 0
-nbd.py:46:1: W293 blank line contains whitespace
-nbd.py:47:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:58:80: E501 line too long (89 > 79 characters)
-nbd.py:59:80: E501 line too long (91 > 79 characters)
-nbd.py:67:5: E301 expected 1 blank line, found 0
-nbd.py:80:80: E501 line too long (80 > 79 characters)
-nbd.py:98:26: W291 trailing whitespace
-nbd.py:104:77: W291 trailing whitespace
-nbd.py:110:80: E501 line too long (87 > 79 characters)
-nbd.py:113:80: E501 line too long (116 > 79 characters)
-nbd.py:114:1: W293 blank line contains whitespace
-nbd.py:118:80: E501 line too long (105 > 79 characters)
-nbd.py:119:1: W293 blank line contains whitespace
-nbd.py:123:25: W291 trailing whitespace
-nbd.py:124:1: W293 blank line contains whitespace
-nbd.py:125:27: W291 trailing whitespace
-nbd.py:127:1: W293 blank line contains whitespace
-nbd.py:129:21: E701 multiple statements on one line (colon)
-nbd.py:130:13: E701 multiple statements on one line (colon)
-nbd.py:131:1: W293 blank line contains whitespace
-nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:133:1: W391 blank line at end of file
-nbd.py:6:22: W291 trailing whitespace
-nbd.py:13:1: F401 'nbformat.v4.new_raw_cell' imported but unused
-nbd.py:13:80: E501 line too long (84 > 79 characters)
-nbd.py:28:38: W291 trailing whitespace
-nbd.py:29:5: E301 expected 1 blank line, found 0
-nbd.py:46:1: W293 blank line contains whitespace
-nbd.py:47:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:58:80: E501 line too long (89 > 79 characters)
-nbd.py:59:80: E501 line too long (91 > 79 characters)
-nbd.py:67:5: E301 expected 1 blank line, found 0
-nbd.py:80:80: E501 line too long (80 > 79 characters)
-nbd.py:98:26: W291 trailing whitespace
-nbd.py:104:77: W291 trailing whitespace
-nbd.py:110:80: E501 line too long (87 > 79 characters)
-nbd.py:113:80: E501 line too long (116 > 79 characters)
-nbd.py:114:1: W293 blank line contains whitespace
-nbd.py:118:80: E501 line too long (105 > 79 characters)
-nbd.py:119:1: W293 blank line contains whitespace
-nbd.py:123:25: W291 trailing whitespace
-nbd.py:124:1: W293 blank line contains whitespace
-nbd.py:125:27: W291 trailing whitespace
-nbd.py:127:1: W293 blank line contains whitespace
-nbd.py:129:21: E701 multiple statements on one line (colon)
-nbd.py:130:13: E701 multiple statements on one line (colon)
-nbd.py:131:1: W293 blank line contains whitespace
-nbd.py:132:1: E305 expected 2 blank lines after class or function definition, found 1
-nbd.py:133:1: W391 blank line at end of file
+nbd.py:142:50: W291 trailing whitespace
+nbd.py:144:80: E501 line too long (102 > 79 characters)
+nbd.py:147:66: E231 missing whitespace after ','
+nbd.py:147:80: E501 line too long (98 > 79 characters)
+nbd.py:147:99: W291 trailing whitespace
+nbd.py:149:33: E225 missing whitespace around operator
+nbd.py:151:1: W391 blank line at end of file

@@ -11775,7 +11775,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Docs-built-on-nbconvert"><code>Docs</code> built on <code>nbconvert</code><a class="anchor-link" href="#Docs-built-on-nbconvert">&#182;</a></h1>
+<h1 id="readme.md"><a href="readme.md">readme.md</a><a class="anchor-link" href="#readme.md">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -11783,227 +11783,74 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Callable exporter </li>
-<li>Callable postprocessor</li>
-<li>Nested file writer</li>
+<h1 id="It's-no-big-deal,-it-just-works.">It's <code>no big deal</code>, it just works.<a class="anchor-link" href="#It's-no-big-deal,-it-just-works.">&#182;</a></h1><p>Documentation ∀ files; based on the <a href="nbformat.readthedocs.io"><code>nbformat</code></a>.</p>
+<h3 id="Install-with-version-control">Install with version control<a class="anchor-link" href="#Install-with-version-control">&#182;</a></h3><p><code>pip install git+</code><code><a href="https://github.com/tonyfast/nbd/">https://github.com/tonyfast/nbd/</a></code></p>
+<h2 id="Why">Why<a class="anchor-link" href="#Why">&#182;</a></h2><ul>
+<li><code>nbconvert</code> doesn't accept all file formats.  <code>nbd</code> adds the concept of loaders
+that transform arbitrary files to the nbformat.</li>
 </ul>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nbd</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="err">!</span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">docs</span><span class="o">/**.</span><span class="n">html</span>
+<span class="err">!</span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">python</span> <span class="n">config</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">nbd</span><span class="o">.</span><span class="n">ipynb</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">dir</span> <span class="o">.</span>
+<span class="err">!</span><span class="n">flake8</span> <span class="n">nbd</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">file</span><span class="o">=</span><span class="n">flake8</span><span class="o">.</span><span class="n">txt</span>
+<span class="err">!</span><span class="n">pyreverse</span> <span class="o">-</span><span class="n">o</span> <span class="n">png</span> <span class="o">-</span><span class="n">p</span> <span class="n">nbd</span> <span class="n">nbd</span><span class="o">.</span><span class="n">py</span>
+<span class="err">!</span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">markdown</span> <span class="n">readme</span><span class="o">.</span><span class="n">ipynb</span>
+<span class="err">!</span><span class="n">jupyter</span> <span class="n">nbd</span> <span class="o">--</span><span class="n">config</span> <span class="n">config</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nbformat.v4</span> <span class="k">import</span> <span class="n">new_code_cell</span> <span class="k">as</span> <span class="n">code</span><span class="p">,</span> <span class="n">new_markdown_cell</span> <span class="k">as</span> <span class="n">markdown</span><span class="p">,</span> <span class="n">new_notebook</span> <span class="k">as</span> <span class="n">notebook</span><span class="p">,</span> <span class="n">new_raw_cell</span> <span class="k">as</span> <span class="n">raw</span><span class="p">,</span> <span class="n">new_output</span> <span class="k">as</span> <span class="n">output</span>
-<span class="kn">from</span> <span class="nn">nbformat</span> <span class="k">import</span> <span class="n">reads</span><span class="p">,</span> <span class="n">io</span><span class="p">,</span> <span class="n">writes</span>
-<span class="kn">from</span> <span class="nn">traitlets</span> <span class="k">import</span> <span class="n">Any</span>
-<span class="kn">from</span> <span class="nn">nbconvert.nbconvertapp</span> <span class="k">import</span> <span class="n">NbConvertApp</span>
-<span class="kn">from</span> <span class="nn">nbconvert.exporters</span> <span class="k">import</span> <span class="n">html</span>
-<span class="kn">from</span> <span class="nn">nbconvert</span> <span class="k">import</span> <span class="n">writers</span><span class="p">,</span> <span class="n">postprocessors</span>
-<span class="kn">from</span> <span class="nn">pathlib2</span> <span class="k">import</span> <span class="n">Path</span>
+<pre><code>[NbConvertApp] Converting notebook config.ipynb to python
+[NbConvertApp] Writing 1345 bytes to ./config.py
+[NbConvertApp] Converting notebook nbd.ipynb to python
+[NbConvertApp] Writing 4751 bytes to ./nbd.py
+parsing nbd.py...
+[NbConvertApp] Converting notebook readme.ipynb to markdown
+[NbConvertApp] Writing 3674 bytes to readme.md
+[Docs] Converting notebook nbd.ipynb to html
+[Docs] Writing 274252 bytes to docs/nbd.ipynb.html
+[Docs] Converting notebook config.ipynb to html
+[Docs] Writing 256830 bytes to docs/config.ipynb.html
+[Docs] Converting notebook config.py to html
+[Docs] Writing 254290 bytes to docs/config.py.html
+[Docs] Converting notebook template.ipynb to html
+[Docs] Writing 249736 bytes to docs/template.ipynb.html
+[Docs] Converting notebook readme.md to html
+[Docs] Writing 255292 bytes to docs/readme.md.html
+[Docs] Converting notebook flake8.txt to html
+[Docs] Writing 356503 bytes to docs/flake8.txt.html
+Traceback (most recent call last):
+  File "/Users/tonyfast/anaconda/bin/jupyter-nbd", line 11, in &lt;module&gt;
+    load_entry_point('nbd', 'console_scripts', 'jupyter-nbd')()
+  File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/jupyter_core/application.py", line 267, in launch_instance
+    return super(JupyterApp, cls).launch_instance(argv=argv, **kwargs)
+  File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/traitlets/config/application.py", line 658, in launch_instance
+    app.start()
+  File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/nbconvert/nbconvertapp.py", line 313, in start
+    self.convert_notebooks()
+  File "/Users/tonyfast/nbd/nbd.py", line 118, in convert_notebooks
+    self, name, nbformat.io.StringIO(nbformat.writes(nb))) for name, nb in self.report()]
+  File "/Users/tonyfast/nbd/nbd.py", line 118, in &lt;listcomp&gt;
+    self, name, nbformat.io.StringIO(nbformat.writes(nb))) for name, nb in self.report()]
+NameError: name 'nbformat' is not defined
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="s1">&#39;markdown&#39;</span><span class="p">,</span> <span class="s1">&#39;notebook&#39;</span><span class="p">,</span> <span class="s1">&#39;code&#39;</span><span class="p">,</span> <span class="s1">&#39;raw&#39;</span><span class="p">,</span> <span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="s1">&#39;reads&#39;</span>
+
+</code></pre>
+<h2 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">&#182;</a></h2><ul>
+<li>An Ipython backed make configuration system</li>
+</ul>
+<h3 id="HTML-Views">HTML Views<a class="anchor-link" href="#HTML-Views">&#182;</a></h3><ul>
+<li><a href="https://rawgit.com/tonyfast/nbd/master/docs/index.html">Raw Git</a></li>
+<li><a href="https://tonyfast.github.io/nbd">Github Pages</a></li>
+</ul>
+<h3 id="Notebook-Views">Notebook Views<a class="anchor-link" href="#Notebook-Views">&#182;</a></h3><ul>
+<li><a href="http://nbviewer.jupyter.org/github/tonyfast/nbd/blob/master/readme.ipynb">nbviewer</a></li>
+<li><a href="https://github.com/tonyfast/nbd/blob/master/usage/readme.ipynb">github</a></li>
+</ul>
+<div class="highlight"><pre><span></span>
 </pre></div>
 
 </div>
 </div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[108]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">PostProcess</span><span class="p">(</span><span class="n">postprocessors</span><span class="o">.</span><span class="n">PostProcessorBase</span><span class="p">):</span>
-    <span class="n">callable</span> <span class="o">=</span> <span class="n">Any</span><span class="p">()</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    
-    <span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">write_result</span><span class="p">):</span>
-        <span class="n">html</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">notebook_name</span> <span class="o">=</span> <span class="n">write_result</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">callable</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">notebook_name</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[106]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FilesWriter</span><span class="p">(</span><span class="n">writers</span><span class="o">.</span><span class="n">FilesWriter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Use the same name so I don&#39;t have write an configuration docs.</span>
-<span class="sd">    This monkey patch assures the parent directory exists.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">notebook_name</span><span class="p">):</span>
-        <span class="p">(</span><span class="k">lambda</span> <span class="n">path</span><span class="p">:</span> <span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="ow">or</span> <span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">())(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">build_directory</span> <span class="o">/</span> <span class="n">Path</span><span class="p">(</span><span class="n">notebook_name</span><span class="p">))</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">notebook_name</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">notebook_name</span>
-        
-<span class="n">FilesWriter</span><span class="o">.</span><span class="n">build_directory</span><span class="o">.</span><span class="n">default_value</span> <span class="o">=</span> <span class="s1">&#39;docs&#39;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[102]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;callable to export ipynb files&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">reads</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">(),</span> <span class="mi">4</span><span class="p">),</span> <span class="n">resources</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong><code>FuncExporter</code></strong> is a flexible <code>nbconvert</code> exporter. It calls a function that returns
-a new <code>nbformat.NotebookNode</code> object and a resources dictionary.  This exporter is called
-with the <code>Docs</code> <code>NbConvertApp</code> app.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[101]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FuncExporter</span><span class="p">(</span><span class="n">html</span><span class="o">.</span><span class="n">HTMLExporter</span><span class="p">):</span>
-    <span class="n">callable</span> <span class="o">=</span> <span class="n">Any</span><span class="p">(</span><span class="n">identity</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">from_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
-        <span class="n">html</span><span class="p">,</span> <span class="n">resources</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_notebook_node</span><span class="p">(</span>
-            <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">callable</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">file_name</span><span class="p">),</span> <span class="n">resources</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">),</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">html</span><span class="p">,</span> <span class="n">resources</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">minimal_style</span><span class="p">(</span><span class="n">callable</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A minimal style wrapper other file types&quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">_return_nb</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">notebook</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="p">[</span>
-            <span class="n">markdown</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;# [</span><span class="si">{0}</span><span class="s2">](</span><span class="si">{0}</span><span class="s2">)&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))),</span>
-            <span class="n">callable</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">())]),</span> <span class="n">resources</span>
-    <span class="k">return</span> <span class="n">_return_nb</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[107]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rules</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">(</span><span class="s1">&#39;ipynb&#39;</span><span class="p">,):</span> <span class="n">identity</span><span class="p">,</span>
-    <span class="p">(</span><span class="s1">&#39;py&#39;</span><span class="p">,</span> <span class="s1">&#39;pyi&#39;</span><span class="p">):</span> <span class="n">minimal_style</span><span class="p">(</span><span class="n">code</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;md&#39;</span><span class="p">,</span> <span class="s1">&#39;markdown&#39;</span><span class="p">):</span> <span class="n">minimal_style</span><span class="p">(</span><span class="n">markdown</span><span class="p">),</span>
-    <span class="p">(</span><span class="s1">&#39;txt&#39;</span><span class="p">,):</span> <span class="n">minimal_style</span><span class="p">(</span><span class="n">code</span><span class="p">)}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Docs</span><span class="p">(</span><span class="n">NbConvertApp</span><span class="p">):</span>    
-    <span class="n">loaders</span> <span class="o">=</span> <span class="n">Any</span><span class="p">(</span>
-        <span class="n">default_value</span><span class="o">=</span><span class="n">rules</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;&quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">post</span> <span class="o">=</span> <span class="n">Any</span><span class="p">(</span><span class="n">default_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">report</span> <span class="o">=</span> <span class="n">Any</span><span class="p">(</span><span class="n">default_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">convert_single_notebook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notebook_filename</span><span class="p">,</span> <span class="n">input_buffer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>    
-        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">notebook_filename</span><span class="p">)</span>
-        <span class="n">exporter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exporter</span>
-        <span class="k">for</span> <span class="n">exts</span><span class="p">,</span> <span class="n">callable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">loaders</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="ow">in</span> <span class="n">exts</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">exporter</span> <span class="o">=</span> <span class="n">FuncExporter</span><span class="p">(</span><span class="n">callable</span><span class="o">=</span><span class="n">callable</span><span class="p">)</span>
-                <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">convert_single_notebook</span><span class="p">(</span><span class="n">notebook_filename</span><span class="p">,</span> <span class="n">input_buffer</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">exporter</span> <span class="o">=</span> <span class="n">exporter</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> was not converted; there is no rule for the </span><span class="si">{}</span><span class="s2"> suffix.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span><span class="p">))</span>
-            
-    <span class="k">def</span> <span class="nf">convert_notebooks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">convert_notebooks</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span> <span class="ow">and</span> <span class="p">[</span>
-            <span class="n">name</span> <span class="ow">and</span> <span class="n">NbConvertApp</span><span class="o">.</span><span class="n">convert_single_notebook</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="n">writes</span><span class="p">(</span><span class="n">nb</span><span class="p">)))</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">nb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">report</span><span class="p">()]</span>
-   
-    <span class="k">def</span> <span class="nf">init_single_notebook_resources</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notebook_filename</span><span class="p">):</span>
-        <span class="n">resources</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">init_single_notebook_resources</span><span class="p">(</span><span class="n">notebook_filename</span><span class="p">)</span>
-        <span class="n">resources</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">resources</span><span class="p">[</span><span class="s1">&#39;unique_key&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">notebook_filename</span>
-        <span class="k">return</span> <span class="n">resources</span>    
-     
-    <span class="k">def</span> <span class="nf">init_writer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
-        <span class="bp">self</span><span class="o">.</span><span class="n">writer</span> <span class="o">=</span> <span class="n">FilesWriter</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
-        
-    <span class="k">def</span> <span class="nf">init_postprocessor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">postprocessor</span> <span class="o">=</span> <span class="n">PostProcess</span><span class="p">(</span><span class="n">callable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>  <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">init_postprocessor</span><span class="p">()</span>
-        
-<span class="n">main</span> <span class="o">=</span> <span class="n">launch_new_instance</span> <span class="o">=</span> <span class="n">Docs</span><span class="o">.</span><span class="n">launch_instance</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">_index</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">notebook_name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">bs4</span> <span class="k">import</span> <span class="n">BeautifulSoup</span>
-        <span class="n">html</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>    
-        <span class="n">location</span> <span class="o">=</span> <span class="n">notebook_name</span><span class="o">+</span><span class="n">resources</span><span class="p">[</span><span class="s1">&#39;output_extension&#39;</span><span class="p">]</span>
-        <span class="n">data</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">markdown</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;[&lt;small&gt;</span><span class="si">{}</span><span class="s2">&lt;/small&gt;](</span><span class="si">{}</span><span class="s2">)&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resources</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">location</span><span class="p">)))</span>
-        <span class="n">data</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">markdown</span><span class="p">(</span>
-            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="sd">&quot;&quot;&quot;{} [{}]({}#{})\n&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="o">*</span><span class="nb">int</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span><span class="n">h</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">location</span><span class="p">,</span> <span class="n">h</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span> 
-                <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">html</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;h1,h2&#39;</span><span class="p">))))</span>
-        <span class="n">data</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">source</span> <span class="o">+=</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\n</span><span class="s2">---</span><span class="se">\n\n</span><span class="s2">&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">_index</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
 </div>
     </div>
   </div>
