@@ -11789,7 +11789,7 @@ div#notebook {
 <li><code>nbconvert</code> doesn't accept all file formats.  <code>nbd</code> adds the concept of loaders
 that transform arbitrary files to the nbformat.</li>
 </ul>
-<h2 id="Example-Configuration">Example Configuration<a class="anchor-link" href="#Example-Configuration">&#182;</a></h2><div class="highlight"><pre><span></span><span class="o">%%</span><span class="nb">file</span> <span class="n">demo</span><span class="o">.</span><span class="n">py</span>
+<h2 id="An-Example-Configuration">An Example Configuration<a class="anchor-link" href="#An-Example-Configuration">&#182;</a></h2><h3 id="1.-Execute-from-the-application">1. Execute from the application<a class="anchor-link" href="#1.-Execute-from-the-application">&#182;</a></h3><div class="highlight"><pre><span></span><span class="o">%%</span><span class="nb">file</span> <span class="n">demo</span><span class="o">.</span><span class="n">py</span>
 <span class="kn">from</span> <span class="nn">nbd</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">notebook</span><span class="p">()</span>
@@ -11808,15 +11808,14 @@ that transform arbitrary files to the nbformat.</li>
 <pre><code>Overwriting demo.py
 
 
-
 </code></pre>
-<div class="highlight"><pre><span></span><span class="err">!</span><span class="n">jupyter</span> <span class="n">nbd</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">dir</span> <span class="n">docs</span><span class="o">/</span><span class="n">demo</span> <span class="o">--</span><span class="n">config</span> <span class="n">demo</span><span class="o">.</span><span class="n">py</span>
+<h3 id="2.-Execute-from-the-application">2. Execute from the application<a class="anchor-link" href="#2.-Execute-from-the-application">&#182;</a></h3><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">jupyter</span> <span class="n">nbd</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">dir</span> <span class="n">docs</span><span class="o">/</span><span class="n">demo</span> <span class="o">--</span><span class="n">config</span> <span class="n">demo</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 
 <pre><code>[Docs] Converting notebook nbd.ipynb to html
 [Docs] Writing 274530 bytes to docs/demo/nbd.ipynb.html
 [Docs] Converting notebook readme.md to html
-[Docs] Writing 256824 bytes to docs/demo/readme.md.html
+[Docs] Writing 257958 bytes to docs/demo/readme.md.html
 [Docs] Converting notebook nbd.py to html
 [Docs] Writing 272320 bytes to docs/demo/nbd.py.html
 [Docs] Converting notebook into html
@@ -11838,46 +11837,6 @@ that transform arbitrary files to the nbformat.</li>
 <span class="err">!</span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">bootswatch</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">readable</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">css</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">check</span><span class="o">-</span><span class="n">certificate</span>
 <span class="err">!</span><span class="n">mv</span> <span class="n">bootstrap</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">css</span> <span class="n">docs</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
 </pre></div>
-
-<pre><code>[NbConvertApp] Converting notebook config.ipynb to python
-[NbConvertApp] Writing 1376 bytes to ./config.py
-[NbConvertApp] Converting notebook nbd.ipynb to python
-[NbConvertApp] Writing 4789 bytes to ./nbd.py
-parsing nbd.py...
-[NbConvertApp] Converting notebook readme.ipynb to markdown
-[NbConvertApp] Writing 2186 bytes to readme.md
-[Docs] Converting notebook nbd.ipynb to html
-[Docs] Writing 274530 bytes to docs/nbd.ipynb.html
-[Docs] Converting notebook config.ipynb to html
-[Docs] Writing 257051 bytes to docs/config.ipynb.html
-[Docs] Converting notebook config.py to html
-[Docs] Writing 254521 bytes to docs/config.py.html
-[Docs] Converting notebook template.ipynb to html
-[Docs] Writing 250260 bytes to docs/template.ipynb.html
-[Docs] Converting notebook readme.md to html
-[Docs] Writing 257596 bytes to docs/readme.md.html
-[Docs] Converting notebook flake8.txt to html
-[Docs] Writing 261700 bytes to docs/flake8.txt.html
-[Docs] Converting notebook into html
-[Docs] Writing 256612 bytes to docs/index.html
-[Docs] Converting notebook into html
-[Docs] Writing 249084 bytes to docs/schema.html
---2017-09-10 10:29:40--  https://bootswatch.com/readable/bootstrap.min.css
-Resolving bootswatch.com (bootswatch.com)... 104.28.7.66, 104.28.6.66, 2400:cb00:2048:1::681c:742, ...
-Connecting to bootswatch.com (bootswatch.com)|104.28.7.66|:443... connected.
-WARNING: cannot verify bootswatch.com's certificate, issued by ‘CN=COMODO ECC Domain Validation Secure Server CA 2,O=COMODO CA Limited,L=Salford,ST=Greater Manchester,C=GB’:
-  Unable to locally verify the issuer's authority.
-HTTP request sent, awaiting response... 200 OK
-Length: unspecified [text/css]
-Saving to: ‘bootstrap.min.css’
-
-bootstrap.min.css       [ &lt;=&gt;                ] 121.62K  --.-KB/s    in 0.06s   
-
-2017-09-10 10:29:40 (2.11 MB/s) - ‘bootstrap.min.css’ saved [124537]
-
-
-
-</code></pre>
 <h2 id="Views">Views<a class="anchor-link" href="#Views">&#182;</a></h2><h3 id="HTML-Views">HTML Views<a class="anchor-link" href="#HTML-Views">&#182;</a></h3><ul>
 <li><a href="https://rawgit.com/tonyfast/nbd/master/docs/index.html">Raw Git</a></li>
 <li><a href="https://tonyfast.github.io/nbd">Github Pages</a></li>
