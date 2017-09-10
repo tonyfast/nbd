@@ -135,7 +135,7 @@ main = launch_new_instance = Docs.launch_instance
 # In[2]:
 
 
-def index(data):
+def index(data, selector='h1,h2'):
     def _index(html, resources, notebook_name):
         """"""
         from bs4 import BeautifulSoup
@@ -145,7 +145,7 @@ def index(data):
         data.cells.append(markdown(
             "\n".join(
                 """{} [{}]({}#{})\n""".format('#'*int(h.name[-1]),h.text, location, h.attrs['id']) 
-                for h in html.select('h1,h2,h3'))))
+                for h in html.select(selector))))
         data.cells[-1].source +="""\n---\n\n"""
     return _index
 

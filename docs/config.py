@@ -63,7 +63,7 @@ from nbd import index
 c.FilesWriter.build_directory = 'docs'
 c.Docs.update(
     report=report,
-    post=index(data),
+    post=index(data, "h1,h2"),
     notebooks=[
         'nbd.ipynb',
         'config.ipynb',
