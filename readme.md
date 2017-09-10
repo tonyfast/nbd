@@ -41,9 +41,9 @@ c.Docs.post, c.Docs.report = index, report
 
     [Docs] WARNING | pattern 'config.py' matched no files
     [Docs] Converting notebook nbd.ipynb to html
-    [Docs] Writing 274199 bytes to docs/demo/nbd.ipynb.html
+    [Docs] Writing 274307 bytes to docs/demo/nbd.ipynb.html
     [Docs] Converting notebook readme.md to html
-    [Docs] Writing 257704 bytes to docs/demo/readme.md.html
+    [Docs] Writing 256784 bytes to docs/demo/readme.md.html
     [Docs] Converting notebook into html
     [Docs] Writing 249227 bytes to docs/demo/index.html
 
@@ -63,14 +63,8 @@ c.Docs.post, c.Docs.report = index, report
 !jupyter nbconvert --to markdown readme.ipynb
 !jupyter nbd --config config.py
 !mv classes_nbd.png config.py flake8.txt docs
+!touch docs/custom.css
 ```
-
-    [NbConvertApp] Converting notebook config.ipynb to python
-    [NbConvertApp] Writing 1390 bytes to ./config.py
-    [NbConvertApp] Converting notebook nbd.ipynb to python
-    [NbConvertApp] Writing 4760 bytes to ./nbd.py
-    parsing nbd.py...
-
 
 ## Views
 ### HTML Views

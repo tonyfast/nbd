@@ -7,21 +7,21 @@
 # * Callable postprocessor
 # * Nested file writer
 
-# In[1]:
+# In[110]:
 
 
-from nbformat.v4 import new_code_cell as code, new_markdown_cell as markdown, new_notebook as notebook, new_raw_cell as raw, new_output as output
-from nbformat import reads, io, writes
+from nbformat.v4 import new_code_cell, new_markdown_cell, new_notebook, new_raw_cell
+import nbformat
 from traitlets import Any
 from nbconvert.nbconvertapp import NbConvertApp
 from nbconvert.exporters import html
 from nbconvert import writers, postprocessors
 from pathlib2 import Path
 
-__all__ = 'markdown', 'notebook', 'code', 'raw', 'output', 'reads'
+__all__ = 'main', 'launch_new_instance'
 
 
-# In[2]:
+# In[108]:
 
 
 class PostProcess(postprocessors.PostProcessorBase):
@@ -31,7 +31,7 @@ class PostProcess(postprocessors.PostProcessorBase):
         self.callable(html, resources, notebook_name)
 
 
-# In[3]:
+# In[106]:
 
 
 class FilesWriter(writers.FilesWriter):
@@ -47,54 +47,52 @@ class FilesWriter(writers.FilesWriter):
 FilesWriter.build_directory.default_value = 'docs'
 
 
-# In[4]:
+# In[102]:
 
 
-def identity(path, resources=None, **kw):
+def notebook(path, resources=None, **kw):
     """callable to export ipynb files"""
-    return reads(path.read_text(), 4), resources
+    return nbformat.reads(path.read_text(), 4), resources
 
 
 # __`FuncExporter`__ is a flexible `nbconvert` exporter. It calls a function that returns
 # a new `nbformat.NotebookNode` object and a resources dictionary.  This exporter is called
 # with the `Docs` `NbConvertApp` app.
 
-# In[5]:
+# In[101]:
 
 
 class FuncExporter(html.HTMLExporter):
-    callable = Any(identity)
+    callable = Any(notebook)
     def from_filename(self, file_name, resources=None, **kw):
         html, resources = self.from_notebook_node(
             *self.callable(Path(file_name), resources, **kw), **kw)
         return html, resources
 
 
-# In[6]:
+# In[103]:
 
 
-def minimal_style(callable):
+def minimal_style(new):
     """A minimal style wrapper other file types"""
     def _return_nb(path, resources=None, **kw):
-        return notebook(cells=[
-            markdown("""# [{}]({})""".format(
-                str(path), str(path)+'.html')),
-            callable(path.read_text())
-        ]), resources
+        return new_notebook(cells=[
+            nbformat.v4.new_markdown_cell("""# [{0}]({0})""".format(str(path))),
+            new(path.read_text())]), resources
     return _return_nb
 
 
-# In[7]:
+# In[107]:
 
 
 rules = {
-    ('ipynb',): identity,
-    ('py', 'pyi'): minimal_style(code),
-    ('md', 'markdown'): minimal_style(markdown),
-    ('txt',): minimal_style(code)}
+    ('ipynb',): notebook,
+    ('py', 'pyi'): minimal_style(new_code_cell),
+    ('md', 'markdown'): minimal_style(new_markdown_cell),
+    ('txt',): minimal_style(new_code_cell)}
 
 
-# In[8]:
+# In[105]:
 
 
 class Docs(NbConvertApp):    
@@ -117,7 +115,7 @@ class Docs(NbConvertApp):
     def convert_notebooks(self):
         super().convert_notebooks() or self.report and [
             name and NbConvertApp.convert_single_notebook(
-                    self, name, io.StringIO(writes(nb))) for name, nb in self.report()]
+                    self, name, nbformat.io.StringIO(nbformat.writes(nb))) for name, nb in self.report()]
    
     def init_single_notebook_resources(self, notebook_filename):
         resources = super().init_single_notebook_resources(notebook_filename)
@@ -134,20 +132,20 @@ class Docs(NbConvertApp):
 main = launch_new_instance = Docs.launch_instance
 
 
-# In[9]:
+# In[2]:
 
 
-def index(data, selector='h1,h2'):
+def basic_index(data):
     def _index(html, resources, notebook_name):
         """"""
         from bs4 import BeautifulSoup
         html = BeautifulSoup(html, 'html.parser')    
         location = notebook_name+resources['output_extension']
-        data.cells.append(markdown("""[<small>{}</small>]({})""".format(resources['name'], location)))
-        data.cells.append(markdown(
+        data.cells.append(new_markdown_cell("""[<small>{}</small>]({})""".format(resources['name'], location)))
+        data.cells.append(new_markdown_cell(
             "\n".join(
                 """{} [{}]({}#{})\n""".format('#'*int(h.name[-1]),h.text, location, h.attrs['id']) 
-                for h in html.select(selector))))
+                for h in html.select('h1,h2'))))
         data.cells[-1].source +="""\n---\n\n"""
     return _index
 
