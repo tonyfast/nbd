@@ -145,7 +145,7 @@ def index(data):
         data.cells.append(markdown(
             "\n".join(
                 """{} [{}]({}#{})\n""".format('#'*int(h.name[-1]),h.text, location, h.attrs['id']) 
-                for h in html.select('h1,h2'))))
+                for h in html.select('h1,h2,h3'))))
         data.cells[-1].source +="""\n---\n\n"""
     return _index
 

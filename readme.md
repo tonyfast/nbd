@@ -49,6 +49,11 @@ c.Docs.post, c.Docs.report = index, report
     [Docs] Writing 249275 bytes to docs/demo/index.html
 
 
+## Motivation
+
+* An Ipython backed make configuration system
+* It works for every file
+
 ## Developer
 
 
@@ -58,38 +63,35 @@ c.Docs.post, c.Docs.report = index, report
 !pyreverse -o png -p nbd nbd.py
 !jupyter nbconvert --to markdown readme.ipynb
 !jupyter nbd --config config.py
+!mv classes_nbd.png config.py flake8.txt docs
 ```
 
     [NbConvertApp] Converting notebook config.ipynb to python
-    [NbConvertApp] Writing 1345 bytes to ./config.py
+    [NbConvertApp] Writing 1381 bytes to ./config.py
     [NbConvertApp] Converting notebook nbd.ipynb to python
     [NbConvertApp] Writing 4741 bytes to ./nbd.py
     parsing nbd.py...
     [NbConvertApp] Converting notebook readme.ipynb to markdown
-    [NbConvertApp] Writing 1970 bytes to readme.md
+    [NbConvertApp] Writing 3265 bytes to readme.md
     [Docs] Converting notebook nbd.ipynb to html
     [Docs] Writing 274196 bytes to docs/nbd.ipynb.html
     [Docs] Converting notebook config.ipynb to html
-    [Docs] Writing 256830 bytes to docs/config.ipynb.html
+    [Docs] Writing 258717 bytes to docs/config.ipynb.html
     [Docs] Converting notebook config.py to html
-    [Docs] Writing 254290 bytes to docs/config.py.html
+    [Docs] Writing 254485 bytes to docs/config.py.html
     [Docs] Converting notebook template.ipynb to html
     [Docs] Writing 249736 bytes to docs/template.ipynb.html
     [Docs] Converting notebook readme.md to html
-    [Docs] Writing 256148 bytes to docs/readme.md.html
+    [Docs] Writing 257704 bytes to docs/readme.md.html
     [Docs] Converting notebook flake8.txt to html
-    [Docs] Writing 381045 bytes to docs/flake8.txt.html
+    [Docs] Writing 261694 bytes to docs/flake8.txt.html
     [Docs] Converting notebook into html
-    [Docs] Writing 250043 bytes to docs/index.html
+    [Docs] Writing 255721 bytes to docs/index.html
     [Docs] Converting notebook into html
     [Docs] Writing 249084 bytes to docs/schema.html
 
 
-## Motivation
-
-* An Ipython backed make configuration system
-* It works for every file
-
+## Visews
 ### HTML Views
 
 * [Raw Git](https://rawgit.com/tonyfast/nbd/master/docs/index.html)

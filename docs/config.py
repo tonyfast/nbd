@@ -56,17 +56,24 @@ def report():
 
 # ## A simple index.
 
-# In[ ]:
+# In[8]:
 
 
 from nbd import index
 c.FilesWriter.build_directory = 'docs'
 c.Docs.update(
     report=report,
+    post=index(data),
     notebooks=[
         'nbd.ipynb',
         'config.ipynb',
         'config.py',
         'template.ipynb',
         'readme.md', 'flake8.txt'])
+
+
+# In[ ]:
+
+
+
 

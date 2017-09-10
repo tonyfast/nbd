@@ -11789,56 +11789,80 @@ div#notebook {
 <li><code>nbconvert</code> doesn't accept all file formats.  <code>nbd</code> adds the concept of loaders
 that transform arbitrary files to the nbformat.</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nbd</span> <span class="kn">import</span> <span class="o">*</span>
-</pre></div>
-<div class="highlight"><pre><span></span><span class="err">!</span><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">docs</span><span class="o">/**.</span><span class="n">html</span>
-<span class="err">!</span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">python</span> <span class="n">config</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">nbd</span><span class="o">.</span><span class="n">ipynb</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">dir</span> <span class="o">.</span>
-<span class="err">!</span><span class="n">flake8</span> <span class="n">nbd</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">file</span><span class="o">=</span><span class="n">flake8</span><span class="o">.</span><span class="n">txt</span>
-<span class="err">!</span><span class="n">pyreverse</span> <span class="o">-</span><span class="n">o</span> <span class="n">png</span> <span class="o">-</span><span class="n">p</span> <span class="n">nbd</span> <span class="n">nbd</span><span class="o">.</span><span class="n">py</span>
-<span class="err">!</span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">markdown</span> <span class="n">readme</span><span class="o">.</span><span class="n">ipynb</span>
-<span class="err">!</span><span class="n">jupyter</span> <span class="n">nbd</span> <span class="o">--</span><span class="n">config</span> <span class="n">config</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight"><pre><span></span><span class="o">%%</span><span class="nb">file</span> <span class="n">demo</span><span class="o">.</span><span class="n">py</span>
+<span class="kn">from</span> <span class="nn">nbd</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">notebook</span><span class="p">()</span>
+<span class="n">data</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">markdown</span><span class="p">(</span><span class="s1">&#39;# My Demo Page</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="n">resources</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">source</span> <span class="o">+=</span> <span class="s1">&#39;* [{}]({})</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">name</span><span class="o">+</span><span class="n">resources</span><span class="p">[</span><span class="s1">&#39;output_extension&#39;</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">report</span><span class="p">():</span>
+    <span class="k">yield</span> <span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="n">data</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">Docs</span><span class="o">.</span><span class="n">notebooks</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nbd.ipynb&#39;</span><span class="p">,</span> <span class="s1">&#39;readme.md&#39;</span><span class="p">,</span> <span class="s1">&#39;config.py&#39;</span><span class="p">]</span>
+<span class="n">c</span><span class="o">.</span><span class="n">Docs</span><span class="o">.</span><span class="n">post</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">Docs</span><span class="o">.</span><span class="n">report</span> <span class="o">=</span> <span class="n">index</span><span class="p">,</span> <span class="n">report</span>
 </pre></div>
 
-<pre><code>[NbConvertApp] Converting notebook config.ipynb to python
-[NbConvertApp] Writing 1345 bytes to ./config.py
-[NbConvertApp] Converting notebook nbd.ipynb to python
-[NbConvertApp] Writing 4751 bytes to ./nbd.py
-parsing nbd.py...
-[NbConvertApp] Converting notebook readme.ipynb to markdown
-[NbConvertApp] Writing 3674 bytes to readme.md
-[Docs] Converting notebook nbd.ipynb to html
-[Docs] Writing 274252 bytes to docs/nbd.ipynb.html
-[Docs] Converting notebook config.ipynb to html
-[Docs] Writing 256830 bytes to docs/config.ipynb.html
-[Docs] Converting notebook config.py to html
-[Docs] Writing 254290 bytes to docs/config.py.html
-[Docs] Converting notebook template.ipynb to html
-[Docs] Writing 249736 bytes to docs/template.ipynb.html
+<pre><code>Overwriting demo.py
+
+
+
+</code></pre>
+<div class="highlight"><pre><span></span><span class="err">!</span><span class="n">jupyter</span> <span class="n">nbd</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">dir</span> <span class="n">docs</span><span class="o">/</span><span class="n">demo</span> <span class="o">--</span><span class="n">config</span> <span class="n">demo</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+<pre><code>[Docs] Converting notebook nbd.ipynb to html
+[Docs] Writing 274196 bytes to docs/demo/nbd.ipynb.html
 [Docs] Converting notebook readme.md to html
-[Docs] Writing 255292 bytes to docs/readme.md.html
-[Docs] Converting notebook flake8.txt to html
-[Docs] Writing 356503 bytes to docs/flake8.txt.html
-Traceback (most recent call last):
-  File "/Users/tonyfast/anaconda/bin/jupyter-nbd", line 11, in &lt;module&gt;
-    load_entry_point('nbd', 'console_scripts', 'jupyter-nbd')()
-  File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/jupyter_core/application.py", line 267, in launch_instance
-    return super(JupyterApp, cls).launch_instance(argv=argv, **kwargs)
-  File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/traitlets/config/application.py", line 658, in launch_instance
-    app.start()
-  File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/nbconvert/nbconvertapp.py", line 313, in start
-    self.convert_notebooks()
-  File "/Users/tonyfast/nbd/nbd.py", line 118, in convert_notebooks
-    self, name, nbformat.io.StringIO(nbformat.writes(nb))) for name, nb in self.report()]
-  File "/Users/tonyfast/nbd/nbd.py", line 118, in &lt;listcomp&gt;
-    self, name, nbformat.io.StringIO(nbformat.writes(nb))) for name, nb in self.report()]
-NameError: name 'nbformat' is not defined
+[Docs] Writing 254809 bytes to docs/demo/readme.md.html
+[Docs] Converting notebook config.py to html
+[Docs] Writing 254290 bytes to docs/demo/config.py.html
+[Docs] Converting notebook into html
+[Docs] Writing 249275 bytes to docs/demo/index.html
 
 
 </code></pre>
 <h2 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">&#182;</a></h2><ul>
 <li>An Ipython backed make configuration system</li>
+<li>It works for every file</li>
 </ul>
-<h3 id="HTML-Views">HTML Views<a class="anchor-link" href="#HTML-Views">&#182;</a></h3><ul>
+<h2 id="Developer">Developer<a class="anchor-link" href="#Developer">&#182;</a></h2><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">python</span> <span class="n">config</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">nbd</span><span class="o">.</span><span class="n">ipynb</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">dir</span> <span class="o">.</span>
+<span class="err">!</span><span class="n">flake8</span> <span class="n">nbd</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">file</span><span class="o">=</span><span class="n">flake8</span><span class="o">.</span><span class="n">txt</span>
+<span class="err">!</span><span class="n">pyreverse</span> <span class="o">-</span><span class="n">o</span> <span class="n">png</span> <span class="o">-</span><span class="n">p</span> <span class="n">nbd</span> <span class="n">nbd</span><span class="o">.</span><span class="n">py</span>
+<span class="err">!</span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">markdown</span> <span class="n">readme</span><span class="o">.</span><span class="n">ipynb</span>
+<span class="err">!</span><span class="n">jupyter</span> <span class="n">nbd</span> <span class="o">--</span><span class="n">config</span> <span class="n">config</span><span class="o">.</span><span class="n">py</span>
+<span class="err">!</span><span class="n">mv</span> <span class="n">classes_nbd</span><span class="o">.</span><span class="n">png</span> <span class="n">config</span><span class="o">.</span><span class="n">py</span> <span class="n">flake8</span><span class="o">.</span><span class="n">txt</span> <span class="n">docs</span>
+</pre></div>
+
+<pre><code>[NbConvertApp] Converting notebook config.ipynb to python
+[NbConvertApp] Writing 1381 bytes to ./config.py
+[NbConvertApp] Converting notebook nbd.ipynb to python
+[NbConvertApp] Writing 4741 bytes to ./nbd.py
+parsing nbd.py...
+[NbConvertApp] Converting notebook readme.ipynb to markdown
+[NbConvertApp] Writing 3265 bytes to readme.md
+[Docs] Converting notebook nbd.ipynb to html
+[Docs] Writing 274196 bytes to docs/nbd.ipynb.html
+[Docs] Converting notebook config.ipynb to html
+[Docs] Writing 258717 bytes to docs/config.ipynb.html
+[Docs] Converting notebook config.py to html
+[Docs] Writing 254485 bytes to docs/config.py.html
+[Docs] Converting notebook template.ipynb to html
+[Docs] Writing 249736 bytes to docs/template.ipynb.html
+[Docs] Converting notebook readme.md to html
+[Docs] Writing 257704 bytes to docs/readme.md.html
+[Docs] Converting notebook flake8.txt to html
+[Docs] Writing 261694 bytes to docs/flake8.txt.html
+[Docs] Converting notebook into html
+[Docs] Writing 255721 bytes to docs/index.html
+[Docs] Converting notebook into html
+[Docs] Writing 249084 bytes to docs/schema.html
+
+
+</code></pre>
+<h2 id="Visews">Visews<a class="anchor-link" href="#Visews">&#182;</a></h2><h3 id="HTML-Views">HTML Views<a class="anchor-link" href="#HTML-Views">&#182;</a></h3><ul>
 <li><a href="https://rawgit.com/tonyfast/nbd/master/docs/index.html">Raw Git</a></li>
 <li><a href="https://tonyfast.github.io/nbd">Github Pages</a></li>
 </ul>

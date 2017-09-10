@@ -11841,19 +11841,23 @@ div#notebook {
 
 <span class="c1"># ## A simple index.</span>
 
-<span class="c1"># In[ ]:</span>
+<span class="c1"># In[8]:</span>
 
 
 <span class="kn">from</span> <span class="nn">nbd</span> <span class="k">import</span> <span class="n">index</span>
 <span class="n">c</span><span class="o">.</span><span class="n">FilesWriter</span><span class="o">.</span><span class="n">build_directory</span> <span class="o">=</span> <span class="s1">&#39;docs&#39;</span>
 <span class="n">c</span><span class="o">.</span><span class="n">Docs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
     <span class="n">report</span><span class="o">=</span><span class="n">report</span><span class="p">,</span>
+    <span class="n">post</span><span class="o">=</span><span class="n">index</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
     <span class="n">notebooks</span><span class="o">=</span><span class="p">[</span>
         <span class="s1">&#39;nbd.ipynb&#39;</span><span class="p">,</span>
         <span class="s1">&#39;config.ipynb&#39;</span><span class="p">,</span>
         <span class="s1">&#39;config.py&#39;</span><span class="p">,</span>
         <span class="s1">&#39;template.ipynb&#39;</span><span class="p">,</span>
         <span class="s1">&#39;readme.md&#39;</span><span class="p">,</span> <span class="s1">&#39;flake8.txt&#39;</span><span class="p">])</span>
+
+
+<span class="c1"># In[ ]:</span>
 </pre></div>
 
 </div>
