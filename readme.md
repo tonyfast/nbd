@@ -1,89 +1,31 @@
 
-# `nbd`ocumentation 
+# It's `no big deal`, it just works.
 
-[<big>NBD</big>](https://github.com/tonyfast/nbd) creates static documentation for Jupyter noteb👀ks. 
+Configurable static documentation based on [`nbformat`]().
 
-> Create documentation from a full featured python script using the nbconvert configuration system.
+### Get it from Github
 
-Below is a sample configuration file to create an index file.
+`pip install git+`<code><a href="https://github.com/tonyfast/nbd/">https://github.com/tonyfast/nbd/</a></code>
+
+
+## Configuring you documentation
+
+Use any tool you like.
 
 
 ```python
-%%file nbd_config.py
-from nbd import ReduceExport
-from nbconvert.exporters.html import HTMLExporter 
-from nbformat.v4 import new_markdown_cell
-
-c.NbConvertApp.notebooks = ['nbd.ipynb', 'readme.ipynb', 'nbd.py']
-c.TemplateExporter.template_path = ['templates']
-c.FilesWriter.build_directory = 'docs'
-
-# shit = HTMLExporter(config=c).environment.get_template('shit')
-
-class SoupyIndex(ReduceExport):
-    def add_entry(self, item, resources):
-        return """{header} [{title}]({href})\n""".format(
-            header='#'*(int(item.name[-1]) + 3),
-            title=item.text,
-            href='/'.join([
-                resources.get('name')+resources.get('output_extension')
-            ])+'#'+str(item.attrs['id']))
-    
-    def from_render(self, output, resources, **kw):
-        from bs4 import BeautifulSoup
-        soup = BeautifulSoup(output, 'html.parser')
-        self.nb.cells.append(new_markdown_cell(
-"""---
-
-> {}
-
-""".format(resources['name'])
-        ))
-        
-        self.nb.cells.append(
-            new_markdown_cell('\n'.join([
-                self.add_entry(item, resources)
-                for item in soup.select('h1,h2,h3')])))
-        
-        return output, resources
-c.StaticExporter.post_render = [SoupyIndex(filename='index')]
+!rm -rf docs/**.htl
+!jupyter nbconvert --to python config.ipynb nbd.ipynb --output-dir .
+!flake8 nbd.py --output-file=flake8.txt
+!pyreverse -o png -p nbd nbd.py
+!jupyter nbconvert --to markdown readme.ipynb
+!jupyter nbd --config config.py
+!mv classes_nbd.png nbd.py config.py flake8.txt docs
 ```
 
-    Overwriting nbd_config.py
+## Motivation
 
-
-
-```bash
-%%bash
-rm -rf docs
-mkdir docs
-jupyter nbconvert --to python nbd.ipynb
-jupyter nbconvert --to markdown readme.ipynb
-jupyter nbd --config nbd_config.py
-cp custom.css docs/
-ls docs/
-```
-
-    custom.css
-    index.html
-    nbd.ipynb.html
-    nbd.py.html
-    readme.ipynb.html
-
-
-    [NbConvertApp] Converting notebook nbd.ipynb to python
-    [NbConvertApp] Writing 3882 bytes to nbd.py
-    [NbConvertApp] Converting notebook readme.ipynb to markdown
-    [NbConvertApp] Writing 2658 bytes to readme.md
-    [NbdApp] Converting notebook nbd.ipynb to nbd.StaticExporter
-    [NbdApp] Writing 268928 bytes to docs/nbd.ipynb.html
-    [NbdApp] Converting notebook readme.ipynb to nbd.StaticExporter
-    [NbdApp] Writing 253742 bytes to docs/readme.ipynb.html
-    [NbdApp] Converting notebook nbd.py to nbd.StaticExporter
-    [NbdApp] Writing 267057 bytes to docs/nbd.py.html
-    [NbdApp] Converting notebook into nbd.StaticExporter
-    [NbdApp] Writing 249919 bytes to docs/index.html
-
+* An Ipython backed make configuration system
 
 ### HTML Views
 
@@ -94,3 +36,8 @@ ls docs/
 
 * [nbviewer](http://nbviewer.jupyter.org/github/tonyfast/nbd/blob/master/readme.ipynb)
 * [github](https://github.com/tonyfast/nbd/blob/master/usage/readme.ipynb)
+
+
+```python
+
+```
