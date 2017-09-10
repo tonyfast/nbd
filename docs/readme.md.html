@@ -11784,7 +11784,7 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="It's-no-big-deal,-it-just-works.">It's <code>no big deal</code>, it just works.<a class="anchor-link" href="#It's-no-big-deal,-it-just-works.">&#182;</a></h1><p>Documentation ∀ files; based on the <a href="nbformat.readthedocs.io"><code>nbformat</code></a>.</p>
-<h3 id="Install-with-version-control">Install with version control<a class="anchor-link" href="#Install-with-version-control">&#182;</a></h3><p><code>pip install git+</code><code><a href="https://github.com/tonyfast/nbd/">https://github.com/tonyfast/nbd/</a></code></p>
+<h4 id="Install-with-version-control">Install with version control<a class="anchor-link" href="#Install-with-version-control">&#182;</a></h4><p><code>pip install git+</code><code><a href="https://github.com/tonyfast/nbd/">https://github.com/tonyfast/nbd/</a></code></p>
 <h2 id="Why">Why<a class="anchor-link" href="#Why">&#182;</a></h2><ul>
 <li><code>nbconvert</code> doesn't accept all file formats.  <code>nbd</code> adds the concept of loaders
 that transform arbitrary files to the nbformat.</li>
@@ -11813,14 +11813,13 @@ that transform arbitrary files to the nbformat.</li>
 <div class="highlight"><pre><span></span><span class="err">!</span><span class="n">jupyter</span> <span class="n">nbd</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">dir</span> <span class="n">docs</span><span class="o">/</span><span class="n">demo</span> <span class="o">--</span><span class="n">config</span> <span class="n">demo</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 
-<pre><code>[Docs] Converting notebook nbd.ipynb to html
-[Docs] Writing 274196 bytes to docs/demo/nbd.ipynb.html
+<pre><code>[Docs] WARNING | pattern 'config.py' matched no files
+[Docs] Converting notebook nbd.ipynb to html
+[Docs] Writing 274199 bytes to docs/demo/nbd.ipynb.html
 [Docs] Converting notebook readme.md to html
-[Docs] Writing 254809 bytes to docs/demo/readme.md.html
-[Docs] Converting notebook config.py to html
-[Docs] Writing 254290 bytes to docs/demo/config.py.html
+[Docs] Writing 257704 bytes to docs/demo/readme.md.html
 [Docs] Converting notebook into html
-[Docs] Writing 249275 bytes to docs/demo/index.html
+[Docs] Writing 249227 bytes to docs/demo/index.html
 
 
 </code></pre>
@@ -11839,30 +11838,30 @@ that transform arbitrary files to the nbformat.</li>
 <pre><code>[NbConvertApp] Converting notebook config.ipynb to python
 [NbConvertApp] Writing 1381 bytes to ./config.py
 [NbConvertApp] Converting notebook nbd.ipynb to python
-[NbConvertApp] Writing 4741 bytes to ./nbd.py
+[NbConvertApp] Writing 4744 bytes to ./nbd.py
 parsing nbd.py...
 [NbConvertApp] Converting notebook readme.ipynb to markdown
-[NbConvertApp] Writing 3265 bytes to readme.md
+[NbConvertApp] Writing 3213 bytes to readme.md
 [Docs] Converting notebook nbd.ipynb to html
-[Docs] Writing 274196 bytes to docs/nbd.ipynb.html
+[Docs] Writing 274199 bytes to docs/nbd.ipynb.html
 [Docs] Converting notebook config.ipynb to html
 [Docs] Writing 258717 bytes to docs/config.ipynb.html
 [Docs] Converting notebook config.py to html
 [Docs] Writing 254485 bytes to docs/config.py.html
 [Docs] Converting notebook template.ipynb to html
-[Docs] Writing 249736 bytes to docs/template.ipynb.html
+[Docs] Writing 249824 bytes to docs/template.ipynb.html
 [Docs] Converting notebook readme.md to html
-[Docs] Writing 257704 bytes to docs/readme.md.html
+[Docs] Writing 257654 bytes to docs/readme.md.html
 [Docs] Converting notebook flake8.txt to html
 [Docs] Writing 261694 bytes to docs/flake8.txt.html
 [Docs] Converting notebook into html
-[Docs] Writing 255721 bytes to docs/index.html
+[Docs] Writing 256445 bytes to docs/index.html
 [Docs] Converting notebook into html
 [Docs] Writing 249084 bytes to docs/schema.html
 
 
 </code></pre>
-<h2 id="Visews">Visews<a class="anchor-link" href="#Visews">&#182;</a></h2><h3 id="HTML-Views">HTML Views<a class="anchor-link" href="#HTML-Views">&#182;</a></h3><ul>
+<h2 id="Views">Views<a class="anchor-link" href="#Views">&#182;</a></h2><h3 id="HTML-Views">HTML Views<a class="anchor-link" href="#HTML-Views">&#182;</a></h3><ul>
 <li><a href="https://rawgit.com/tonyfast/nbd/master/docs/index.html">Raw Git</a></li>
 <li><a href="https://tonyfast.github.io/nbd">Github Pages</a></li>
 </ul>
