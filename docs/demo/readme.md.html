@@ -11775,7 +11775,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="readme.md"><a href="readme.md">readme.md</a><a class="anchor-link" href="#readme.md">&#182;</a></h1>
+<h1 id="readme.md"><a href="readme.md.html">readme.md</a><a class="anchor-link" href="#readme.md">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -11789,7 +11789,7 @@ div#notebook {
 <li><code>nbconvert</code> doesn't accept all file formats.  <code>nbd</code> adds the concept of loaders
 that transform arbitrary files to the nbformat.</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="o">%%</span><span class="nb">file</span> <span class="n">demo</span><span class="o">.</span><span class="n">py</span>
+<h2 id="Example-Configuration">Example Configuration<a class="anchor-link" href="#Example-Configuration">&#182;</a></h2><div class="highlight"><pre><span></span><span class="o">%%</span><span class="nb">file</span> <span class="n">demo</span><span class="o">.</span><span class="n">py</span>
 <span class="kn">from</span> <span class="nn">nbd</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">notebook</span><span class="p">()</span>
@@ -11815,9 +11815,9 @@ that transform arbitrary files to the nbformat.</li>
 
 <pre><code>[Docs] WARNING | pattern 'config.py' matched no files
 [Docs] Converting notebook nbd.ipynb to html
-[Docs] Writing 274199 bytes to docs/demo/nbd.ipynb.html
+[Docs] Writing 274307 bytes to docs/demo/nbd.ipynb.html
 [Docs] Converting notebook readme.md to html
-[Docs] Writing 257704 bytes to docs/demo/readme.md.html
+[Docs] Writing 256784 bytes to docs/demo/readme.md.html
 [Docs] Converting notebook into html
 [Docs] Writing 249227 bytes to docs/demo/index.html
 
@@ -11833,16 +11833,9 @@ that transform arbitrary files to the nbformat.</li>
 <span class="err">!</span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">markdown</span> <span class="n">readme</span><span class="o">.</span><span class="n">ipynb</span>
 <span class="err">!</span><span class="n">jupyter</span> <span class="n">nbd</span> <span class="o">--</span><span class="n">config</span> <span class="n">config</span><span class="o">.</span><span class="n">py</span>
 <span class="err">!</span><span class="n">mv</span> <span class="n">classes_nbd</span><span class="o">.</span><span class="n">png</span> <span class="n">config</span><span class="o">.</span><span class="n">py</span> <span class="n">flake8</span><span class="o">.</span><span class="n">txt</span> <span class="n">docs</span>
+<span class="c1"># !wget https://bootswatch.com/readable/bootstrap.min.css --no-check-certificate</span>
+<span class="c1"># !mv bootstrap.min.css docs/custom.css</span>
 </pre></div>
-
-<pre><code>[NbConvertApp] Converting notebook config.ipynb to python
-[NbConvertApp] Writing 1390 bytes to ./config.py
-[NbConvertApp] Converting notebook nbd.ipynb to python
-[NbConvertApp] Writing 4760 bytes to ./nbd.py
-parsing nbd.py...
-
-
-</code></pre>
 <h2 id="Views">Views<a class="anchor-link" href="#Views">&#182;</a></h2><h3 id="HTML-Views">HTML Views<a class="anchor-link" href="#HTML-Views">&#182;</a></h3><ul>
 <li><a href="https://rawgit.com/tonyfast/nbd/master/docs/index.html">Raw Git</a></li>
 <li><a href="https://tonyfast.github.io/nbd">Github Pages</a></li>

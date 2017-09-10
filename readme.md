@@ -13,6 +13,8 @@ Documentation ∀ files; based on the [`nbformat`](nbformat.readthedocs.io).
 * `nbconvert` doesn't accept all file formats.  `nbd` adds the concept of loaders
 that transform arbitrary files to the nbformat.
 
+## Example Configuration
+
 
 ```python
 %%file demo.py
@@ -27,7 +29,7 @@ def index(html, resources, name):
 def report():
     yield 'index', data
     
-c.Docs.notebooks = ['nbd.ipynb', 'readme.md', 'config.py']
+c.Docs.notebooks = ['nbd.ipynb', 'readme.md', 'nbd.py']
 c.Docs.post, c.Docs.report = index, report
 ```
 
@@ -39,13 +41,14 @@ c.Docs.post, c.Docs.report = index, report
 !jupyter nbd --output-dir docs/demo --config demo.py
 ```
 
-    [Docs] WARNING | pattern 'config.py' matched no files
     [Docs] Converting notebook nbd.ipynb to html
-    [Docs] Writing 274307 bytes to docs/demo/nbd.ipynb.html
+    [Docs] Writing 274530 bytes to docs/demo/nbd.ipynb.html
     [Docs] Converting notebook readme.md to html
-    [Docs] Writing 256784 bytes to docs/demo/readme.md.html
+    [Docs] Writing 256824 bytes to docs/demo/readme.md.html
+    [Docs] Converting notebook nbd.py to html
+    [Docs] Writing 272320 bytes to docs/demo/nbd.py.html
     [Docs] Converting notebook into html
-    [Docs] Writing 249227 bytes to docs/demo/index.html
+    [Docs] Writing 249269 bytes to docs/demo/index.html
 
 
 ## Motivation
@@ -63,7 +66,8 @@ c.Docs.post, c.Docs.report = index, report
 !jupyter nbconvert --to markdown readme.ipynb
 !jupyter nbd --config config.py
 !mv classes_nbd.png config.py flake8.txt docs
-!touch docs/custom.css
+!wget https://bootswatch.com/readable/bootstrap.min.css --no-check-certificate
+!mv bootstrap.min.css docs/custom.css
 ```
 
 ## Views

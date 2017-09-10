@@ -9,5 +9,5 @@ def index(html, resources, name):
 def report():
     yield 'index', data
     
-c.Docs.notebooks = ['nbd.ipynb', 'readme.md', 'config.py']
+c.Docs.notebooks = ['nbd.ipynb', 'readme.md', 'nbd.py']
 c.Docs.post, c.Docs.report = index, report

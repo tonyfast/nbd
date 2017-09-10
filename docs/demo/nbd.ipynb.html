@@ -11794,7 +11794,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nbformat.v4</span> <span class="k">import</span> <span class="n">new_code_cell</span> <span class="k">as</span> <span class="n">code</span><span class="p">,</span> <span class="n">new_markdown_cell</span> <span class="k">as</span> <span class="n">markdown</span><span class="p">,</span> <span class="n">new_notebook</span> <span class="k">as</span> <span class="n">notebook</span><span class="p">,</span> <span class="n">new_raw_cell</span> <span class="k">as</span> <span class="n">raw</span><span class="p">,</span> <span class="n">new_output</span> <span class="k">as</span> <span class="n">output</span>
@@ -11815,7 +11815,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[108]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">PostProcess</span><span class="p">(</span><span class="n">postprocessors</span><span class="o">.</span><span class="n">PostProcessorBase</span><span class="p">):</span>
@@ -11832,7 +11832,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[106]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FilesWriter</span><span class="p">(</span><span class="n">writers</span><span class="o">.</span><span class="n">FilesWriter</span><span class="p">):</span>
@@ -11855,7 +11855,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[102]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
@@ -11881,7 +11881,7 @@ with the <code>Docs</code> <code>NbConvertApp</code> app.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[101]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">FuncExporter</span><span class="p">(</span><span class="n">html</span><span class="o">.</span><span class="n">HTMLExporter</span><span class="p">):</span>
@@ -11899,15 +11899,17 @@ with the <code>Docs</code> <code>NbConvertApp</code> app.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[103]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">minimal_style</span><span class="p">(</span><span class="n">callable</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A minimal style wrapper other file types&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">_return_nb</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">notebook</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="p">[</span>
-            <span class="n">markdown</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;# [</span><span class="si">{0}</span><span class="s2">](</span><span class="si">{0}</span><span class="s2">)&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))),</span>
-            <span class="n">callable</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">())]),</span> <span class="n">resources</span>
+            <span class="n">markdown</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;# [</span><span class="si">{}</span><span class="s2">](</span><span class="si">{}</span><span class="s2">)&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.html&#39;</span><span class="p">)),</span>
+            <span class="n">callable</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">read_text</span><span class="p">())</span>
+        <span class="p">]),</span> <span class="n">resources</span>
     <span class="k">return</span> <span class="n">_return_nb</span>
 </pre></div>
 
@@ -11918,7 +11920,7 @@ with the <code>Docs</code> <code>NbConvertApp</code> app.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">rules</span> <span class="o">=</span> <span class="p">{</span>
@@ -11935,7 +11937,7 @@ with the <code>Docs</code> <code>NbConvertApp</code> app.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Docs</span><span class="p">(</span><span class="n">NbConvertApp</span><span class="p">):</span>    
@@ -11982,7 +11984,7 @@ with the <code>Docs</code> <code>NbConvertApp</code> app.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">selector</span><span class="o">=</span><span class="s1">&#39;h1,h2&#39;</span><span class="p">):</span>
