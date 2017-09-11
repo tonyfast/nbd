@@ -46,13 +46,13 @@ c.Docs.post, c.Docs.report = index, report
 ```
 
     [Docs] Converting notebook nbd.ipynb to html
-    [Docs] Writing 274530 bytes to docs/demo/nbd.ipynb.html
+    [Docs] Writing 280752 bytes to docs/demo/nbd.ipynb.html
     [Docs] Converting notebook readme.md to html
-    [Docs] Writing 257958 bytes to docs/demo/readme.md.html
+    [Docs] Writing 257333 bytes to docs/demo/readme.md.html
     [Docs] Converting notebook nbd.py to html
-    [Docs] Writing 272320 bytes to docs/demo/nbd.py.html
+    [Docs] Writing 275782 bytes to docs/demo/nbd.py.html
     [Docs] Converting notebook into html
-    [Docs] Writing 249269 bytes to docs/demo/index.html
+    [Docs] Writing 249359 bytes to docs/demo/index.html
 
 
 ## Motivation
@@ -72,9 +72,30 @@ Configure the documentation for this project through the readme file.
 !jupyter nbconvert --to markdown readme.ipynb
 !jupyter nbd --config config.py
 !mv classes_nbd.png config.py flake8.txt docs
-!wget https://bootswatch.com/readable/bootstrap.min.css --no-check-certificate
-!mv bootstrap.min.css docs/custom.css
+# !wget https://bootswatch.com/readable/bootstrap.min.css --no-check-certificate
+# !mv bootstrap.min.css docs/custom.css
 ```
+
+    [NbConvertApp] Converting notebook config.ipynb to python
+    [NbConvertApp] Writing 1376 bytes to ./config.py
+    [NbConvertApp] Converting notebook nbd.ipynb to python
+    [NbConvertApp] Writing 6098 bytes to ./nbd.py
+    parsing nbd.py...
+    invalid syntax (<string>, line 137)
+    [NbConvertApp] Converting notebook readme.ipynb to markdown
+    [NbConvertApp] Writing 3521 bytes to readme.md
+    Traceback (most recent call last):
+      File "/Users/tonyfast/anaconda/bin/jupyter-nbd", line 11, in <module>
+        load_entry_point('nbd', 'console_scripts', 'jupyter-nbd')()
+      File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg/pkg_resources/__init__.py", line 565, in load_entry_point
+      File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg/pkg_resources/__init__.py", line 2598, in load_entry_point
+      File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg/pkg_resources/__init__.py", line 2258, in load
+      File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg/pkg_resources/__init__.py", line 2264, in resolve
+      File "/Users/tonyfast/nbd/nbd.py", line 137
+        Docs.
+            ^
+    SyntaxError: invalid syntax
+
 
 ## Views
 ### HTML Views
