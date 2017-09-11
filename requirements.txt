@@ -2,3 +2,5 @@ jupyter
 nbconvert
 pathlib2
 toolz
+pylint
+flake8
