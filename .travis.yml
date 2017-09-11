@@ -1,29 +1,19 @@
 language: python
-python:
+python: 
 - 3.5
-branches:
-  except:
-  - gh-pages
+
 install:
-- wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
-- bash miniconda.sh -b -p $HOME/miniconda
-- export PATH="$HOME/miniconda/bin:$PATH"
-- rm miniconda.sh
-- hash -r
-- conda config --set always_yes yes --set changeps1 no
-- conda config --add channels conda-forge
-- conda update -q conda
-- conda info -a
-- conda create -y -q -n convert python=$TRAVIS_PYTHON_VERSION jupyter nbconvert beautifulsoup4
-  lxml
-- source activate convert
+- pip install -r requirements.txt
+- python setup.py install
+
 script:
-- jupyter nbconvert --to markdown readme.ipynb
-- jupyter nbconvert --to python nbd.ipynb
-- python nbd.py --to . --deep --ext ipynb --name tonyfast --url https://tonyfast.com/nbd
+- ipython -c "from IPython import get_ipython;`jupyter nbconvert --to python readme.ipynb --stdout`"
+- ls **
+
 deploy:
+  local_dir: docs
   provider: pages
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
   on:
     branch: master
