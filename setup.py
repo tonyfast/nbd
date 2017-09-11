@@ -25,7 +25,7 @@ setuptools.setup(
         "Topic :: Software Development :: Documentation",
     ],
     install_requires=[
-        'nbconvert', 'entrypoints', 'beautifulsoup4', 'pathlib2'
+        'nbconvert', 'entrypoints', 'pathlib2'
     ], 
     tests_require=[],
     entry_points={

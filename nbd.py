@@ -1,119 +1,28 @@
 
 # coding: utf-8
 
-# # `Docs` built on `nbconvert`
+# The main source for the `nbd` jupyter application and its notebook creation tools.  The nbformat namespace was renamed to simplify the creation of new notebooks.  When someone is using `nbd` they should expect to make one python configuration file that is executed from the command line with 
+# 
+#         jupyter nbd --config config.py
 
-# * Callable exporter 
-# * Callable postprocessor
-# * Nested file writer
+# In[19]:
 
-# In[1]:
-
-
-from nbformat.v4 import new_code_cell as code, new_markdown_cell as markdown, new_notebook as notebook, new_raw_cell as raw, new_output as output
-from nbformat import reads, io, writes
-from traitlets import Any
-from nbconvert.nbconvertapp import NbConvertApp
-from nbconvert.exporters import html
-from nbconvert import writers, postprocessors
-from pathlib2 import Path
 
 __all__ = 'markdown', 'notebook', 'code', 'raw', 'output', 'reads'
 
 
-# In[2]:
+# In[20]:
 
 
-class PostProcess(postprocessors.PostProcessorBase):
-    callable = Any().tag(config=True)    
-    def postprocess(self, write_result):
-        html, resources, notebook_name = write_result
-        self.callable(html, resources, notebook_name)
-
-
-# In[3]:
-
-
-class FilesWriter(writers.FilesWriter):
-    """Use the same name so I don't have write an configuration docs.
-    This monkey patch assures the parent directory exists.
-    """
-    def write(self, output, resources, notebook_name):
-        (lambda path: path.parent.exists() or path.parent.mkdir())(
-            self.build_directory / Path(notebook_name))
-        super().write(output, resources, notebook_name)
-        return output, resources, notebook_name
-        
-FilesWriter.build_directory.default_value = 'docs'
-
-
-# In[4]:
-
-
-def identity(path, resources=None, **kw):
-    """callable to export ipynb files"""
-    return reads(path.read_text(), 4), resources
-
-
-# __`FuncExporter`__ is a flexible `nbconvert` exporter. It calls a function that returns
-# a new `nbformat.NotebookNode` object and a resources dictionary.  This exporter is called
-# with the `Docs` `NbConvertApp` app.
-
-# In[5]:
-
-
-class FuncExporter(html.HTMLExporter):
-    callable = Any(identity)
-    def from_filename(self, file_name, resources=None, **kw):
-        html, resources = self.from_notebook_node(
-            *self.callable(Path(file_name), resources, **kw), **kw)
-        return html, resources
-
-
-# In[6]:
-
-
-def minimal_style(callable):
-    """A minimal style wrapper other file types"""
-    def _return_nb(path, resources=None, **kw):
-        return notebook(cells=[
-            markdown("""# [{}]({})""".format(
-                str(path), str(path)+'.html')),
-            callable(path.read_text())
-        ]), resources
-    return _return_nb
-
-
-# In[7]:
-
-
-rules = {
-    ('ipynb',): identity,
-    ('py', 'pyi'): minimal_style(code),
-    ('md', 'markdown'): minimal_style(markdown),
-    ('txt',): minimal_style(code)}
-
-
-# In[8]:
-
+from nbconvert.nbconvertapp import NbConvertApp
+from traitlets import Any  # These should be properly assigned
+import typing as t
 
 class Docs(NbConvertApp):    
-    loaders = Any(
-        default_value=rules, help="""""").tag(config=True)
-    post = Any(default_value=None).tag(config=True)
-    report = Any(default_value=None).tag(config=True)
-
-    def convert_single_notebook(self, notebook_filename, input_buffer=None):    
-        path = Path(notebook_filename)
-        exporter = self.exporter
-        for exts, callable in self.loaders.items():
-            if path.suffix[1:] in exts:
-                self.exporter = FuncExporter(callable=callable)
-                return super().convert_single_notebook(notebook_filename, input_buffer)
-        else:
-            self.exporter = exporter
-        self.log.warning("{} was not converted; there is no rule for the {} suffix.".format(str(path), path.suffix))
-            
+    loaders = Any(default_value=tuple(), help="""""").tag(config=True)
+    post = Any(default_value=None, help="""""").tag(config=True)
+    report = Any(default_value=None, help="""""").tag(config=True)
+                
     def convert_notebooks(self):
         super().convert_notebooks() or self.report and [
             name and NbConvertApp.convert_single_notebook(
@@ -123,18 +32,148 @@ class Docs(NbConvertApp):
         resources = super().init_single_notebook_resources(notebook_filename)
         resources['name'] = resources['unique_key'] = notebook_filename
         return resources    
-     
-    def init_writer(self): 
-        self.writer = FilesWriter(config=self.config)
-        
-    def init_postprocessor(self):
-        if self.post: self.postprocessor = PostProcess(callable=self.post)
-        else:  super().init_postprocessor()
-        
+
 main = launch_new_instance = Docs.launch_instance
 
 
-# In[9]:
+# Continuing on attributes are appened to the `Docs` class as they become necessary.
+
+# ## Callable Exporter
+# 
+# > similar to FuncTransform in sklearn.
+
+# In[21]:
+
+
+from nbformat import reads, io, writes, NotebookNode
+
+def identity(path, resources: dict=None, **kw) -> t.Tuple[NotebookNode, dict]:
+    """callable to export ipynb files"""
+    return reads(path.read_text(), 4), resources
+
+class FuncExporter(__import__('nbconvert').exporters.html.HTMLExporter):
+    callable = Any(identity)
+    def from_filename(self, file_name: str, resources: dict=None, **kw) -> t.Tuple[str, dict]:
+        html, resources = self.from_notebook_node(
+            *self.callable(Path(file_name), resources, **kw), **kw)
+        return html, resources
+
+
+# Update the exporter each time a new notebook is accessed.
+
+# In[31]:
+
+
+def convert_single_notebook(self, name, buffer=None):    
+    path = Path(name)
+    for exts, exporter in reversed([*RULES, *self.loaders]):  # There is a better way to have default loaders
+        if path.suffix[1:] in exts:
+            self.exporter = (
+                isinstance(exporter, __import__('nbconvert').exporters.base.Exporter)
+                and exporter or FuncExporter(callable=exporter))
+            return super(Docs, self).convert_single_notebook(name, buffer)
+    else:
+        self.log.warning("{} was not converted; there is no rule for the {} suffix.".format(str(path), path.suffix))
+
+Docs.convert_single_notebook = convert_single_notebook
+
+
+# ## The Loaders.
+# 
+# The default loader is notebooks only.  
+
+# In[23]:
+
+
+def minimal_style(
+    callable: t.Callable[[str, dict], NotebookNode]
+) -> t.Callable[[str, dict], t.Tuple[NotebookNode, dict]]:
+    """A minimal style wrapper other file types"""
+    def _return_nb(path, resources=None, **kw):
+        return notebook(cells=[
+            markdown("""# [{}]({})""".format(str(path), str(path)+'.html')),
+            callable(path.read_text())]), resources
+    return _return_nb
+
+
+# Notebooks are created using objects in the `nbformat` package; rename these objects to have shorter namespaces.
+
+# ### Default loaders
+
+# In[24]:
+
+
+from nbformat.v4 import (
+    new_code_cell     as code, 
+    new_markdown_cell as markdown, 
+    new_notebook      as notebook, 
+    new_raw_cell      as raw, 
+    new_output        as output)
+
+RULES = [
+    (('ipynb',), identity), 
+    (('py', 'pyi'), minimal_style(code)), 
+    (('md', 'markdown'), minimal_style(markdown)), 
+    (('txt',), minimal_style(code))]
+
+
+# ## Post Processing
+# 
+# The standard post processor recieves just the notebook name, this one recieves the exported text, resources, and name.
+
+# In[25]:
+
+
+class CallablePostProcessor(__import__('nbconvert').postprocessors.PostProcessorBase):
+    """Call an arbitrary function after it has been writen to disk."""
+    callable = Any().tag(config=True)    
+    def postprocess(self, result: t.Tuple[str, dict, str]) -> None:
+        html, resources, notebook_name = result
+        self.callable(html, resources, notebook_name)
+
+
+# In[26]:
+
+
+def init_postprocessor(self):
+    if self.post: self.postprocessor = CallablePostProcessor(callable=self.post)
+    else:  super(Docs, self).init_postprocessor()
+
+Docs.init_postprocessor = init_postprocessor
+
+
+# ## Writing 
+# 
+# The post processor above requires a patched files writer.
+
+# In[27]:
+
+
+class FilesWriter(__import__('nbconvert').writers.FilesWriter):
+    """Use the same name so configuration works the same.  This patch assures the parent directory exists and returns the output, resources, and name.
+    """
+    def write(self, output: str, resources: dict, notebook_name: str) -> t.Tuple[str, dict, str]:
+        """Returns a tuple of the output html, resources, and file destination. These
+        values are available to the post processor."""
+        (lambda path: path.parent.exists() or path.parent.mkdir())(
+            self.build_directory / Path(notebook_name))
+        return output, resources, super().write(output, resources, notebook_name)
+
+
+# Change the default directory path to docs to be consistent with github pages.
+
+# In[28]:
+
+
+FilesWriter.build_directory.default_value = 'docs'
+Docs.writer_class.default_value = 'nbd.FilesWriter'
+
+
+# ## Utilities
+
+# This function will go very soon.  It creates an index file out of the box, but it requires beautiful soup.
+
+# In[29]:
 
 
 def index(data, selector='h1,h2'):
@@ -150,4 +189,12 @@ def index(data, selector='h1,h2'):
                 for h in html.select(selector))))
         data.cells[-1].source +="""\n---\n\n"""
     return _index
+
+
+# If imports are needed in scope then don't import them.
+
+# In[30]:
+
+
+from pathlib2 import Path
 

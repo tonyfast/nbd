@@ -11813,13 +11813,13 @@ that transform arbitrary files to the nbformat.</li>
 </pre></div>
 
 <pre><code>[Docs] Converting notebook nbd.ipynb to html
-[Docs] Writing 274530 bytes to docs/demo/nbd.ipynb.html
+[Docs] Writing 280752 bytes to docs/demo/nbd.ipynb.html
 [Docs] Converting notebook readme.md to html
-[Docs] Writing 257958 bytes to docs/demo/readme.md.html
+[Docs] Writing 257333 bytes to docs/demo/readme.md.html
 [Docs] Converting notebook nbd.py to html
-[Docs] Writing 272320 bytes to docs/demo/nbd.py.html
+[Docs] Writing 275782 bytes to docs/demo/nbd.py.html
 [Docs] Converting notebook into html
-[Docs] Writing 249269 bytes to docs/demo/index.html
+[Docs] Writing 249359 bytes to docs/demo/index.html
 
 
 </code></pre>
@@ -11834,9 +11834,32 @@ that transform arbitrary files to the nbformat.</li>
 <span class="err">!</span><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">markdown</span> <span class="n">readme</span><span class="o">.</span><span class="n">ipynb</span>
 <span class="err">!</span><span class="n">jupyter</span> <span class="n">nbd</span> <span class="o">--</span><span class="n">config</span> <span class="n">config</span><span class="o">.</span><span class="n">py</span>
 <span class="err">!</span><span class="n">mv</span> <span class="n">classes_nbd</span><span class="o">.</span><span class="n">png</span> <span class="n">config</span><span class="o">.</span><span class="n">py</span> <span class="n">flake8</span><span class="o">.</span><span class="n">txt</span> <span class="n">docs</span>
-<span class="err">!</span><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">bootswatch</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">readable</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">css</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">check</span><span class="o">-</span><span class="n">certificate</span>
-<span class="err">!</span><span class="n">mv</span> <span class="n">bootstrap</span><span class="o">.</span><span class="n">min</span><span class="o">.</span><span class="n">css</span> <span class="n">docs</span><span class="o">/</span><span class="n">custom</span><span class="o">.</span><span class="n">css</span>
+<span class="c1"># !wget https://bootswatch.com/readable/bootstrap.min.css --no-check-certificate</span>
+<span class="c1"># !mv bootstrap.min.css docs/custom.css</span>
 </pre></div>
+
+<pre><code>[NbConvertApp] Converting notebook config.ipynb to python
+[NbConvertApp] Writing 1376 bytes to ./config.py
+[NbConvertApp] Converting notebook nbd.ipynb to python
+[NbConvertApp] Writing 6098 bytes to ./nbd.py
+parsing nbd.py...
+invalid syntax (&lt;string&gt;, line 137)
+[NbConvertApp] Converting notebook readme.ipynb to markdown
+[NbConvertApp] Writing 3521 bytes to readme.md
+Traceback (most recent call last):
+  File "/Users/tonyfast/anaconda/bin/jupyter-nbd", line 11, in &lt;module&gt;
+    load_entry_point('nbd', 'console_scripts', 'jupyter-nbd')()
+  File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg/pkg_resources/__init__.py", line 565, in load_entry_point
+  File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg/pkg_resources/__init__.py", line 2598, in load_entry_point
+  File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg/pkg_resources/__init__.py", line 2258, in load
+  File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg/pkg_resources/__init__.py", line 2264, in resolve
+  File "/Users/tonyfast/nbd/nbd.py", line 137
+    Docs.
+        ^
+SyntaxError: invalid syntax
+
+
+</code></pre>
 <h2 id="Views">Views<a class="anchor-link" href="#Views">&#182;</a></h2><h3 id="HTML-Views">HTML Views<a class="anchor-link" href="#HTML-Views">&#182;</a></h3><ul>
 <li><a href="https://rawgit.com/tonyfast/nbd/master/docs/index.html">Raw Git</a></li>
 <li><a href="https://tonyfast.github.io/nbd">Github Pages</a></li>
