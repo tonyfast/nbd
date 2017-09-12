@@ -1,0 +1,55 @@
+nbd.py:4:80: E501 line too long (293 > 79 characters)
+nbd.py:4:294: W291 trailing whitespace
+nbd.py:5:2: W291 trailing whitespace
+nbd.py:21:1: E302 expected 2 blank lines, found 1
+nbd.py:21:26: W291 trailing whitespace
+nbd.py:25:1: W293 blank line contains whitespace
+nbd.py:29:80: E501 line too long (87 > 79 characters)
+nbd.py:30:1: W293 blank line contains whitespace
+nbd.py:34:25: W291 trailing whitespace
+nbd.py:36:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:39:80: E501 line too long (84 > 79 characters)
+nbd.py:46:1: E402 module level import not at top of file
+nbd.py:48:1: E302 expected 2 blank lines, found 1
+nbd.py:52:1: E302 expected 2 blank lines, found 1
+nbd.py:54:5: E301 expected 1 blank line, found 0
+nbd.py:54:80: E501 line too long (94 > 79 characters)
+nbd.py:65:54: W291 trailing whitespace
+nbd.py:67:80: E501 line too long (109 > 79 characters)
+nbd.py:70:80: E501 line too long (85 > 79 characters)
+nbd.py:74:80: E501 line too long (116 > 79 characters)
+nbd.py:76:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:80:2: W291 trailing whitespace
+nbd.py:81:40: W291 trailing whitespace
+nbd.py:87:18: E124 closing bracket does not match visual indentation
+nbd.py:96:80: E501 line too long (113 > 79 characters)
+nbd.py:103:1: E402 module level import not at top of file
+nbd.py:104:18: E272 multiple spaces before keyword
+nbd.py:104:31: W291 trailing whitespace
+nbd.py:105:35: W291 trailing whitespace
+nbd.py:106:17: E272 multiple spaces before keyword
+nbd.py:106:35: W291 trailing whitespace
+nbd.py:107:17: E272 multiple spaces before keyword
+nbd.py:107:30: W291 trailing whitespace
+nbd.py:108:15: E272 multiple spaces before keyword
+nbd.py:111:28: W291 trailing whitespace
+nbd.py:112:42: W291 trailing whitespace
+nbd.py:113:51: W291 trailing whitespace
+nbd.py:118:2: W291 trailing whitespace
+nbd.py:119:80: E501 line too long (120 > 79 characters)
+nbd.py:124:80: E501 line too long (86 > 79 characters)
+nbd.py:126:38: W291 trailing whitespace
+nbd.py:127:5: E301 expected 1 blank line, found 0
+nbd.py:136:17: E701 multiple statements on one line (colon)
+nbd.py:136:80: E501 line too long (80 > 79 characters)
+nbd.py:137:9: E701 multiple statements on one line (colon)
+nbd.py:139:1: E305 expected 2 blank lines after class or function definition, found 1
+nbd.py:142:13: W291 trailing whitespace
+nbd.py:143:2: W291 trailing whitespace
+nbd.py:150:80: E501 line too long (146 > 79 characters)
+nbd.py:152:80: E501 line too long (97 > 79 characters)
+nbd.py:157:80: E501 line too long (81 > 79 characters)
+nbd.py:178:34: E231 missing whitespace after ','
+nbd.py:178:80: E501 line too long (108 > 79 characters)
+nbd.py:187:1: E402 module level import not at top of file
+nbd.py:188:1: W391 blank line at end of file
