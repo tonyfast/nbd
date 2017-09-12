@@ -4,6 +4,7 @@ python:
 
 install:
 - pip install -r requirements.txt
+- ipython setup.py install
 
 script:
 - ipython -c "from IPython import get_ipython;`jupyter nbconvert --to python readme.ipynb --stdout`"
