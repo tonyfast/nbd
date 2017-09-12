@@ -4,4 +4,3 @@ pathlib2
 toolz
 pylint
 flake8
-beautifulsoup4
