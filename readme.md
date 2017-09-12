@@ -15,45 +15,38 @@ that transform arbitrary files to the nbformat.
 
 ## An Example Configuration
 
-### 1. Execute from the application
+### 1. Configure your documentation in python
+
+More configuration options are available at [nbconvert.readthedocs.io/en/latest/config_options.html]()
 
 
 ```python
 %%file demo.py
 from nbd import *
+# use nbd's super basic index
 
-data = notebook()
-data.cells.append(markdown('# My Demo Page\n\n'))
+from nbd import index
 
-def index(html, resources, name):
-    data.cells[-1].source += '* [{}]({})\n'.format(name, name+resources['output_extension'])
-    
-def report():
-    yield 'index', data
+# Store data in a notebook object
+data = notebook(cells=[
+    markdown('''# My Demo Page \n\nCheck out the complete [`nbd` documentation](../index.html).''')])
+
+def report(): yield 'index', data
     
 c.Docs.notebooks = ['nbd.ipynb', 'readme.md', 'nbd.py']
-c.Docs.post, c.Docs.report = index, report
+c.FilesWriter.build_directory = 'docs/demo'
+c.Docs.post, c.Docs.report = __import__('nbd').index(data), report
 ```
 
     Overwriting demo.py
 
 
-### 2. Execute from the application
+### 2. Execute `nbd`
 
 
 ```python
-!jupyter nbd --output-dir docs/demo --config demo.py
+!jupyter nbd --config demo.py
 ```
-
-    [Docs] Converting notebook nbd.ipynb to html
-    [Docs] Writing 280752 bytes to docs/demo/nbd.ipynb.html
-    [Docs] Converting notebook readme.md to html
-    [Docs] Writing 257333 bytes to docs/demo/readme.md.html
-    [Docs] Converting notebook nbd.py to html
-    [Docs] Writing 275782 bytes to docs/demo/nbd.py.html
-    [Docs] Converting notebook into html
-    [Docs] Writing 249359 bytes to docs/demo/index.html
-
 
 ## Motivation
 
@@ -77,24 +70,28 @@ Configure the documentation for this project through the readme file.
 ```
 
     [NbConvertApp] Converting notebook config.ipynb to python
-    [NbConvertApp] Writing 1376 bytes to ./config.py
+    [NbConvertApp] Writing 1182 bytes to ./config.py
     [NbConvertApp] Converting notebook nbd.ipynb to python
-    [NbConvertApp] Writing 6098 bytes to ./nbd.py
+    [NbConvertApp] Writing 6072 bytes to ./nbd.py
     parsing nbd.py...
-    invalid syntax (<string>, line 137)
     [NbConvertApp] Converting notebook readme.ipynb to markdown
-    [NbConvertApp] Writing 3521 bytes to readme.md
-    Traceback (most recent call last):
-      File "/Users/tonyfast/anaconda/bin/jupyter-nbd", line 11, in <module>
-        load_entry_point('nbd', 'console_scripts', 'jupyter-nbd')()
-      File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg/pkg_resources/__init__.py", line 565, in load_entry_point
-      File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg/pkg_resources/__init__.py", line 2598, in load_entry_point
-      File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg/pkg_resources/__init__.py", line 2258, in load
-      File "/Users/tonyfast/anaconda/lib/python3.5/site-packages/setuptools-27.2.0-py3.5.egg/pkg_resources/__init__.py", line 2264, in resolve
-      File "/Users/tonyfast/nbd/nbd.py", line 137
-        Docs.
-            ^
-    SyntaxError: invalid syntax
+    [NbConvertApp] Writing 3672 bytes to readme.md
+    [Docs] Converting notebook nbd.ipynb to html
+    [Docs] Writing 280613 bytes to docs/nbd.ipynb.html
+    [Docs] Converting notebook config.ipynb to html
+    [Docs] Writing 256375 bytes to docs/config.ipynb.html
+    [Docs] Converting notebook config.py to html
+    [Docs] Writing 254329 bytes to docs/config.py.html
+    [Docs] Converting notebook template.ipynb to html
+    [Docs] Writing 250263 bytes to docs/template.ipynb.html
+    [Docs] Converting notebook readme.md to html
+    [Docs] Writing 258217 bytes to docs/readme.md.html
+    [Docs] Converting notebook flake8.txt to html
+    [Docs] Writing 271585 bytes to docs/flake8.txt.html
+    [Docs] Converting notebook into html
+    [Docs] Writing 252550 bytes to docs/index.html
+    [Docs] Converting notebook into html
+    [Docs] Writing 249380 bytes to docs/uml.html
 
 
 ## Views

@@ -5,13 +5,13 @@
 # 
 #         jupyter nbd --config config.py
 
-# In[19]:
+# In[1]:
 
 
 __all__ = 'markdown', 'notebook', 'code', 'raw', 'output', 'reads'
 
 
-# In[20]:
+# In[2]:
 
 
 from nbconvert.nbconvertapp import NbConvertApp
@@ -39,10 +39,8 @@ main = launch_new_instance = Docs.launch_instance
 # Continuing on attributes are appened to the `Docs` class as they become necessary.
 
 # ## Callable Exporter
-# 
-# > similar to FuncTransform in sklearn.
 
-# In[21]:
+# In[3]:
 
 
 from nbformat import reads, io, writes, NotebookNode
@@ -61,7 +59,7 @@ class FuncExporter(__import__('nbconvert').exporters.html.HTMLExporter):
 
 # Update the exporter each time a new notebook is accessed.
 
-# In[31]:
+# In[4]:
 
 
 def convert_single_notebook(self, name, buffer=None):    
@@ -82,12 +80,11 @@ Docs.convert_single_notebook = convert_single_notebook
 # 
 # The default loader is notebooks only.  
 
-# In[23]:
+# In[112]:
 
 
-def minimal_style(
-    callable: t.Callable[[str, dict], NotebookNode]
-) -> t.Callable[[str, dict], t.Tuple[NotebookNode, dict]]:
+def minimal_style(callable: t.Callable[[str, dict], NotebookNode]
+                 ) -> t.Callable[[str, dict], t.Tuple[NotebookNode, dict]]:
     """A minimal style wrapper other file types"""
     def _return_nb(path, resources=None, **kw):
         return notebook(cells=[
@@ -100,7 +97,7 @@ def minimal_style(
 
 # ### Default loaders
 
-# In[24]:
+# In[6]:
 
 
 from nbformat.v4 import (
@@ -121,7 +118,7 @@ RULES = [
 # 
 # The standard post processor recieves just the notebook name, this one recieves the exported text, resources, and name.
 
-# In[25]:
+# In[7]:
 
 
 class CallablePostProcessor(__import__('nbconvert').postprocessors.PostProcessorBase):
@@ -132,7 +129,7 @@ class CallablePostProcessor(__import__('nbconvert').postprocessors.PostProcessor
         self.callable(html, resources, notebook_name)
 
 
-# In[26]:
+# In[8]:
 
 
 def init_postprocessor(self):
@@ -146,7 +143,7 @@ Docs.init_postprocessor = init_postprocessor
 # 
 # The post processor above requires a patched files writer.
 
-# In[27]:
+# In[9]:
 
 
 class FilesWriter(__import__('nbconvert').writers.FilesWriter):
@@ -162,38 +159,29 @@ class FilesWriter(__import__('nbconvert').writers.FilesWriter):
 
 # Change the default directory path to docs to be consistent with github pages.
 
-# In[28]:
+# In[10]:
 
 
 FilesWriter.build_directory.default_value = 'docs'
 Docs.writer_class.default_value = 'nbd.FilesWriter'
 
 
-# ## Utilities
+# > A Most Basic Index that lists the notebooks.
 
-# This function will go very soon.  It creates an index file out of the box, but it requires beautiful soup.
-
-# In[29]:
+# In[111]:
 
 
-def index(data, selector='h1,h2'):
-    def _index(html, resources, notebook_name):
+def index(data):
+    def _index(html, resources, destination):
         """"""
-        from bs4 import BeautifulSoup
-        html = BeautifulSoup(html, 'html.parser')    
-        location = notebook_name+resources['output_extension']
-        data.cells.append(markdown("""[<small>{}</small>]({})""".format(resources['name'], location)))
-        data.cells.append(markdown(
-            "\n".join(
-                """{} [{}]({}#{})\n""".format('#'*int(h.name[-1]),h.text, location, h.attrs['id']) 
-                for h in html.select(selector))))
-        data.cells[-1].source +="""\n---\n\n"""
+        data.cells.append(markdown("""# [{0}]({1})\n\n---\n\n""".format(
+            resources.get('name'),resources.get('name') + destination.split(resources.get('name'), 1)[-1])))
     return _index
 
 
 # If imports are needed in scope then don't import them.
 
-# In[30]:
+# In[ ]:
 
 
 from pathlib2 import Path
